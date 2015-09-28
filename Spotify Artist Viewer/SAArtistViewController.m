@@ -11,13 +11,23 @@
 
 @interface SAArtistViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
+
 @end
 
 @implementation SAArtistViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    
+    self.biographyTextView.scrollEnabled = NO;
+    CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
+    self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
+    [self.biographyTextView sizeToFit];
     [self updateArtistInfoWithEchoNest];
 }
 
