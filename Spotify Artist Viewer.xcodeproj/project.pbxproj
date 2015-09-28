@@ -15,6 +15,7 @@
 		453079311BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079301BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m */; };
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		453079511BB9879100BDC8FB /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079501BB9879100BDC8FB /* SAArtist.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		4530793D1BB9799800BDC8FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		453079491BB97E3200BDC8FB /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
+		4530794F1BB9879100BDC8FB /* SAArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtist.h; sourceTree = "<group>"; };
+		453079501BB9879100BDC8FB /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 			children = (
 				453079491BB97E3200BDC8FB /* SASearchViewController.h */,
 				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
+				4530794F1BB9879100BDC8FB /* SAArtist.h */,
+				453079501BB9879100BDC8FB /* SAArtist.m */,
 				453079191BB9799800BDC8FB /* AppDelegate.h */,
 				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
 				4530791F1BB9799800BDC8FB /* Main.storyboard */,
@@ -270,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
