@@ -16,6 +16,7 @@
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		453079511BB9879100BDC8FB /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079501BB9879100BDC8FB /* SAArtist.m */; settings = {ASSET_TAGS = (); }; };
+		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 		4530794F1BB9879100BDC8FB /* SAArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtist.h; sourceTree = "<group>"; };
 		453079501BB9879100BDC8FB /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtist.m; sourceTree = "<group>"; };
+		453079521BB98A8400BDC8FB /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
+		453079531BB98A8400BDC8FB /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +107,8 @@
 		453079151BB9799800BDC8FB /* Spotify Artist Viewer */ = {
 			isa = PBXGroup;
 			children = (
-				453079491BB97E3200BDC8FB /* SASearchViewController.h */,
-				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
-				4530794F1BB9879100BDC8FB /* SAArtist.h */,
-				453079501BB9879100BDC8FB /* SAArtist.m */,
-				453079191BB9799800BDC8FB /* AppDelegate.h */,
-				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
+				453079551BB98A9300BDC8FB /* Controllers */,
+				453079561BB98A9D00BDC8FB /* Model */,
 				4530791F1BB9799800BDC8FB /* Main.storyboard */,
 				453079221BB9799800BDC8FB /* Assets.xcassets */,
 				453079241BB9799800BDC8FB /* LaunchScreen.storyboard */,
@@ -122,6 +121,8 @@
 		453079161BB9799800BDC8FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				453079191BB9799800BDC8FB /* AppDelegate.h */,
+				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
 				453079171BB9799800BDC8FB /* main.m */,
 			);
 			name = "Supporting Files";
@@ -143,6 +144,26 @@
 				4530793D1BB9799800BDC8FB /* Info.plist */,
 			);
 			path = "Spotify Artist ViewerUITests";
+			sourceTree = "<group>";
+		};
+		453079551BB98A9300BDC8FB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				453079491BB97E3200BDC8FB /* SASearchViewController.h */,
+				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
+				453079521BB98A8400BDC8FB /* SAArtistViewController.h */,
+				453079531BB98A8400BDC8FB /* SAArtistViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		453079561BB98A9D00BDC8FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4530794F1BB9879100BDC8FB /* SAArtist.h */,
+				453079501BB9879100BDC8FB /* SAArtist.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +299,7 @@
 				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
+				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

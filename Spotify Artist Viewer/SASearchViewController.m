@@ -7,9 +7,14 @@
 //
 
 #import "SASearchViewController.h"
+#import "SAArtist.h"
+#import "SAArtistViewController.h"
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *dummyArtists;
 
 @end
 
@@ -17,8 +22,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.searchBar.delegate = self;
+    [self setUpDummyData];
+    
+}
+
+-(void)setUpDummyData
+{
+    self.dummyArtists = [[NSMutableArray alloc]init];
+    for (NSUInteger i = 0; i<10; i++)
+    {
+        SAArtist *artist = [[SAArtist alloc]initWithName:@"Jason Isbell" biography:@"Amazing songwriter.  Best of the generation!" image:nil];
+        [self.dummyArtists addObject:artist];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,19 +62,30 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 10;
+    return self.dummyArtists.count;
 }
 
 
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
- // Configure the cell...
-     cell.textLabel.text = @"testtt";
+
+     SAArtist *currentArtist = self.dummyArtists[indexPath.row];
+     cell.textLabel.text = currentArtist.artistName;
      
- return cell;
+     return cell;
  }
- 
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    SAArtistViewController *destinationVC = [segue destinationViewController];
+    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+    destinationVC.artist = self.dummyArtists[selectedRowIndexPath.row];
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -95,14 +122,8 @@
  */
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 @end
