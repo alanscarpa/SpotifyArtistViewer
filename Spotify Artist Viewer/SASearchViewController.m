@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *dummyArtists;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end
 
@@ -24,18 +24,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchBar.delegate = self;
-    [self setUpDummyData];
     
 }
 
--(void)setUpDummyData
+//-(void)setUpDummyData
+//{
+//    self.dummyArtists = [[NSMutableArray alloc]init];
+//    for (NSUInteger i = 0; i<10; i++)
+//    {
+//        SAArtist *artist = [[SAArtist alloc]initWithName:@"Jason Isbell" biography:@"Amazing songwriter.  Best of the generation!" image:nil];
+//        [self.dummyArtists addObject:artist];
+//    }
+//}
+
+-(void)updateTableViewWithSearchResults:(NSDictionary*)results
 {
-    self.dummyArtists = [[NSMutableArray alloc]init];
-    for (NSUInteger i = 0; i<10; i++)
+    self.searchResults = [[NSMutableArray alloc]init];
+
+    for (NSDictionary *artist in results[@"artists"][@"items"])
     {
-        SAArtist *artist = [[SAArtist alloc]initWithName:@"Jason Isbell" biography:@"Amazing songwriter.  Best of the generation!" image:nil];
-        [self.dummyArtists addObject:artist];
+        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+        
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil];
+        [self.searchResults addObject:artist];
     }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +65,8 @@
     SARequestManager *requestManager = [SARequestManager sharedManager];
     [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
         
-        NSLog(@"%@", artists[@"artists"][@"items"][0][@"name"]);
+        [self updateTableViewWithSearchResults:artists];
+        
     } failure:^(NSError *error) {
         NSLog(@"API Call to Spotify failed with error: %@", error);
     }];
@@ -68,17 +85,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dummyArtists.count;
+    return self.searchResults.count;
 }
 
 
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-
-     SAArtist *currentArtist = self.dummyArtists[indexPath.row];
-     cell.textLabel.text = currentArtist.artistName;
-     
+     cell.textLabel.text = [self.searchResults[indexPath.row] artistName];
      return cell;
  }
 
@@ -90,7 +104,7 @@
     
     SAArtistViewController *destinationVC = [segue destinationViewController];
     NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
-    destinationVC.artist = self.dummyArtists[selectedRowIndexPath.row];
+    destinationVC.artist = self.searchResults[selectedRowIndexPath.row];
 }
 
 /*
