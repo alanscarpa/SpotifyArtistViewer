@@ -33,6 +33,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="5f7-SC-lz8" kind="show" id="lTY-r1-5eJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -58,10 +61,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc"/>
+                    <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="cSW-We-6eF"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>
                         <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>
+                        <outlet property="tableView" destination="PO2-5k-54x" id="Sd0-zu-0pW"/>
                     </connections>
                 </viewController>
                 <searchDisplayController id="lfY-dO-ehq">
@@ -75,6 +81,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1393" y="35"/>
+        </scene>
+        <!--Artist View Controller-->
+        <scene sceneID="sTb-kZ-jgu">
+            <objects>
+                <viewController id="5f7-SC-lz8" customClass="SAArtistViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RyH-sx-x11"/>
+                        <viewControllerLayoutGuide type="bottom" id="DY7-dj-i7g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IWf-2I-7PJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jdT-PN-MuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2129" y="35"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UcY-MT-fhc">
