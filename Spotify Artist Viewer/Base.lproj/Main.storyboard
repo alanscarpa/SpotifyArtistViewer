@@ -7,15 +7,6 @@
         <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <searchDisplayController id="lfY-dO-ehq">
-                    <connections>
-                        <outlet property="delegate" destination="BYZ-38-t0r" id="bXg-rt-GlO"/>
-                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="bD7-7i-sSI"/>
-                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="gxh-W1-fMe"/>
-                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="9sh-IF-Uwi"/>
-                    </connections>
-                </searchDisplayController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="SASearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -73,6 +64,15 @@
                         <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>
                     </connections>
                 </viewController>
+                <searchDisplayController id="lfY-dO-ehq">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="bXg-rt-GlO"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="bD7-7i-sSI"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="gxh-W1-fMe"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="9sh-IF-Uwi"/>
+                    </connections>
+                </searchDisplayController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1393" y="35"/>
         </scene>
