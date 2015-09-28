@@ -9,6 +9,7 @@
 #import "SASearchViewController.h"
 #import "SAArtist.h"
 #import "SAArtistViewController.h"
+#import "SARequestManager.h"
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -45,6 +46,13 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"Clicked %@", self.searchBar.text);
+    SARequestManager *requestManager = [SARequestManager sharedManager];
+    [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
+        
+        NSLog(@"%@", artists[@"artists"][@"items"][0][@"name"]);
+    } failure:^(NSError *error) {
+        NSLog(@"API Call to Spotify failed with error: %@", error);
+    }];
     [self.searchBar resignFirstResponder];
 
 }
@@ -56,12 +64,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     return self.dummyArtists.count;
 }
 

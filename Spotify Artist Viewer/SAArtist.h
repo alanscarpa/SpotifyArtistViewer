@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSString *artistBiography;
 @property (nonatomic, strong) UIImage *artistImage;
 
--(instancetype)initWithName:(NSString*)name biography:(NSString*)bio image:(UIImage*)image;
+-(instancetype)initWithName:(NSString*)name
+                  biography:(NSString*)bio
+                      image:(UIImage*)image;
 
 @end
