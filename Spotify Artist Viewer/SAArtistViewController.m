@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.activityIndicator startAnimating];
     self.artistNameLabel.text = self.artist.artistName;
     [self getArtistInfoFromEchoNest];
 }
@@ -81,6 +83,10 @@
         }];
     } else {
         NSLog(@"No image available");
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.activityIndicator stopAnimating];
+            self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+        }];
     }
     
     
@@ -88,6 +94,7 @@
 -(void)updateArtistImage
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.activityIndicator stopAnimating];
         self.profileImage.image = self.artist.artistImage;
     }];
 }

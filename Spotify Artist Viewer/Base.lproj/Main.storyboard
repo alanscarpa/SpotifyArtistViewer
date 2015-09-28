@@ -99,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcx-Ql-aWe" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="945"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="944"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifs-jR-bFf">
                                                 <rect key="frame" x="255" y="36" width="91" height="21"/>
@@ -107,16 +107,20 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corgi" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-le-fv5">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-le-fv5">
                                                 <rect key="frame" x="210" y="93" width="180" height="180"/>
                                             </imageView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="M7S-x2-nuz">
+                                                <rect key="frame" x="282" y="164" width="37" height="37"/>
+                                                <color key="color" red="1" green="0.7931892572" blue="0.3434751103" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
-                                                <rect key="frame" x="75" y="309" width="450" height="600"/>
+                                                <rect key="frame" x="30" y="309" width="540" height="600"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="600" id="OAR-6W-ikq"/>
                                                 </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                <string key="text">lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -126,7 +130,9 @@
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="centerX" secondItem="Bcx-Ql-aWe" secondAttribute="centerX" id="Bic-Dc-lbu"/>
                                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="ifs-jR-bFf" secondAttribute="bottom" constant="36" id="G9i-ke-K5M"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="top" secondItem="EXz-le-fv5" secondAttribute="bottom" constant="36" id="JXi-np-Gfo"/>
+                                            <constraint firstItem="M7S-x2-nuz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="NU5-mm-Ram"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="height" secondItem="Bcx-Ql-aWe" secondAttribute="height" id="TJx-Jr-Sgg"/>
+                                            <constraint firstItem="M7S-x2-nuz" firstAttribute="centerY" secondItem="EXz-le-fv5" secondAttribute="centerY" id="VaP-Rb-dEk"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="cZU-00-gzW"/>
                                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="16" id="ddn-Tn-77U"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="36" id="l0A-8p-pjW"/>
@@ -153,7 +159,7 @@
                         <constraints>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" multiplier="0.3" id="78Z-PL-1dA"/>
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="leading" secondItem="IWf-2I-7PJ" secondAttribute="leading" id="Je3-xf-qkF"/>
-                            <constraint firstItem="8YC-SY-IAz" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" multiplier="0.75" id="KWD-DZ-wHy"/>
+                            <constraint firstItem="8YC-SY-IAz" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" multiplier="0.9" id="KWD-DZ-wHy"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="centerX" secondItem="IWf-2I-7PJ" secondAttribute="centerX" id="LKK-vY-wed"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="RyH-sx-x11" secondAttribute="bottom" constant="16" id="UZk-jU-Lte"/>
                             <constraint firstItem="DY7-dj-i7g" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="bottom" id="X5u-Uq-Avj"/>
@@ -174,6 +180,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Artist Profile" id="nB4-DV-AvZ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="M7S-x2-nuz" id="ubI-oy-NCF"/>
                         <outlet property="artistNameLabel" destination="ifs-jR-bFf" id="8k8-s5-QZ6"/>
                         <outlet property="biographyTextView" destination="8YC-SY-IAz" id="nlI-3K-xZO"/>
                         <outlet property="profileImage" destination="EXz-le-fv5" id="1LZ-IY-WgM"/>
@@ -203,7 +210,4 @@
             <point key="canvasLocation" x="680" y="35"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="corgi" width="400" height="400"/>
-    </resources>
 </document>
