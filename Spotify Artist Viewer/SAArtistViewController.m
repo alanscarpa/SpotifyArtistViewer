@@ -16,23 +16,20 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 
+
 @end
 
 @implementation SAArtistViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
-    self.biographyTextView.scrollEnabled = NO;
-    CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
-    self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
-    [self.biographyTextView sizeToFit];
-    [self updateArtistInfoWithEchoNest];
+    [self getArtistInfoFromEchoNest];
 }
 
 
--(void)updateArtistInfoWithEchoNest
+
+
+-(void)getArtistInfoFromEchoNest
 {
     
     SARequestManager *requestManager = [SARequestManager sharedManager];
@@ -67,7 +64,7 @@
         [operationQ addOperationWithBlock:^{
             NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
             self.artist.artistImage = [UIImage imageWithData:imageData];
-            
+            [self updateUI];
         }];
         
         
@@ -76,6 +73,25 @@
         NSLog(@"Error getting data from EchoNest: %@", error);
     }];
     
+}
+
+
+-(void)updateUI
+{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.profileImage.image = self.artist.artistImage;
+        self.biographyTextView.text = self.artist.artistBiography;
+        [self updateBioTextViewSize];
+    }];
+}
+
+-(void)updateBioTextViewSize
+{
+    
+ 
+    self.biographyTextView.scrollEnabled = NO;
+    CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
+    self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
 }
 
 - (void)didReceiveMemoryWarning {
