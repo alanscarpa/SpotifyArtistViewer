@@ -12,10 +12,9 @@
 @interface SAArtistViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
-
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 
 @end
 
@@ -23,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.artistNameLabel.text = self.artist.artistName;
     [self getArtistInfoFromEchoNest];
 }
 
@@ -33,6 +33,7 @@
 {
     
     SARequestManager *requestManager = [SARequestManager sharedManager];
+    
     [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
         
         NSString *artistBio = [[NSString alloc]init];
@@ -47,27 +48,11 @@
             }
         }
         
-        if ([artistBio isEqualToString:@""]){
-            NSLog(@"No bio available");
-        }
-        
         if ([results[@"response"][@"artist"][@"images"] count] > 0){
             artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
-            NSLog(@"%@\n%@", artistImageURL, artistBio);
-        } else {
-            NSLog(@"No image available");
         }
         
-        self.artist.artistBiography = artistBio;
-        NSURL *imageURL = [NSURL URLWithString:artistImageURL];
-        NSOperationQueue *operationQ = [[NSOperationQueue alloc]init];
-        [operationQ addOperationWithBlock:^{
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            self.artist.artistImage = [UIImage imageWithData:imageData];
-            [self updateUI];
-        }];
-        
-        
+        [self updateArtistWithBio:artistBio andPictureURL:artistImageURL];
         
     } failure:^(NSError *error) {
         NSLog(@"Error getting data from EchoNest: %@", error);
@@ -75,23 +60,46 @@
     
 }
 
+-(void)updateArtistWithBio:(NSString*)bio andPictureURL:(NSString*)url
+{
+    if ([bio isEqualToString:@""])
+    {
+       self.artist.artistBiography = @"No biography available.";
+    } else {
+       self.artist.artistBiography = bio;
+    }
+    [self updateBioTextViewSize];
 
--(void)updateUI
+    
+    if (![url isEqualToString:@""]){
+        NSURL *imageURL = [NSURL URLWithString:url];
+        NSOperationQueue *operationQ = [[NSOperationQueue alloc]init];
+        [operationQ addOperationWithBlock:^{
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            self.artist.artistImage = [UIImage imageWithData:imageData];
+            [self updateArtistImage];
+        }];
+    } else {
+        NSLog(@"No image available");
+    }
+    
+    
+}
+-(void)updateArtistImage
 {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         self.profileImage.image = self.artist.artistImage;
-        self.biographyTextView.text = self.artist.artistBiography;
-        [self updateBioTextViewSize];
     }];
 }
 
 -(void)updateBioTextViewSize
 {
-    
- 
-    self.biographyTextView.scrollEnabled = NO;
-    CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
-    self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.biographyTextView.text = self.artist.artistBiography;
+        self.biographyTextView.scrollEnabled = NO;
+        CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
+        self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
