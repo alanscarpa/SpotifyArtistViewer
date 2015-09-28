@@ -8,6 +8,7 @@
 
 #import "SAArtistViewController.h"
 #import "SARequestManager.h"
+#import <SDWebImage/UIIMageView+WebCache.h>
 
 @interface SAArtistViewController ()
 
@@ -71,18 +72,22 @@
        self.artist.artistBiography = bio;
     }
     [self updateBioTextViewSize];
-
+    
     
     if (![url isEqualToString:@""]){
-        NSURL *imageURL = [NSURL URLWithString:url];
-        NSOperationQueue *operationQ = [[NSOperationQueue alloc]init];
-        [operationQ addOperationWithBlock:^{
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            self.artist.artistImage = [UIImage imageWithData:imageData];
-            [self updateArtistImage];
-        }];
+        [self.profileImage sd_setImageWithURL:[NSURL URLWithString:url]
+                             placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 if (!error){
+                                     [self.activityIndicator stopAnimating];
+                                     self.artist.artistImage = image;
+                                 } else {
+                                     // SOMETIMES IMAGE URL RETURNED DOES NOT WORK, SO WE DISPLAY NOIMAGE PHOTO IN THESE CASES
+                                     [self.activityIndicator stopAnimating];
+                                     self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                 }
+                            }];
     } else {
-        NSLog(@"No image available");
+        // NO IMAGE WAS AVAILABLE
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.activityIndicator stopAnimating];
             self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
