@@ -70,7 +70,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc"/>
+                    <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="cSW-We-6eF"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>
                         <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>

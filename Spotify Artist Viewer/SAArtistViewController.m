@@ -29,7 +29,8 @@
     [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
         
         NSString *artistBio = [[NSString alloc]init];
-    
+        NSString *artistImageURL = [[NSString alloc]init];
+        
         for (NSDictionary *bio in results[@"response"][@"artist"][@"biographies"])
         {
             // Find the first biography that is not truncated
@@ -44,11 +45,22 @@
         }
         
         if ([results[@"response"][@"artist"][@"images"] count] > 0){
-            NSString *artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
+            artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
             NSLog(@"%@\n%@", artistImageURL, artistBio);
         } else {
             NSLog(@"No image available");
         }
+        
+        self.artist.artistBiography = artistBio;
+        NSURL *imageURL = [NSURL URLWithString:artistImageURL];
+        NSOperationQueue *operationQ = [[NSOperationQueue alloc]init];
+        [operationQ addOperationWithBlock:^{
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            self.artist.artistImage = [UIImage imageWithData:imageData];
+            
+        }];
+        
+        
         
     } failure:^(NSError *error) {
         NSLog(@"Error getting data from EchoNest: %@", error);
