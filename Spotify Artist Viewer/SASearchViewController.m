@@ -7,9 +7,14 @@
 //
 
 #import "SASearchViewController.h"
+#import "SAArtist.h"
+#import "SAArtistViewController.h"
+#import "SARequestManager.h"
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end
 
@@ -17,8 +22,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.searchBar.delegate = self;
+}
+
+-(void)updateTableViewWithSearchResults:(NSDictionary*)results
+{
+    self.searchResults = [[NSMutableArray alloc]init];
+
+    for (NSDictionary *artist in results[@"artists"][@"items"])
+    {
+        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
+        [self.searchResults addObject:artist];
+    }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tableView reloadData];
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,7 +50,13 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"Clicked %@", self.searchBar.text);
+    
+    SARequestManager *requestManager = [SARequestManager sharedManager];
+    [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
+        [self updateTableViewWithSearchResults:artists];
+    } failure:^(NSError *error) {
+        NSLog(@"API Call to Spotify failed with error: %@", error);
+    }];
     [self.searchBar resignFirstResponder];
 
 }
@@ -40,25 +68,31 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 10;
+    return self.searchResults.count;
 }
 
 
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
- // Configure the cell...
-     cell.textLabel.text = @"testtt";
-     
- return cell;
+     cell.textLabel.text = [self.searchResults[indexPath.row] artistName];
+     return cell;
  }
- 
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    SAArtistViewController *destinationVC = [segue destinationViewController];
+    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+    destinationVC.artist = self.searchResults[selectedRowIndexPath.row];
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -95,14 +129,8 @@
  */
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 @end
