@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *searchResults;
-
 @end
 
 @implementation SASearchViewController
@@ -25,23 +24,6 @@
     self.searchBar.delegate = self;
 }
 
--(void)updateTableViewWithSearchResults:(NSDictionary*)results
-{
-    self.searchResults = [[NSMutableArray alloc]init];
-
-    for (NSDictionary *artist in results[@"artists"][@"items"])
-    {
-        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
-        [self.searchResults addObject:artist];
-    }
-    
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self.tableView reloadData];
-    }];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,10 +42,27 @@
     [self.searchBar resignFirstResponder];
 
 }
--(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+
+
+-(void)updateTableViewWithSearchResults:(NSDictionary*)results
 {
+    self.searchResults = [[NSMutableArray alloc]init];
+    
+    for (NSDictionary *artist in results[@"artists"][@"items"])
+    {
+        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
+        [self.searchResults addObject:artist];
+    }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tableView reloadData];
+    }];
     
 }
+
+
 
 #pragma mark - Table view data source
 
@@ -81,6 +80,7 @@
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
      cell.textLabel.text = [self.searchResults[indexPath.row] artistName];
      return cell;
+     
  }
 
 
@@ -92,7 +92,16 @@
     SAArtistViewController *destinationVC = [segue destinationViewController];
     NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
     destinationVC.artist = self.searchResults[selectedRowIndexPath.row];
+    
 }
+
+
+
+
+
+
+
+
 
 /*
  // Override to support conditional editing of the table view.
