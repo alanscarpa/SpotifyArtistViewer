@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SASearchViewController.h
 //  Spotify Artist Viewer
 //
 //  Created by Alan Scarpa on 9/28/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface SASearchViewController : UIViewController
 
 @end
-

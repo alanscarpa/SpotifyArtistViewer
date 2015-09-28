@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VrH-2u-kPz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <searchDisplayController id="lfY-dO-ehq">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="bXg-rt-GlO"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="bD7-7i-sSI"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="gxh-W1-fMe"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="9sh-IF-Uwi"/>
+                    </connections>
+                </searchDisplayController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <viewController id="BYZ-38-t0r" customClass="SASearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +24,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5ov-BH-D1P">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PO2-5k-54x">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="JLu-wZ-PhV">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JLu-wZ-PhV" id="rik-zs-4cX">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="HRB-M6-Jd8"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dW0-Wh-W37"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="28r-ba-lfG"/>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="top" secondItem="5ov-BH-D1P" secondAttribute="bottom" id="Adq-jJ-YnV"/>
+                            <constraint firstItem="5ov-BH-D1P" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="BVr-lY-wjm"/>
+                            <constraint firstItem="5ov-BH-D1P" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Bud-OQ-tqO"/>
+                            <constraint firstItem="5ov-BH-D1P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K7f-c0-2dt"/>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Neo-RQ-Iei"/>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YLF-dQ-h60"/>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sXP-hF-MB5"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="YLF-dQ-h60"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc"/>
+                    <connections>
+                        <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>
+                        <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1393" y="35"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UcY-MT-fhc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VrH-2u-kPz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rd1-jh-Hiw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="D0e-ZA-JME"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULS-Bx-PEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="680" y="35"/>
         </scene>
     </scenes>
 </document>

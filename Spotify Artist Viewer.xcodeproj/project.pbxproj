@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
-		4530791E1BB9799800BDC8FB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791D1BB9799800BDC8FB /* ViewController.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
 		453079231BB9799800BDC8FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 453079221BB9799800BDC8FB /* Assets.xcassets */; };
 		453079261BB9799800BDC8FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 453079241BB9799800BDC8FB /* LaunchScreen.storyboard */; };
 		453079311BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079301BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m */; };
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
+		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +39,6 @@
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4530791A1BB9799800BDC8FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4530791C1BB9799800BDC8FB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4530791D1BB9799800BDC8FB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		453079201BB9799800BDC8FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		453079221BB9799800BDC8FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		453079251BB9799800BDC8FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +49,8 @@
 		453079371BB9799800BDC8FB /* Spotify Artist ViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spotify Artist ViewerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Spotify_Artist_ViewerUITests.m; sourceTree = "<group>"; };
 		4530793D1BB9799800BDC8FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		453079491BB97E3200BDC8FB /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
+		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +101,10 @@
 		453079151BB9799800BDC8FB /* Spotify Artist Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				453079491BB97E3200BDC8FB /* SASearchViewController.h */,
+				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
 				453079191BB9799800BDC8FB /* AppDelegate.h */,
 				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
-				4530791C1BB9799800BDC8FB /* ViewController.h */,
-				4530791D1BB9799800BDC8FB /* ViewController.m */,
 				4530791F1BB9799800BDC8FB /* Main.storyboard */,
 				453079221BB9799800BDC8FB /* Assets.xcassets */,
 				453079241BB9799800BDC8FB /* LaunchScreen.storyboard */,
@@ -270,9 +270,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4530791E1BB9799800BDC8FB /* ViewController.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
+				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
