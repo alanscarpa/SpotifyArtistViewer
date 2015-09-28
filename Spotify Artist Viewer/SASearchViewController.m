@@ -14,7 +14,6 @@
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end
@@ -24,18 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.searchBar.delegate = self;
-    
 }
-
-//-(void)setUpDummyData
-//{
-//    self.dummyArtists = [[NSMutableArray alloc]init];
-//    for (NSUInteger i = 0; i<10; i++)
-//    {
-//        SAArtist *artist = [[SAArtist alloc]initWithName:@"Jason Isbell" biography:@"Amazing songwriter.  Best of the generation!" image:nil];
-//        [self.dummyArtists addObject:artist];
-//    }
-//}
 
 -(void)updateTableViewWithSearchResults:(NSDictionary*)results
 {
@@ -44,14 +32,15 @@
     for (NSDictionary *artist in results[@"artists"][@"items"])
     {
         NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-        
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil];
+        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
         [self.searchResults addObject:artist];
     }
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.tableView reloadData];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,12 +50,10 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"Clicked %@", self.searchBar.text);
+    
     SARequestManager *requestManager = [SARequestManager sharedManager];
     [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
-        
         [self updateTableViewWithSearchResults:artists];
-        
     } failure:^(NSError *error) {
         NSLog(@"API Call to Spotify failed with error: %@", error);
     }];

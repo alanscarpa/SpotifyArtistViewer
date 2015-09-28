@@ -16,4 +16,8 @@
                    success:(void (^)(NSDictionary *artists))success
                    failure:(void (^)(NSError *error))failure;
 
+-(void)getArtistInfoWithSpotifyID:(NSString*)spotifyID
+                      success:(void (^)(NSDictionary *results))success
+                      failure:(void (^)(NSError *error))failure;
+
 @end

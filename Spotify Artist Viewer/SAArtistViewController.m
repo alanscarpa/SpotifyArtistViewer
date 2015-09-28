@@ -7,6 +7,7 @@
 //
 
 #import "SAArtistViewController.h"
+#import "SARequestManager.h"
 
 @interface SAArtistViewController ()
 
@@ -17,7 +18,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"%@", self.artist.artistName);
+    [self updateArtistInfoWithEchoNest];
+}
+
+
+-(void)updateArtistInfoWithEchoNest
+{
+    
+    SARequestManager *requestManager = [SARequestManager sharedManager];
+    [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
+        
+        NSString *artistBio = [[NSString alloc]init];
+    
+        for (NSDictionary *bio in results[@"response"][@"artist"][@"biographies"])
+        {
+            // Find the first biography that is not truncated
+            if ((NSUInteger)bio[@"truncated"] == 0){
+                artistBio = [NSString stringWithFormat:@"%@", bio[@"text"]];
+                break;
+            }
+        }
+        
+        if ([artistBio isEqualToString:@""]){
+            NSLog(@"No bio available");
+        }
+        
+        if ([results[@"response"][@"artist"][@"images"] count] > 0){
+            NSString *artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
+            NSLog(@"%@\n%@", artistImageURL, artistBio);
+        } else {
+            NSLog(@"No image available");
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Error getting data from EchoNest: %@", error);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

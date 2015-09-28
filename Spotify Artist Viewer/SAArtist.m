@@ -12,11 +12,11 @@
 
 -(instancetype)init
 {
-    self = [self initWithName:@"" biography:@"" image:nil];
+    self = [self initWithName:@"" biography:@"" image:nil spotifyID:@""];
     return self;
 }
 
--(instancetype)initWithName:(NSString*)name biography:(NSString*)bio image:(UIImage*)image
+-(instancetype)initWithName:(NSString*)name biography:(NSString*)bio image:(UIImage*)image spotifyID:(NSString *)spotifyID
 {
     self = [super init];
     if (self)
@@ -24,6 +24,7 @@
         _artistName = name;
         _artistBiography = bio;
         _artistImage = image;
+        _artistSpotifyID = spotifyID;
     }
     return self;
     
