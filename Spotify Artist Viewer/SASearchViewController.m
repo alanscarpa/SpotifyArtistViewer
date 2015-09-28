@@ -24,15 +24,11 @@
     self.searchBar.delegate = self;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     SARequestManager *requestManager = [SARequestManager sharedManager];
     [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
         [self updateTableViewWithSearchResults:artists];
@@ -40,29 +36,20 @@
         NSLog(@"API Call to Spotify failed with error: %@", error);
     }];
     [self.searchBar resignFirstResponder];
-
 }
 
-
--(void)updateTableViewWithSearchResults:(NSDictionary*)results
-{
+- (void)updateTableViewWithSearchResults:(NSDictionary*)results {
     self.searchResults = [[NSMutableArray alloc]init];
-    
-    for (NSDictionary *artist in results[@"artists"][@"items"])
-    {
-        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
-        [self.searchResults addObject:artist];
+    for (NSDictionary *artist in results[@"artists"][@"items"]) {
+            NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+            NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+            SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
+            [self.searchResults addObject:artist];
     }
-    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.tableView reloadData];
     }];
-    
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -74,25 +61,18 @@
     return self.searchResults.count;
 }
 
-
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
      cell.textLabel.text = [self.searchResults[indexPath.row] artistName];
      return cell;
-     
- }
-
+}
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     SAArtistViewController *destinationVC = [segue destinationViewController];
     NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
     destinationVC.artist = self.searchResults[selectedRowIndexPath.row];
-    
 }
 
 

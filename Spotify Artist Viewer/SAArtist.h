@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImage *artistImage;
 @property (nonatomic, strong) NSString *artistSpotifyID;
 
--(instancetype)initWithName:(NSString*)name
+- (instancetype)initWithName:(NSString*)name
                   biography:(NSString*)bio
                       image:(UIImage*)image
                   spotifyID:(NSString*)spotifyID;

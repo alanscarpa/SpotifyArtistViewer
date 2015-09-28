@@ -29,42 +29,28 @@
     [self getArtistInfoFromEchoNest];
 }
 
-
-
-
--(void)getArtistInfoFromEchoNest
-{
-    
+-(void)getArtistInfoFromEchoNest {
     SARequestManager *requestManager = [SARequestManager sharedManager];
-    
     [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
-        
         NSString *artistBio = [[NSString alloc]init];
         NSString *artistImageURL = [[NSString alloc]init];
-        
-        for (NSDictionary *bio in results[@"response"][@"artist"][@"biographies"])
-        {
+        for (NSDictionary *bio in results[@"response"][@"artist"][@"biographies"]) {
             // Find the first biography that is not truncated
-            if ((NSUInteger)bio[@"truncated"] == 0){
+            if ((NSUInteger)bio[@"truncated"] == 0) {
                 artistBio = [NSString stringWithFormat:@"%@", bio[@"text"]];
                 break;
             }
         }
-        
-        if ([results[@"response"][@"artist"][@"images"] count] > 0){
+        if ([results[@"response"][@"artist"][@"images"] count] > 0) {
             artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
         }
-        
         [self updateArtistWithBio:artistBio andPictureURL:artistImageURL];
-        
     } failure:^(NSError *error) {
         NSLog(@"Error getting data from EchoNest: %@", error);
     }];
-    
 }
 
--(void)updateArtistWithBio:(NSString*)bio andPictureURL:(NSString*)url
-{
+- (void)updateArtistWithBio:(NSString*)bio andPictureURL:(NSString*)url {
     if ([bio isEqualToString:@""])
     {
        self.artist.artistBiography = @"No biography available.";
@@ -72,8 +58,6 @@
        self.artist.artistBiography = bio;
     }
     [self updateBioTextViewSize];
-    
-    
     if (![url isEqualToString:@""]){
         [self.profileImage sd_setImageWithURL:[NSURL URLWithString:url]
                              placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -87,25 +71,21 @@
                                  }
                             }];
     } else {
-        // NO IMAGE WAS AVAILABLE
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.activityIndicator stopAnimating];
             self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
         }];
     }
-    
-    
 }
--(void)updateArtistImage
-{
+
+- (void)updateArtistImage {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.activityIndicator stopAnimating];
         self.profileImage.image = self.artist.artistImage;
     }];
 }
 
--(void)updateBioTextViewSize
-{
+-(void)updateBioTextViewSize {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         self.biographyTextView.text = self.artist.artistBiography;
         self.biographyTextView.scrollEnabled = NO;
@@ -118,6 +98,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
 
 /*
 #pragma mark - Navigation

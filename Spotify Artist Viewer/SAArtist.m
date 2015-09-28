@@ -10,13 +10,13 @@
 
 @implementation SAArtist
 
--(instancetype)init
+- (instancetype)init
 {
     self = [self initWithName:@"" biography:@"" image:nil spotifyID:@""];
     return self;
 }
 
--(instancetype)initWithName:(NSString*)name biography:(NSString*)bio image:(UIImage*)image spotifyID:(NSString *)spotifyID
+- (instancetype)initWithName:(NSString*)name biography:(NSString*)bio image:(UIImage*)image spotifyID:(NSString *)spotifyID
 {
     self = [super init];
     if (self)

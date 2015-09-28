@@ -10,13 +10,13 @@
 
 @interface SARequestManager : NSObject
 
-+(instancetype)sharedManager;
++ (instancetype)sharedManager;
 
--(void)getArtistsWithQuery:(NSString*)query
+- (void)getArtistsWithQuery:(NSString*)query
                    success:(void (^)(NSDictionary *artists))success
                    failure:(void (^)(NSError *error))failure;
 
--(void)getArtistInfoWithSpotifyID:(NSString*)spotifyID
+- (void)getArtistInfoWithSpotifyID:(NSString*)spotifyID
                       success:(void (^)(NSDictionary *results))success
                       failure:(void (^)(NSError *error))failure;
 
