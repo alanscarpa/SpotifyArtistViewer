@@ -10,6 +10,9 @@
 #import "SAArtist.h"
 #import "SAArtistViewController.h"
 #import "SARequestManager.h"
+#import "SAAFNetworkingManager.h"
+#import "SASearchTableViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 static NSString * const kCellName = @"cell";
 
@@ -38,10 +41,12 @@ static NSString * const kCellName = @"cell";
 }
 
 -(void)searchForSpotifyArtist {
-    [[SARequestManager sharedManager] getArtistsWithQuery:self.searchBar.text success:^(NSArray *artists) {
-        [self updateTableViewWithSearchResults:artists];
-    } failure:^(NSError *error) {
-        NSLog(@"API Call to Spotify failed with error: %@", error);
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withCompletionHandler:^(NSArray *artists, NSError *error) {
+        if (artists){
+            [self updateTableViewWithSearchResults:artists];
+        } else {
+            NSLog(@"Error calling Spotify API: %@", error);
+        }
     }];
 }
 
@@ -61,13 +66,27 @@ static NSString * const kCellName = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:kCellName forIndexPath:indexPath] atIndexPath:indexPath];
+     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:@"SASearchTableViewCell" forIndexPath:indexPath] atIndexPath:indexPath];
 }
 
-- (UITableViewCell*)customizeCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
-    cell.textLabel.text = [self.artistsFromSearch[indexPath.row] artistName];
+- (UITableViewCell*)customizeCell:(SASearchTableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath {
+    SAArtist *artist = self.artistsFromSearch[indexPath.row];
+    cell.artistName.text = artist.artistName;
+    cell.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
+    cell.artistPopularity.text = artist.popularity;
+    [cell.artistImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
+                         placeholderImage:nil
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    //[self.activityIndicator stopAnimating];
+                                    if (error){
+                                        cell.artistImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                    }
+                                }];
     return cell;
 }
+
+#pragma mark - Helper Methods
+
 
 #pragma mark - Navigation
 

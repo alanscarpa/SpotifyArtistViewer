@@ -12,11 +12,11 @@
 
 - (instancetype)init
 {
-    self = [self initWithName:@"" biography:@"" imageURL:nil spotifyID:@""];
+    self = [self initWithName:@"" biography:@"" imageURL:nil artistSearchThumbnailURL:nil genres:nil popularity:@"" spotifyID:@""];
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name biography:(NSString*)bio imageURL:(NSURL*)imageURL spotifyID:(NSString *)spotifyID
+- (instancetype)initWithName:(NSString *)name biography:(NSString *)bio imageURL:(NSURL *)imageURL artistSearchThumbnailURL:(NSURL *)thumbnailURL genres:(NSArray *)genres popularity:(NSString *)popularity spotifyID:(NSString *)spotifyID
 {
     self = [super init];
     if (self)
@@ -24,6 +24,9 @@
         _artistName = name;
         _artistBiography = bio;
         _artistImageURL = imageURL;
+        _artistSearchThumbnailImageURL = thumbnailURL;
+        _genres = genres;
+        _popularity = popularity;
         _artistSpotifyID = spotifyID;
     }
     return self;
