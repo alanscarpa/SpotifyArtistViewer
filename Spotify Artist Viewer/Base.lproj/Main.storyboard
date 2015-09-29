@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JLu-wZ-PhV" id="rik-zs-4cX">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -46,18 +46,14 @@
                         <constraints>
                             <constraint firstItem="PO2-5k-54x" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="28r-ba-lfG"/>
                             <constraint firstItem="PO2-5k-54x" firstAttribute="top" secondItem="5ov-BH-D1P" secondAttribute="bottom" id="Adq-jJ-YnV"/>
-                            <constraint firstItem="5ov-BH-D1P" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="BVr-lY-wjm"/>
                             <constraint firstItem="5ov-BH-D1P" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Bud-OQ-tqO"/>
                             <constraint firstItem="5ov-BH-D1P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K7f-c0-2dt"/>
-                            <constraint firstItem="PO2-5k-54x" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Neo-RQ-Iei"/>
-                            <constraint firstItem="PO2-5k-54x" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YLF-dQ-h60"/>
+                            <constraint firstAttribute="trailing" secondItem="PO2-5k-54x" secondAttribute="trailing" id="NBd-ix-O5L"/>
+                            <constraint firstAttribute="trailing" secondItem="5ov-BH-D1P" secondAttribute="trailing" id="R4H-sj-z3h"/>
+                            <constraint firstItem="PO2-5k-54x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WRO-7E-6ID"/>
+                            <constraint firstItem="5ov-BH-D1P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jkL-UE-6V5"/>
                             <constraint firstItem="PO2-5k-54x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sXP-hF-MB5"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="YLF-dQ-h60"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="cSW-We-6eF"/>
@@ -101,7 +97,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifs-jR-bFf">
                                                 <rect key="frame" x="255" y="36" width="91" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-le-fv5">
@@ -128,19 +124,13 @@
                                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="ifs-jR-bFf" secondAttribute="bottom" constant="36" id="G9i-ke-K5M"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="top" secondItem="EXz-le-fv5" secondAttribute="bottom" constant="36" id="JXi-np-Gfo"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="NU5-mm-Ram"/>
-                                            <constraint firstItem="8YC-SY-IAz" firstAttribute="height" secondItem="Bcx-Ql-aWe" secondAttribute="height" id="TJx-Jr-Sgg"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerY" secondItem="EXz-le-fv5" secondAttribute="centerY" id="VaP-Rb-dEk"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="cZU-00-gzW"/>
-                                            <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="16" id="ddn-Tn-77U"/>
+                                            <constraint firstItem="8YC-SY-IAz" firstAttribute="leading" secondItem="Bcx-Ql-aWe" secondAttribute="leading" constant="30" id="ezV-ik-Ghc"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="36" id="l0A-8p-pjW"/>
+                                            <constraint firstAttribute="trailing" secondItem="8YC-SY-IAz" secondAttribute="trailing" constant="30" id="qd0-4t-7c6"/>
                                             <constraint firstAttribute="bottom" secondItem="8YC-SY-IAz" secondAttribute="bottom" constant="36" id="uYC-V8-gok"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="ddn-Tn-77U"/>
-                                                <exclude reference="TJx-Jr-Sgg"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -155,24 +145,13 @@
                         <constraints>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" multiplier="0.3" id="78Z-PL-1dA"/>
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="leading" secondItem="IWf-2I-7PJ" secondAttribute="leading" id="Je3-xf-qkF"/>
-                            <constraint firstItem="8YC-SY-IAz" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" multiplier="0.9" id="KWD-DZ-wHy"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="centerX" secondItem="IWf-2I-7PJ" secondAttribute="centerX" id="LKK-vY-wed"/>
-                            <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="RyH-sx-x11" secondAttribute="bottom" constant="16" id="UZk-jU-Lte"/>
                             <constraint firstItem="DY7-dj-i7g" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="bottom" id="X5u-Uq-Avj"/>
                             <constraint firstItem="Bcx-Ql-aWe" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" id="iAo-cg-CSG"/>
                             <constraint firstAttribute="trailing" secondItem="PFK-c9-eDS" secondAttribute="trailing" id="iGF-7A-h5r"/>
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="top" secondItem="RyH-sx-x11" secondAttribute="bottom" id="im4-hi-k2R"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="height" secondItem="IWf-2I-7PJ" secondAttribute="height" multiplier="0.3" id="q9K-ty-RJT"/>
-                            <constraint firstItem="Bcx-Ql-aWe" firstAttribute="height" secondItem="IWf-2I-7PJ" secondAttribute="height" id="sKu-T1-z2v"/>
-                            <constraint firstItem="8YC-SY-IAz" firstAttribute="height" secondItem="IWf-2I-7PJ" secondAttribute="height" placeholder="YES" id="z9T-yS-1TG"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="sKu-T1-z2v"/>
-                                <exclude reference="UZk-jU-Lte"/>
-                                <exclude reference="z9T-yS-1TG"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Artist Profile" id="nB4-DV-AvZ"/>
                     <connections>

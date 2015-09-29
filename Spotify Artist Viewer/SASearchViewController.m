@@ -14,38 +14,51 @@
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *searchResults;
+@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setSearchBarDelegate];
+}
+
+-(void)setSearchBarDelegate {
     self.searchBar.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    SARequestManager *requestManager = [SARequestManager sharedManager];
-    [requestManager getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
+    [self searchForSpotifyArtist];
+    [self.searchBar resignFirstResponder];
+}
+
+-(void)searchForSpotifyArtist {
+    [[SARequestManager sharedManager] getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
         [self updateTableViewWithSearchResults:artists];
     } failure:^(NSError *error) {
         NSLog(@"API Call to Spotify failed with error: %@", error);
     }];
-    [self.searchBar resignFirstResponder];
 }
 
 - (void)updateTableViewWithSearchResults:(NSDictionary*)results {
-    self.searchResults = [[NSMutableArray alloc]init];
+    [self populateArtistsArrayWithSearchResults:results];
+    [self updateTableView];
+}
+
+- (void)populateArtistsArrayWithSearchResults:(NSDictionary*)results {
+    self.artistsFromSearch = [[NSMutableArray alloc]init];
     for (NSDictionary *artist in results[@"artists"][@"items"]) {
-            NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-            NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-            SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
-            [self.searchResults addObject:artist];
+        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
+        [self.artistsFromSearch addObject:artist];
     }
+}
+
+- (void)updateTableView {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.tableView reloadData];
     }];
@@ -58,13 +71,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResults.count;
+    return self.artistsFromSearch.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-     cell.textLabel.text = [self.searchResults[indexPath.row] artistName];
-     return cell;
+     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath] atIndexPath:indexPath];
+}
+
+- (UITableViewCell*)customizeCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
+    cell.textLabel.text = [self.artistsFromSearch[indexPath.row] artistName];
+    return cell;
 }
 
 #pragma mark - Navigation
@@ -72,54 +88,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     SAArtistViewController *destinationVC = [segue destinationViewController];
     NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
-    destinationVC.artist = self.searchResults[selectedRowIndexPath.row];
+    destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
 }
-
-
-
-
-
-
-
-
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-
-
-
-
 
 @end
