@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -29,7 +28,7 @@
     [self getArtistInfoFromEchoNest];
 }
 
--(void)getArtistInfoFromEchoNest {
+- (void)getArtistInfoFromEchoNest {
     SARequestManager *requestManager = [SARequestManager sharedManager];
     [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
         NSString *artistBio = [[NSString alloc]init];
@@ -89,8 +88,8 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         self.biographyTextView.text = self.artist.artistBiography;
         self.biographyTextView.scrollEnabled = NO;
-        CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
-        self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
+//        CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
+//        self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
     }];
 }
 

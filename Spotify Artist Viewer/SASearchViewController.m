@@ -11,6 +11,8 @@
 #import "SAArtistViewController.h"
 #import "SARequestManager.h"
 
+static NSString * const kCellName = @"cell";
+
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -66,16 +68,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.artistsFromSearch.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath] atIndexPath:indexPath];
+     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:kCellName forIndexPath:indexPath] atIndexPath:indexPath];
 }
 
 - (UITableViewCell*)customizeCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
