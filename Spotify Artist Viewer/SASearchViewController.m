@@ -66,27 +66,25 @@ static NSString * const kCellName = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:@"SASearchTableViewCell" forIndexPath:indexPath] atIndexPath:indexPath];
+     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath] atIndexPath:indexPath];
 }
 
 - (UITableViewCell*)customizeCell:(SASearchTableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath {
     SAArtist *artist = self.artistsFromSearch[indexPath.row];
+    [cell.activityIndicator startAnimating];
     cell.artistName.text = artist.artistName;
     cell.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
     cell.artistPopularity.text = artist.popularity;
     [cell.artistImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
                          placeholderImage:nil
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                    //[self.activityIndicator stopAnimating];
+                                    [cell.activityIndicator stopAnimating];
                                     if (error){
                                         cell.artistImage.image = [UIImage imageNamed:@"noImage.jpg"];
                                     }
                                 }];
     return cell;
 }
-
-#pragma mark - Helper Methods
-
 
 #pragma mark - Navigation
 

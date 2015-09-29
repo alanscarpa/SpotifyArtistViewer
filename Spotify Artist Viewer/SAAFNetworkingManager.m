@@ -25,23 +25,25 @@
     
 }
 
-
-
 + (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];
-    for (NSDictionary *artist in JSONDictionary[@"artists"][@"items"]) {
-        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-        NSURL *artistThumbnailURL = nil;
-        if ([artist[@"images"] count] > 0){
-             artistThumbnailURL = [NSURL URLWithString:artist[@"images"][0][@"url"]];
-        }
-        NSArray *artistGenres = [[NSArray alloc]initWithArray:artist[@"genres"]];
-        NSString *popularity = [NSString stringWithFormat:@"%@", artist[@"popularity"]];
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil artistSearchThumbnailURL:artistThumbnailURL genres:artistGenres popularity:popularity spotifyID:spotifyID];
-        [artistsFromSearch addObject:artist];
+    for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {
+        [artistsFromSearch addObject:[self artistFromDictionary:artistDictionary]];
     }
     return artistsFromSearch;
+}
+
++ (SAArtist *)artistFromDictionary:(NSDictionary *)artistDictionary {
+    NSString *artistName = [NSString stringWithFormat:@"%@", artistDictionary[@"name"]];
+    NSString *spotifyID = [NSString stringWithFormat:@"%@", artistDictionary[@"id"]];
+    NSURL *artistThumbnailURL = nil;
+    if ([artistDictionary[@"images"] count] > 0){
+        artistThumbnailURL = [NSURL URLWithString:artistDictionary[@"images"][0][@"url"]];
+    }
+    NSArray *artistGenres = [[NSArray alloc]initWithArray:artistDictionary[@"genres"]];
+    NSString *popularity = [NSString stringWithFormat:@"Score: %@%%", artistDictionary[@"popularity"]];
+    SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil artistSearchThumbnailURL:artistThumbnailURL genres:artistGenres popularity:popularity spotifyID:spotifyID];
+    return artist;
 }
 
 @end

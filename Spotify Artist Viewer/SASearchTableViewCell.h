@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistName;
 @property (weak, nonatomic) IBOutlet UILabel *artistGenres;
 @property (weak, nonatomic) IBOutlet UILabel *artistPopularity;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

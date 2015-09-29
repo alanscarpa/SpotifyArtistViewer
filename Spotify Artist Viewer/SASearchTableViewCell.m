@@ -7,6 +7,8 @@
 //
 
 #import "SASearchTableViewCell.h"
+#import "SAArtist.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation SASearchTableViewCell
 
@@ -19,5 +21,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end
