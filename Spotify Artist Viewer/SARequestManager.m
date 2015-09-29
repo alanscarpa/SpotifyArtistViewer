@@ -21,29 +21,50 @@
 
 #pragma mark - Spotify Calls
 
+- (void)sendDataTaskWithURL:(NSURL *)URL completionHandler:(void (^)(NSDictionary  * __nullable responseObject, NSError * __nullable error))completionHandler; {
+    NSURLSessionTask *apiCallTask = [[NSURLSession sharedSession] dataTaskWithURL:URL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSError *resultError = nil;
+        NSDictionary *jsonResponse = nil;
+        if (data) {
+            NSError *parseError = nil;
+            jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+            if (parseError) {
+                resultError = parseError;
+            }
+        } else {
+            resultError = error;
+        }
+        
+        if (jsonResponse == nil) {
+            if (resultError == nil) {
+                resultError = [NSError errorWithDomain:@"TBD" code:0 userInfo:nil];
+            }
+
+        }
+        completionHandler(jsonResponse, resultError);
+    }];
+    [apiCallTask resume];
+}
+
 - (void)getArtistsWithQuery:(NSString*)query
                    success:(void (^)(NSArray *artists))success
                    failure:(void (^)(NSError *error))failure {
-    NSURLSessionTask *apiCallTask = [[NSURLSession sharedSession] dataTaskWithURL:[self createSpotifyGETRequestURLWithQuery:query] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (!error) {
+    [self sendDataTaskWithURL:[self createSpotifyGETRequestURLWithQuery:query] completionHandler:^(NSDictionary * _Nullable responseObject, NSError * _Nullable error) {
+        if (responseObject) {
+            NSArray *artists = [self artistsWithJSONDictionary:responseObject];
             if (success) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    success([self artistsFromData:data]);
+                    success(artists);
                 }];
-            } else {
-                NSLog(@"No success block called");
             }
         } else {
-            if (failure){
+            if (failure) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     failure(error);
                 }];
-            } else {
-                NSLog(@"Error but no failure block called");
             }
         }
     }];
-    [apiCallTask resume];
 }
 
 #pragma mark - EchoNest Calls
@@ -86,19 +107,13 @@
     return [NSURL URLWithString:getRequestString];
 }
 
-- (NSArray *)artistsFromData:(NSData*)data {
-    NSError *error = nil;
-    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+- (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];
-    if (jsonResponse){
-        for (NSDictionary *artist in jsonResponse[@"artists"][@"items"]) {
-            NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-            NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-            SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil spotifyID:spotifyID];
-            [artistsFromSearch addObject:artist];
-        }
-    } else {
-        NSLog(@"Error serializing JSON while creating artist array.");
+    for (NSDictionary *artist in JSONDictionary[@"artists"][@"items"]) {
+        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
+        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil spotifyID:spotifyID];
+        [artistsFromSearch addObject:artist];
     }
     return artistsFromSearch;
 }

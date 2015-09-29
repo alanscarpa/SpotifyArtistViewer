@@ -110,17 +110,9 @@
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
                                                 <rect key="frame" x="30" y="308" width="540" height="117"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="OAR-6W-ikq"/>
-                                                </constraints>
                                                 <string key="text">lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="OAR-6W-ikq"/>
-                                                    </mask>
-                                                </variation>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,6 +131,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Bcx-Ql-aWe" firstAttribute="width" secondItem="PFK-c9-eDS" secondAttribute="width" id="55C-BS-LGC"/>
                                     <constraint firstItem="Bcx-Ql-aWe" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="top" id="hFE-Bu-lev"/>
                                     <constraint firstAttribute="bottom" secondItem="Bcx-Ql-aWe" secondAttribute="bottom" id="pu3-zk-UJE"/>
                                     <constraint firstAttribute="trailing" secondItem="Bcx-Ql-aWe" secondAttribute="trailing" id="qtt-6l-M0u"/>
@@ -152,7 +145,6 @@
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="leading" secondItem="IWf-2I-7PJ" secondAttribute="leading" id="Je3-xf-qkF"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="centerX" secondItem="IWf-2I-7PJ" secondAttribute="centerX" id="LKK-vY-wed"/>
                             <constraint firstItem="DY7-dj-i7g" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="bottom" id="X5u-Uq-Avj"/>
-                            <constraint firstItem="Bcx-Ql-aWe" firstAttribute="width" secondItem="IWf-2I-7PJ" secondAttribute="width" id="iAo-cg-CSG"/>
                             <constraint firstAttribute="trailing" secondItem="PFK-c9-eDS" secondAttribute="trailing" id="iGF-7A-h5r"/>
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="top" secondItem="RyH-sx-x11" secondAttribute="bottom" id="im4-hi-k2R"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="height" secondItem="IWf-2I-7PJ" secondAttribute="height" multiplier="0.3" id="q9K-ty-RJT"/>
