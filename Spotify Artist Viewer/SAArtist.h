@@ -13,12 +13,15 @@
 
 @property (nonatomic, strong) NSString *artistName;
 @property (nonatomic, strong) NSString *artistBiography;
-@property (nonatomic, strong) UIImage *artistImage;
+@property (nonatomic, strong) NSURL *artistImageURL;
 @property (nonatomic, strong) NSString *artistSpotifyID;
 
 - (instancetype)initWithName:(NSString*)name
                   biography:(NSString*)bio
-                      image:(UIImage*)image
+                      imageURL:(NSURL*)imageURL
                   spotifyID:(NSString*)spotifyID;
 
+- (void)setBioFromJSON:(NSDictionary *)json;
+- (void)setNameFromJSON:(NSDictionary *)json;
+- (void)setImageURLFromJSON:(NSDictionary *)json;
 @end

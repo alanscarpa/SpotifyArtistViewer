@@ -8,89 +8,57 @@
 
 #import "SAArtistViewController.h"
 #import "SARequestManager.h"
-#import <SDWebImage/UIIMageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAArtistViewController ()
-
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
 @end
 
 @implementation SAArtistViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.activityIndicator startAnimating];
-    self.artistNameLabel.text = self.artist.artistName;
+    [self setUpUI];
     [self getArtistInfoFromEchoNest];
 }
 
+- (void)setUpUI {
+    [self.activityIndicator startAnimating];
+    self.artistNameLabel.text = self.artist.artistName;
+    self.biographyTextView.scrollEnabled = NO;
+}
+
 - (void)getArtistInfoFromEchoNest {
-    SARequestManager *requestManager = [SARequestManager sharedManager];
-    [requestManager getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(NSDictionary *results) {
-        NSString *artistBio = [[NSString alloc]init];
-        NSString *artistImageURL = [[NSString alloc]init];
-        for (NSDictionary *bio in results[@"response"][@"artist"][@"biographies"]) {
-            // Find the first biography that is not truncated
-            if ((NSUInteger)bio[@"truncated"] == 0) {
-                artistBio = [NSString stringWithFormat:@"%@", bio[@"text"]];
-                break;
-            }
-        }
-        if ([results[@"response"][@"artist"][@"images"] count] > 0) {
-            artistImageURL = [NSString stringWithFormat:@"%@", results[@"response"][@"artist"][@"images"][0][@"url"]];
-        }
-        [self updateArtistWithBio:artistBio andPictureURL:artistImageURL];
+    [[SARequestManager sharedManager] getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(SAArtist *artist) {
+        [self updateUIWithArtist:artist];
     } failure:^(NSError *error) {
-        NSLog(@"Error getting data from EchoNest: %@", error);
+        NSLog(@"Unable to get artist info from EchoNest");
     }];
 }
 
-- (void)updateArtistWithBio:(NSString*)bio andPictureURL:(NSString*)url {
-    if ([bio isEqualToString:@""])
-    {
-       self.artist.artistBiography = @"No biography available.";
-    } else {
-       self.artist.artistBiography = bio;
-    }
-    [self updateBioTextViewSize];
-    if (![url isEqualToString:@""]){
-        [self.profileImage sd_setImageWithURL:[NSURL URLWithString:url]
-                             placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 if (!error){
-                                     [self.activityIndicator stopAnimating];
-                                     self.artist.artistImage = image;
-                                 } else {
-                                     // SOMETIMES IMAGE URL RETURNED DOES NOT WORK, SO WE DISPLAY NOIMAGE PHOTO IN THESE CASES
-                                     [self.activityIndicator stopAnimating];
-                                     self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
-                                 }
-                            }];
-    } else {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.activityIndicator stopAnimating];
-            self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
-        }];
-    }
+- (void)updateUIWithArtist:(SAArtist *)artist {
+    self.artist = artist;
+    [self updateBioTextView];
+    [self updateArtistImage];
+}
+
+- (void)updateBioTextView {
+    self.biographyTextView.text = self.artist.artistBiography;
+    self.biographyTextView.hidden = NO;
 }
 
 - (void)updateArtistImage {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self.activityIndicator stopAnimating];
-        self.profileImage.image = self.artist.artistImage;
-    }];
-}
-
-- (void)updateBioTextViewSize {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        self.biographyTextView.text = self.artist.artistBiography;
-        self.biographyTextView.scrollEnabled = NO;
-//        CGSize sizeThatFitsTextView = [self.biographyTextView sizeThatFits:self.biographyTextView.frame.size];
-//        self.textViewHeightConstraint.constant = sizeThatFitsTextView.height;
-    }];
+    [self.profileImage sd_setImageWithURL:self.artist.artistImageURL
+                      placeholderImage:nil
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 [self.activityIndicator stopAnimating];
+                                 if (error){
+                                     self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                 }
+                             }];
 }
 
 @end

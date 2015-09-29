@@ -7,17 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SAArtist.h"
 
 @interface SARequestManager : NSObject
 
 + (instancetype)sharedManager;
 
 - (void)getArtistsWithQuery:(NSString*)query
-                   success:(void (^)(NSDictionary *artists))success
+                   success:(void (^)(NSArray *artists))success
                    failure:(void (^)(NSError *error))failure;
 
 - (void)getArtistInfoWithSpotifyID:(NSString*)spotifyID
-                      success:(void (^)(NSDictionary *results))success
-                      failure:(void (^)(NSError *error))failure;
+                            success:(void (^)(SAArtist *artist))success
+                            failure:(void (^)(NSError *error))failure;
+
 
 @end

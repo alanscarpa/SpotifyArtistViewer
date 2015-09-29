@@ -16,7 +16,7 @@ static NSString * const kCellName = @"cell";
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
+@property (strong, nonatomic) NSArray *artistsFromSearch;
 @end
 
 @implementation SASearchViewController
@@ -26,7 +26,7 @@ static NSString * const kCellName = @"cell";
     [self setSearchBarDelegate];
 }
 
--(void)setSearchBarDelegate {
+- (void)setSearchBarDelegate {
     self.searchBar.delegate = self;
 }
 
@@ -38,32 +38,20 @@ static NSString * const kCellName = @"cell";
 }
 
 -(void)searchForSpotifyArtist {
-    [[SARequestManager sharedManager] getArtistsWithQuery:self.searchBar.text success:^(NSDictionary *artists) {
+    [[SARequestManager sharedManager] getArtistsWithQuery:self.searchBar.text success:^(NSArray *artists) {
         [self updateTableViewWithSearchResults:artists];
     } failure:^(NSError *error) {
         NSLog(@"API Call to Spotify failed with error: %@", error);
     }];
 }
 
-- (void)updateTableViewWithSearchResults:(NSDictionary*)results {
-    [self populateArtistsArrayWithSearchResults:results];
+- (void)updateTableViewWithSearchResults:(NSArray*)results {
+    self.artistsFromSearch = results;
     [self updateTableView];
 }
 
-- (void)populateArtistsArrayWithSearchResults:(NSDictionary*)results {
-    self.artistsFromSearch = [[NSMutableArray alloc]init];
-    for (NSDictionary *artist in results[@"artists"][@"items"]) {
-        NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
-        NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:@"Amazing songwriter.  Best of the generation!" image:nil spotifyID:spotifyID];
-        [self.artistsFromSearch addObject:artist];
-    }
-}
-
 - (void)updateTableView {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self.tableView reloadData];
-    }];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
