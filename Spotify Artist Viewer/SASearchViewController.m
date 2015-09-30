@@ -22,6 +22,7 @@ static NSInteger const kReturnLimit = 3;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) NSMutableArray *tableViewConstraints;
 @end
 
 @implementation SASearchViewController
@@ -31,8 +32,8 @@ static NSInteger const kReturnLimit = 3;
     [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
+    self.tableViewConstraints = [[NSMutableArray alloc]init];
 }
-
 
 - (void)prepareArtistsArray {
     self.artistsFromSearch = [[NSMutableArray alloc]init];
@@ -50,12 +51,21 @@ static NSInteger const kReturnLimit = 3;
 - (IBAction)segmedControlTapped:(id)sender {
     if (self.segmentedControl.selectedSegmentIndex == 0){
         NSLog(@"List");
+        [self.view addSubview:self.tableView];
+        for (NSLayoutConstraint *constraint in self.tableViewConstraints){
+            [self.view addConstraint:constraint];
+        }
     } else {
         NSLog(@"Collection");
+        for (NSLayoutConstraint *constraint in self.view.constraints){
+            if (constraint.firstItem == self.tableView || constraint.secondItem == self.tableView){
+              [self.tableViewConstraints addObject:constraint];
+            }
+        }
+        
+        [self.tableView removeFromSuperview];
     };
 }
-
-
 
 #pragma mark - Search function
 
