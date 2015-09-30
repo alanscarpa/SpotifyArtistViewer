@@ -112,7 +112,7 @@
     for (NSDictionary *artist in JSONDictionary[@"artists"][@"items"]) {
         NSString *artistName = [NSString stringWithFormat:@"%@", artist[@"name"]];
         NSString *spotifyID = [NSString stringWithFormat:@"%@", artist[@"id"]];
-        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil spotifyID:spotifyID];
+        SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil artistSearchThumbnailURL:nil genres:nil popularity:@"" spotifyID:spotifyID];
         [artistsFromSearch addObject:artist];
     }
     return artistsFromSearch;
