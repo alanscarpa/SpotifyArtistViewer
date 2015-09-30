@@ -12,10 +12,10 @@
 
 @implementation SAAFNetworkingManager
 
-+ (void)sendGETRequestWithQuery:(NSString *)query withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
++ (void)sendGETRequestWithQuery:(NSString *)query withOffset:(NSUInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
     if (completionHandler){
         query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist", query] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=3&offset=%lu", query, offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             completionHandler([self artistsWithJSONDictionary:responseObject], nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
@@ -41,7 +41,7 @@
         artistThumbnailURL = [NSURL URLWithString:artistDictionary[@"images"][0][@"url"]];
     }
     NSArray *artistGenres = [[NSArray alloc]initWithArray:artistDictionary[@"genres"]];
-    NSString *popularity = [NSString stringWithFormat:@"Score: %@%%", artistDictionary[@"popularity"]];
+    NSString *popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
     SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil artistSearchThumbnailURL:artistThumbnailURL genres:artistGenres popularity:popularity spotifyID:spotifyID];
     return artist;
 }

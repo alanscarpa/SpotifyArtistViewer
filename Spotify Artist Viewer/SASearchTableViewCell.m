@@ -13,13 +13,16 @@
 @implementation SASearchTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [self makeArtistImageCircular];
+}
+
+- (void)makeArtistImageCircular {
+    self.artistImage.layer.masksToBounds = YES;
+    self.artistImage.layer.cornerRadius = self.artistImage.frame.size.height/2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 

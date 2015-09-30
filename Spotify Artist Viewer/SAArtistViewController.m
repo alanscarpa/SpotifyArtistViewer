@@ -27,8 +27,13 @@
 
 - (void)setUpUI {
     [self.activityIndicator startAnimating];
+    [self setUpArtistNameLabel];
+}
+
+- (void)setUpArtistNameLabel {
+    self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
+    self.artistNameLabel.minimumScaleFactor = 0.7;
     self.artistNameLabel.text = self.artist.artistName;
-    self.biographyTextView.scrollEnabled = NO;
 }
 
 - (void)getArtistInfoFromEchoNest {

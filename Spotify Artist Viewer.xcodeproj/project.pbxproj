@@ -22,6 +22,7 @@
 		456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
 		456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchTableViewCell.m; sourceTree = "<group>"; };
+		456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SASearchTableViewCell+SASearchCellCustomizer.h"; sourceTree = "<group>"; };
+		456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASearchTableViewCell+SASearchCellCustomizer.m"; sourceTree = "<group>"; };
 		6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9D8A86C184B1E6397DADB529 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC5DB85B00813BC0F367B3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
 				456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */,
 				456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */,
+				456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */,
+				456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */,
 			);
 			name = SearchViewController;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
+				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
 				4530795A1BB98D2200BDC8FB /* SARequestManager.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,

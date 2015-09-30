@@ -12,36 +12,56 @@
 #import "SARequestManager.h"
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "SASearchTableViewCell+SASearchCellCustomizer.h"
+#import <UIScrollView+InfiniteScroll.h>
 
 static NSString * const kCellName = @"cell";
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *artistsFromSearch;
+@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
+@property (nonatomic) NSUInteger searchOffset;
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.artistsFromSearch = [[NSMutableArray alloc]init];
+    self.searchOffset = 0;
     [self setSearchBarDelegate];
+    [self setUpInfiniteScroll];
 }
 
 - (void)setSearchBarDelegate {
     self.searchBar.delegate = self;
 }
 
+- (void)setUpInfiniteScroll {
+    // change indicator view style to white
+    self.tableView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
+    [self.tableView addInfiniteScrollWithHandler:^(UITableView* tableView) {
+        self.searchOffset += 3;
+        [self searchForSpotifyArtist];
+        [tableView finishInfiniteScroll];
+    }];
+}
+
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self clearPreviousArtistSearchResults];
     [self searchForSpotifyArtist];
     [self.searchBar resignFirstResponder];
 }
 
--(void)searchForSpotifyArtist {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withCompletionHandler:^(NSArray *artists, NSError *error) {
+- (void)clearPreviousArtistSearchResults {
+    [self.artistsFromSearch removeAllObjects];
+}
+
+- (void)searchForSpotifyArtist {
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withOffset:self.searchOffset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
             [self updateTableViewWithSearchResults:artists];
         } else {
@@ -50,8 +70,8 @@ static NSString * const kCellName = @"cell";
     }];
 }
 
-- (void)updateTableViewWithSearchResults:(NSArray*)results {
-    self.artistsFromSearch = results;
+- (void)updateTableViewWithSearchResults:(NSArray *)results {
+    [self.artistsFromSearch addObjectsFromArray:results];
     [self updateTableView];
 }
 
@@ -66,23 +86,8 @@ static NSString * const kCellName = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath] atIndexPath:indexPath];
-}
-
-- (UITableViewCell*)customizeCell:(SASearchTableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath {
-    SAArtist *artist = self.artistsFromSearch[indexPath.row];
-    [cell.activityIndicator startAnimating];
-    cell.artistName.text = artist.artistName;
-    cell.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
-    cell.artistPopularity.text = artist.popularity;
-    [cell.artistImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
-                         placeholderImage:nil
-                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                    [cell.activityIndicator stopAnimating];
-                                    if (error){
-                                        cell.artistImage.image = [UIImage imageNamed:@"noImage.jpg"];
-                                    }
-                                }];
+    SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     return cell;
 }
 
