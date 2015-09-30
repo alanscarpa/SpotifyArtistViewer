@@ -13,11 +13,11 @@
 
 + (instancetype)sharedManager;
 
-- (void)getArtistsWithQuery:(NSString*)query
+- (void)getArtistsWithQuery:(NSString *)query
                    success:(void (^)(NSArray *artists))success
                    failure:(void (^)(NSError *error))failure;
 
-- (void)getArtistInfoWithSpotifyID:(NSString*)spotifyID
+- (void)getArtistInfoWithSpotifyID:(NSString *)spotifyID
                             success:(void (^)(SAArtist *artist))success
                             failure:(void (^)(NSError *error))failure;
 

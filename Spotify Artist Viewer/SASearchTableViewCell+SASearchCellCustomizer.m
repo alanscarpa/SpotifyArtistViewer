@@ -9,8 +9,6 @@
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-
-
 @implementation SASearchTableViewCell (SASearchCellCustomizer)
 
 - (void)customizeCellWithArtist:(SAArtist *)artist {

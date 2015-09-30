@@ -121,6 +121,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="cSW-We-6eF"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="GOn-yK-DAy">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dpS-kJ-fSP">
+                                <rect key="frame" x="510" y="7" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="List"/>
+                                    <segment title="Collection"/>
+                                </segments>
+                            </segmentedControl>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>

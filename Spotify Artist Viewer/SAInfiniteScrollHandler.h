@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SASearchViewController.h"
 
+
 @interface SAInfiniteScrollHandler : NSObject
 
 @property (nonatomic) NSInteger offset;
-
-- (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController;
+- (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController withSearchLimit:(NSInteger)limit;
 
 @end

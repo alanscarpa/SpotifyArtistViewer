@@ -15,6 +15,8 @@
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
 
+static NSInteger const kReturnLimit = 3;
+
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
@@ -30,6 +32,7 @@
     [self setUpInfiniteScroll];
 }
 
+
 - (void)prepareArtistsArray {
     self.artistsFromSearch = [[NSMutableArray alloc]init];
 }
@@ -40,7 +43,7 @@
 
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
-    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self];
+    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self withSearchLimit:kReturnLimit];
 }
 
 #pragma mark - Search function
@@ -61,7 +64,7 @@
 }
 
 - (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
             [self updateTableViewWithSearchResults:artists];
         } else {

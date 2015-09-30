@@ -15,5 +15,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistPopularity;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *artistNameOffset;
-
 @end

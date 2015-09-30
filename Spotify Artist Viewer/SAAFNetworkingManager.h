@@ -10,6 +10,6 @@
 
 @interface SAAFNetworkingManager : NSObject
 
-+ (void)sendGETRequestWithQuery:(NSString *)query withOffset:(NSInteger)offSet withCompletionHandler:(void (^)(NSArray *artists, NSError *error))completionHandler;
++ (void)sendGETRequestWithQuery:(NSString *)query withReturnLimit:(NSInteger)limit withOffset:(NSInteger)offSet withCompletionHandler:(void (^)(NSArray *artists, NSError *error))completionHandler;
 
 @end
