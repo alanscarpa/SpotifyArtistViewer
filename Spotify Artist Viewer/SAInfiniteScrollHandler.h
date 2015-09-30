@@ -11,6 +11,8 @@
 
 @interface SAInfiniteScrollHandler : NSObject
 
-+ (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController;
+@property (nonatomic) NSInteger offset;
+
+- (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController;
 
 @end

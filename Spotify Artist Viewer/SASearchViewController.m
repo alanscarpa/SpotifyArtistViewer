@@ -13,7 +13,6 @@
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
-#import <UIScrollView+InfiniteScroll.h>
 #import "SAInfiniteScrollHandler.h"
 
 static NSString * const kCellName = @"cell";
@@ -21,6 +20,7 @@ static NSString * const kCellName = @"cell";
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
+@property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
 @end
 
 @implementation SASearchViewController
@@ -41,19 +41,25 @@ static NSString * const kCellName = @"cell";
 }
 
 - (void)setUpInfiniteScroll {
-    [SAInfiniteScrollHandler setUpInfiniteScrollOnViewController:self];
+    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
+    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self];
 }
 
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self clearPreviousArtistSearchResults];
+    [self resetInfiniteScrollOffset];
     [self searchForSpotifyArtistWithOffset:0];
     [self.searchBar resignFirstResponder];
 }
 
 - (void)clearPreviousArtistSearchResults {
     [self.artistsFromSearch removeAllObjects];
+}
+
+- (void)resetInfiniteScrollOffset {
+    self.infiniteScrollHandler.offset = 0;
 }
 
 - (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
