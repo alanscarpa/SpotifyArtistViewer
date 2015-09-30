@@ -21,6 +21,7 @@ static NSInteger const kReturnLimit = 3;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @end
 
 @implementation SASearchViewController
@@ -45,6 +46,16 @@ static NSInteger const kReturnLimit = 3;
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
     [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self withSearchLimit:kReturnLimit];
 }
+
+- (IBAction)segmedControlTapped:(id)sender {
+    if (self.segmentedControl.selectedSegmentIndex == 0){
+        NSLog(@"List");
+    } else {
+        NSLog(@"Collection");
+    };
+}
+
+
 
 #pragma mark - Search function
 

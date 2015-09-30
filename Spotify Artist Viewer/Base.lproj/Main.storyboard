@@ -129,12 +129,16 @@
                                     <segment title="List"/>
                                     <segment title="Collection"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmedControlTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="xnL-fG-UGW"/>
+                                </connections>
                             </segmentedControl>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>
                         <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>
+                        <outlet property="segmentedControl" destination="dpS-kJ-fSP" id="gri-nx-MDF"/>
                         <outlet property="tableView" destination="PO2-5k-54x" id="Sd0-zu-0pW"/>
                     </connections>
                 </viewController>
