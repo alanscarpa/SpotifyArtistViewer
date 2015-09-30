@@ -164,7 +164,6 @@ static NSInteger const kReturnLimit = 3;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SASearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class]) forIndexPath:indexPath];
-    // Configure the cell
     return cell;
 }
 
@@ -186,7 +185,6 @@ static NSInteger const kReturnLimit = 3;
 {
     return 0.0;
 }
-
 
 #pragma mark - Navigation
 
