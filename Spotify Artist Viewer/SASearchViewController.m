@@ -15,8 +15,6 @@
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
 
-static NSString * const kCellName = @"cell";
-
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;

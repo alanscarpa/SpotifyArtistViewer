@@ -10,12 +10,14 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SAArtist.h"
 
+static NSUInteger const kReturnLimit = 3;
+
 @implementation SAAFNetworkingManager
 
 + (void)sendGETRequestWithQuery:(NSString *)query withOffset:(NSInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
     if (completionHandler){
         query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=3&offset=%lu", query, offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=%lu&offset=%lu", query, kReturnLimit, offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             completionHandler([self artistsWithJSONDictionary:responseObject], nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
