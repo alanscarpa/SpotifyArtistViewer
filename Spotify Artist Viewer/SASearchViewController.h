@@ -9,4 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SASearchViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset;
+
 @end

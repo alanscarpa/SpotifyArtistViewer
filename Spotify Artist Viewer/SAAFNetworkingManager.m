@@ -12,7 +12,7 @@
 
 @implementation SAAFNetworkingManager
 
-+ (void)sendGETRequestWithQuery:(NSString *)query withOffset:(NSUInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
++ (void)sendGETRequestWithQuery:(NSString *)query withOffset:(NSInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
     if (completionHandler){
         query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=3&offset=%lu", query, offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

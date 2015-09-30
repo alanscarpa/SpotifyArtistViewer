@@ -14,24 +14,26 @@
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import <UIScrollView+InfiniteScroll.h>
+#import "SAInfiniteScrollHandler.h"
 
 static NSString * const kCellName = @"cell";
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
-@property (nonatomic) NSUInteger searchOffset;
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.artistsFromSearch = [[NSMutableArray alloc]init];
-    self.searchOffset = 0;
+    [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
+}
+
+- (void)prepareArtistsArray {
+    self.artistsFromSearch = [[NSMutableArray alloc]init];
 }
 
 - (void)setSearchBarDelegate {
@@ -39,20 +41,14 @@ static NSString * const kCellName = @"cell";
 }
 
 - (void)setUpInfiniteScroll {
-    // change indicator view style to white
-    self.tableView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
-    [self.tableView addInfiniteScrollWithHandler:^(UITableView* tableView) {
-        self.searchOffset += 3;
-        [self searchForSpotifyArtist];
-        [tableView finishInfiniteScroll];
-    }];
+    [SAInfiniteScrollHandler setUpInfiniteScrollOnViewController:self];
 }
 
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self clearPreviousArtistSearchResults];
-    [self searchForSpotifyArtist];
+    [self searchForSpotifyArtistWithOffset:0];
     [self.searchBar resignFirstResponder];
 }
 
@@ -60,8 +56,8 @@ static NSString * const kCellName = @"cell";
     [self.artistsFromSearch removeAllObjects];
 }
 
-- (void)searchForSpotifyArtist {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withOffset:self.searchOffset withCompletionHandler:^(NSArray *artists, NSError *error) {
+- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
             [self updateTableViewWithSearchResults:artists];
         } else {
