@@ -10,43 +10,70 @@
 #import "SAArtist.h"
 #import "SAArtistViewController.h"
 #import "SARequestManager.h"
+#import "SAAFNetworkingManager.h"
+#import "SASearchTableViewCell.h"
+#import "SASearchTableViewCell+SASearchCellCustomizer.h"
+#import "SAInfiniteScrollHandler.h"
 
 static NSString * const kCellName = @"cell";
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *artistsFromSearch;
+@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
+@property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareArtistsArray];
     [self setSearchBarDelegate];
+    [self setUpInfiniteScroll];
+}
+
+- (void)prepareArtistsArray {
+    self.artistsFromSearch = [[NSMutableArray alloc]init];
 }
 
 - (void)setSearchBarDelegate {
     self.searchBar.delegate = self;
 }
 
+- (void)setUpInfiniteScroll {
+    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
+    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self];
+}
+
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self searchForSpotifyArtist];
+    [self clearPreviousArtistSearchResults];
+    [self resetInfiniteScrollOffset];
+    [self searchForSpotifyArtistWithOffset:0];
     [self.searchBar resignFirstResponder];
 }
 
--(void)searchForSpotifyArtist {
-    [[SARequestManager sharedManager] getArtistsWithQuery:self.searchBar.text success:^(NSArray *artists) {
-        [self updateTableViewWithSearchResults:artists];
-    } failure:^(NSError *error) {
-        NSLog(@"API Call to Spotify failed with error: %@", error);
+- (void)clearPreviousArtistSearchResults {
+    [self.artistsFromSearch removeAllObjects];
+}
+
+- (void)resetInfiniteScrollOffset {
+    self.infiniteScrollHandler.offset = 0;
+}
+
+- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
+        if (artists){
+            [self updateTableViewWithSearchResults:artists];
+        } else {
+            NSLog(@"Error calling Spotify API: %@", error);
+        }
     }];
 }
 
-- (void)updateTableViewWithSearchResults:(NSArray*)results {
-    self.artistsFromSearch = results;
+- (void)updateTableViewWithSearchResults:(NSArray *)results {
+    [self.artistsFromSearch addObjectsFromArray:results];
     [self updateTableView];
 }
 
@@ -61,11 +88,8 @@ static NSString * const kCellName = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     return [self customizeCell:[tableView dequeueReusableCellWithIdentifier:kCellName forIndexPath:indexPath] atIndexPath:indexPath];
-}
-
-- (UITableViewCell*)customizeCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath {
-    cell.textLabel.text = [self.artistsFromSearch[indexPath.row] artistName];
+    SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     return cell;
 }
 
