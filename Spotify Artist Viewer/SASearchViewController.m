@@ -51,7 +51,7 @@ static NSInteger const kReturnLimit = 3;
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
-    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:3];
+    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
 }
 
 - (void)saveTableViewStoryboardConstraints {
