@@ -14,7 +14,7 @@
     static id sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedManager = [[self alloc]init];
+        sharedManager = [[self alloc] init];
     });
     return sharedManager;
 }
@@ -34,12 +34,10 @@
         } else {
             resultError = error;
         }
-        
         if (jsonResponse == nil) {
             if (resultError == nil) {
                 resultError = [NSError errorWithDomain:@"TBD" code:0 userInfo:nil];
             }
-
         }
         completionHandler(jsonResponse, resultError);
     }];

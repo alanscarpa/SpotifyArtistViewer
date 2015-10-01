@@ -26,8 +26,8 @@
                       genres:(NSArray *)genres
                   popularity:(NSString *)popularity
                   spotifyID:(NSString *)spotifyID ;
-
 - (void)setBioFromJSON:(NSDictionary *)json;
 - (void)setNameFromJSON:(NSDictionary *)json;
 - (void)setImageURLFromJSON:(NSDictionary *)json;
+
 @end

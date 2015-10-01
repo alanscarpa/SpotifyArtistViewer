@@ -18,6 +18,11 @@
 #import <PureLayout/PureLayout.h>
 #import "SASearchCollectionViewCell.h"
 
+#import "SADataStore.h"
+#import "Artist.h"
+#import "Album.h"
+#import "Song.h"
+
 static NSInteger const kReturnLimit = 3;
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate>
@@ -28,15 +33,51 @@ static NSInteger const kReturnLimit = 3;
 @property (strong, nonatomic) NSMutableArray *tableViewConstraints;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) SADataStore *dataStore;
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createDummyCoreData];
     [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
+}
+
+- (void)createDummyCoreData {
+    self.dataStore = [SADataStore sharedDataStore];
+    Artist *newArtist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
+    newArtist.name = @"some band";
+    
+    Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:self.dataStore.managedObjectContext];
+    album.name = @"album111";
+    
+    Song *song1 = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.dataStore.managedObjectContext];
+    song1.name = @"song1";
+    Song *song2 = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.dataStore.managedObjectContext];
+    song2.name = @"song2";
+    [album addSong:[[NSSet alloc] initWithArray:@[song1, song2]]];
+    [newArtist addAlbumObject:album];
+    
+    [self.dataStore save];
+    NSFetchRequest *requestArtists = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    requestArtists.sortDescriptors = @[sortArtistsByName];
+    
+    NSArray *savedArtists = [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil];
+    for (Artist *artist in savedArtists) {
+        NSLog(@"Name: %@", artist.name);
+        for (Album *albumm in artist.album){
+            NSLog(@"Albums: %@", albumm.name);
+            for (Song *songg in albumm.song){
+                NSLog(@"Songs: %@", songg.name);
+            }
+        }
+    };
+    //NSLog(@"%@", [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil]);
+
 }
 
 - (void)prepareArtistsArray {
