@@ -33,6 +33,8 @@
 		45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D61B1BBDC669004CBBB9 /* Song+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6231BBDC669004CBBB9 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D61D1BBDC669004CBBB9 /* Song.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6261BBDC6E3004CBBB9 /* SADataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6251BBDC6E3004CBBB9 /* SADataStore.m */; settings = {ASSET_TAGS = (); }; };
+		45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */; settings = {ASSET_TAGS = (); }; };
+		45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */; settings = {ASSET_TAGS = (); }; };
 		45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -102,6 +104,9 @@
 		45B1D61D1BBDC669004CBBB9 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		45B1D6241BBDC6E3004CBBB9 /* SADataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SADataStore.h; sourceTree = "<group>"; };
 		45B1D6251BBDC6E3004CBBB9 /* SADataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADataStore.m; sourceTree = "<group>"; };
+		45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesViewController.h; sourceTree = "<group>"; };
+		45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesViewController.m; sourceTree = "<group>"; };
+		45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAFavoritesViewControllerCell.xib; sourceTree = "<group>"; };
 		45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchCollectionViewCell.h; sourceTree = "<group>"; };
 		45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchCollectionViewCell.m; sourceTree = "<group>"; };
 		6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +210,7 @@
 		453079551BB98A9300BDC8FB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				45B1D6271BBDDD72004CBBB9 /* FavoritesViewController */,
 				456ED7E71BBB3B0E00791E01 /* SearchViewController */,
 				456ED7E81BBB3B1900791E01 /* ArtistViewController */,
 			);
@@ -279,6 +285,16 @@
 				45B1D60F1BBDC2ED004CBBB9 /* Model.xcdatamodeld */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		45B1D6271BBDDD72004CBBB9 /* FavoritesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */,
+				45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */,
+				45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */,
+			);
+			name = FavoritesViewController;
 			sourceTree = "<group>";
 		};
 		834CB4E68DFAEFF27F5D5C0F /* Frameworks */ = {
@@ -404,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453079261BB9799800BDC8FB /* LaunchScreen.storyboard in Resources */,
+				45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */,
 				453079231BB9799800BDC8FB /* Assets.xcassets in Resources */,
 				453079211BB9799800BDC8FB /* Main.storyboard in Resources */,
 				456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */,
@@ -479,6 +496,7 @@
 				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
 				45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */,
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
+				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,

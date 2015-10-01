@@ -40,14 +40,42 @@ static NSInteger const kReturnLimit = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self createDummyCoreData];
+    [self prepareCoreData];
     [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
 }
 
-- (void)createDummyCoreData {
+- (IBAction)favoriteButtonTapped:(UIButton *)sender {
+    SAArtist *artist = self.artistsFromSearch[sender.tag];
+    
+    Artist *artistToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
+    artistToSave.name = artist.artistName;
+    
+    [self.dataStore save];
+    
+    // /////// FETCH
+    NSFetchRequest *requestArtists = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    requestArtists.sortDescriptors = @[sortArtistsByName];
+    
+    NSArray *savedArtists = [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil];
+    for (Artist *artist in savedArtists) {
+        NSLog(@"Name: %@", artist.name);
+        for (Album *albumm in artist.album){
+            NSLog(@"Albums: %@", albumm.name);
+            for (Song *songg in albumm.song){
+                NSLog(@"Songs: %@", songg.name);
+            }
+        }
+    };
+}
+
+- (void)prepareCoreData {
     self.dataStore = [SADataStore sharedDataStore];
+}
+
+- (void)createDummyCoreData {
     Artist *newArtist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
     newArtist.name = @"some band";
     
@@ -122,7 +150,6 @@ static NSInteger const kReturnLimit = 3;
                     completion:nil];
 }
 
-
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -170,7 +197,7 @@ static NSInteger const kReturnLimit = 3;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row] atIndexPath:indexPath];
     return cell;
 }
 
@@ -190,20 +217,16 @@ static NSInteger const kReturnLimit = 3;
     return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SAArtistViewController *destinationVC = [segue destinationViewController];
-    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
-    destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
+    if ([segue.identifier isEqualToString:@"artistProfileSegue"]) {
+        SAArtistViewController *destinationVC = [segue destinationViewController];
+        NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
+        destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
+    } else if ([segue.identifier isEqualToString:@"artistProfileSegue"]) {
+        
+    }
 }
 
 @end

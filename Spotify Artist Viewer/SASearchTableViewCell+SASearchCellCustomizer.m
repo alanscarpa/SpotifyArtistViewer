@@ -11,8 +11,9 @@
 
 @implementation SASearchTableViewCell (SASearchCellCustomizer)
 
-- (void)customizeCellWithArtist:(SAArtist *)artist {
+- (void)customizeCellWithArtist:(SAArtist *)artist atIndexPath:(NSIndexPath *)indexPath {
     [self.activityIndicator startAnimating];
+    self.favoriteButton.tag = indexPath.row;
     self.artistName.text = artist.artistName;
     self.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
     if ([self.artistGenres.text isEqualToString:@""]){

@@ -11,6 +11,6 @@
 
 @interface SASearchTableViewCell (SASearchCellCustomizer)
 
-- (void)customizeCellWithArtist:(SAArtist *)artist;
+- (void)customizeCellWithArtist:(SAArtist *)artist atIndexPath:(NSIndexPath *)indexPath;
 
 @end
