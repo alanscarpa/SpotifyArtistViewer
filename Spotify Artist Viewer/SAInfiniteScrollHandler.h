@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SASearchViewController.h"
-
+#import <UIKit/UIKit.h>
+@protocol SAInfiniteScrollHandlerDelegate;
 
 @interface SAInfiniteScrollHandler : NSObject
-
 @property (nonatomic) NSInteger offset;
-- (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController withSearchLimit:(NSInteger)limit;
+@property (nonatomic, weak) id<SAInfiniteScrollHandlerDelegate> delegate;
+- (void)setUpInfiniteScrollOnScrollView:(UIScrollView *)scrollView withSearchLimit:(NSInteger)limit;
+@end
 
+@protocol SAInfiniteScrollHandlerDelegate <NSObject>
+- (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset;
 @end

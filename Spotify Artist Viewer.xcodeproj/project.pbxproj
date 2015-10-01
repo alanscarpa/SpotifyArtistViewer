@@ -24,6 +24,8 @@
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */; settings = {ASSET_TAGS = (); }; };
+		458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
+		45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,10 @@
 		456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASearchTableViewCell+SASearchCellCustomizer.m"; sourceTree = "<group>"; };
 		456ED7EF1BBC2FCF00791E01 /* SAInfiniteScrollHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAInfiniteScrollHandler.h; sourceTree = "<group>"; };
 		456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAInfiniteScrollHandler.m; sourceTree = "<group>"; };
+		458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"; path = "../SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"; sourceTree = "<group>"; };
+		458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m"; path = "../SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m"; sourceTree = "<group>"; };
+		45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchCollectionViewCell.h; sourceTree = "<group>"; };
+		45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchCollectionViewCell.m; sourceTree = "<group>"; };
 		6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9D8A86C184B1E6397DADB529 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CC5DB85B00813BC0F367B3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +218,10 @@
 				456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */,
 				456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */,
 				456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */,
+				45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */,
+				45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */,
+				458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h */,
+				458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */,
 			);
 			name = SearchViewController;
 			sourceTree = "<group>";
@@ -410,11 +420,13 @@
 			files = (
 				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
 				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
+				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */,
 				4530795A1BB98D2200BDC8FB /* SARequestManager.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
 				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
+				45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */,
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,

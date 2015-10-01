@@ -13,14 +13,21 @@
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
+#import "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
+#import <PureLayout/PureLayout.h>
+#import "SASearchCollectionViewCell.h"
 
 static NSInteger const kReturnLimit = 3;
 
-@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) NSMutableArray *tableViewConstraints;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
 @implementation SASearchViewController
@@ -32,9 +39,8 @@ static NSInteger const kReturnLimit = 3;
     [self setUpInfiniteScroll];
 }
 
-
 - (void)prepareArtistsArray {
-    self.artistsFromSearch = [[NSMutableArray alloc]init];
+    self.artistsFromSearch = [[NSMutableArray alloc] init];
 }
 
 - (void)setSearchBarDelegate {
@@ -42,16 +48,46 @@ static NSInteger const kReturnLimit = 3;
 }
 
 - (void)setUpInfiniteScroll {
-    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
-    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self withSearchLimit:kReturnLimit];
+    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
+    self.infiniteScrollHandler.delegate = self;
+    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
 }
+
+- (IBAction)segmedControlTapped:(id)sender {
+    [self checkWhichSegmentWasTapped];
+}
+
+- (void)checkWhichSegmentWasTapped {
+    if (self.segmentedControl.selectedSegmentIndex == 0){
+        [self showTableView];
+    } else {
+        [self showCollectionView];
+    };
+}
+
+- (void)showTableView {
+    [UIView transitionFromView:self.collectionView
+                        toView:self.tableView
+                      duration:0.6
+                       options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionShowHideTransitionViews
+                    completion:nil];
+}
+
+- (void)showCollectionView {
+    [UIView transitionFromView:self.tableView
+                        toView:self.collectionView
+                      duration:0.6
+                       options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionShowHideTransitionViews
+                    completion:nil];
+}
+
 
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self clearPreviousArtistSearchResults];
     [self resetInfiniteScrollOffset];
-    [self searchForSpotifyArtistWithOffset:0];
+    [self scrollHandler:nil requestAdditionalItemsFromOffset:0];
     [self.searchBar resignFirstResponder];
 }
 
@@ -63,7 +99,9 @@ static NSInteger const kReturnLimit = 3;
     self.infiniteScrollHandler.offset = 0;
 }
 
-- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
+#pragma mark - SAInfiniteScrollHandlerDelegate
+
+- (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
     [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
             [self updateTableViewWithSearchResults:artists];
@@ -75,14 +113,15 @@ static NSInteger const kReturnLimit = 3;
 
 - (void)updateTableViewWithSearchResults:(NSArray *)results {
     [self.artistsFromSearch addObjectsFromArray:results];
-    [self updateTableView];
+    [self updateResults];
 }
 
-- (void)updateTableView {
+- (void)updateResults {
     [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.artistsFromSearch.count;
@@ -92,6 +131,30 @@ static NSInteger const kReturnLimit = 3;
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     return cell;
+}
+
+#pragma mark UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.artistsFromSearch.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    SASearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class]) forIndexPath:indexPath];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
 }
 
 #pragma mark - Navigation

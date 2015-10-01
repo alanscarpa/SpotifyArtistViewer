@@ -11,14 +11,13 @@
 
 @implementation SAInfiniteScrollHandler
 
-- (void)setUpInfiniteScrollOnViewController:(UIViewController *)viewController withSearchLimit:(NSInteger)limit {
-    __block SASearchViewController *vc = (SASearchViewController *)viewController;
+- (void)setUpInfiniteScrollOnScrollView:(UIScrollView *)scrollView withSearchLimit:(NSInteger)limit {
     __block NSInteger offset = limit;
-    vc.tableView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
-    [vc.tableView addInfiniteScrollWithHandler:^(UITableView* tableView) {
+    scrollView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
+    [scrollView addInfiniteScrollWithHandler:^(UIScrollView* innerScrollView) {
         self.offset += offset;
-        [vc searchForSpotifyArtistWithOffset:self.offset];
-        [tableView finishInfiniteScroll];
+        [self.delegate scrollHandler:self requestAdditionalItemsFromOffset:self.offset];
+        [innerScrollView finishInfiniteScroll];
     }];
 }
 
