@@ -13,12 +13,11 @@
 
 - (void)customizeCellWithArtist:(SAArtist *)artist {
     [self.activityIndicator startAnimating];
+    self.artistName.adjustsFontSizeToFitWidth = YES;
+    self.artistName.minimumScaleFactor = 0.7;
     self.artistName.text = artist.artistName;
-    self.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
-//    if ([self.artistGenres.text isEqualToString:@""]){
-//        self.artistNameOffset.constant = 0;
-//    }
     self.artistPopularity.text = artist.popularity;
+    [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
     [self.profileImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -27,6 +26,19 @@
                                        self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
+}
+
+- (void)setStyleBasedOnPopularity:(CGFloat)popularity {
+    CGFloat colorBasedOnPopularity = (110 - popularity)/255.0f;
+    // If popularity is greater than 80%, then we give full alpha.
+    CGFloat alphaBasedOnPopularity = popularity/80;
+    // We don't want very unpopular artists to become invisible, so we set a minimum
+    if (alphaBasedOnPopularity < 0.25){
+        alphaBasedOnPopularity = 0.25;
+    }
+    self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];
+    self.profileImage.alpha = alphaBasedOnPopularity;
+    self.artistName.alpha = alphaBasedOnPopularity;
 }
 
 @end

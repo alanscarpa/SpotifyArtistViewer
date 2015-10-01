@@ -10,10 +10,9 @@
 
 @interface SASearchCollectionViewCell : UICollectionViewCell
 
-@property (strong, nonatomic) UIImageView *profileImage;
-@property (strong, nonatomic) UILabel *artistName;
-@property (strong, nonatomic) UILabel *artistGenres;
+@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
+@property (strong, nonatomic) IBOutlet UILabel *artistName;
 @property (strong, nonatomic) UILabel *artistPopularity;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

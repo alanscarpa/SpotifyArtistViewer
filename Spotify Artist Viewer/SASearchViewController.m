@@ -37,7 +37,6 @@ static NSInteger const kReturnLimit = 3;
     [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
-    [self saveTableViewStoryboardConstraints];
 }
 
 - (void)prepareArtistsArray {
@@ -52,15 +51,6 @@ static NSInteger const kReturnLimit = 3;
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
     [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
-}
-
-- (void)saveTableViewStoryboardConstraints {
-    self.tableViewConstraints = [[NSMutableArray alloc] init];
-    for (NSLayoutConstraint *constraint in self.view.constraints){
-        if (constraint.firstItem == self.tableView || constraint.secondItem == self.tableView){
-            [self.tableViewConstraints addObject:constraint];
-        }
-    }
 }
 
 - (IBAction)segmedControlTapped:(id)sender {

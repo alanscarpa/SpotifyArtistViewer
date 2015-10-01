@@ -110,22 +110,55 @@
                                     </tableView>
                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UQf-Bn-JZP">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
-                                        <color key="backgroundColor" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MRw-vx-WYg">
-                                            <size key="itemSize" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MRw-vx-WYg">
+                                            <size key="itemSize" width="272" height="253"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SASearchCollectionViewCell" id="EkO-SS-0JG" customClass="SASearchCollectionViewCell">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272" height="253"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="253"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="52z-pe-Fps">
+                                                            <rect key="frame" x="8" y="8" width="256" height="209"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pC1-lm-N8H">
+                                                            <rect key="frame" x="16" y="225" width="240" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ok7-Nf-9Yx">
+                                                            <rect key="frame" x="118" y="94" width="37" height="37"/>
+                                                            <color key="color" red="1" green="0.7931892572" blue="0.3434751103" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="pC1-lm-N8H" firstAttribute="leading" secondItem="EkO-SS-0JG" secondAttribute="leadingMargin" constant="8" id="BNX-6C-Nr3"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="pC1-lm-N8H" secondAttribute="trailing" constant="8" id="cTd-03-gfk"/>
+                                                    <constraint firstItem="52z-pe-Fps" firstAttribute="top" secondItem="EkO-SS-0JG" secondAttribute="top" constant="8" id="fM2-5h-FWt"/>
+                                                    <constraint firstItem="52z-pe-Fps" firstAttribute="bottom" secondItem="pC1-lm-N8H" secondAttribute="top" constant="-8" id="fQF-fK-CvK"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pC1-lm-N8H" secondAttribute="bottom" constant="8" id="jR1-vQ-58V"/>
+                                                    <constraint firstItem="Ok7-Nf-9Yx" firstAttribute="centerX" secondItem="52z-pe-Fps" secondAttribute="centerX" id="lJC-2z-BBX"/>
+                                                    <constraint firstItem="pC1-lm-N8H" firstAttribute="centerX" secondItem="EkO-SS-0JG" secondAttribute="centerX" id="ldL-OZ-cfd"/>
+                                                    <constraint firstItem="52z-pe-Fps" firstAttribute="leading" secondItem="EkO-SS-0JG" secondAttribute="leading" constant="8" id="ocK-9e-dUx"/>
+                                                    <constraint firstItem="Ok7-Nf-9Yx" firstAttribute="centerY" secondItem="52z-pe-Fps" secondAttribute="centerY" id="peU-8N-juo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="52z-pe-Fps" secondAttribute="trailing" constant="8" id="uKc-pe-1Yu"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="activityIndicator" destination="Ok7-Nf-9Yx" id="560-wD-69k"/>
+                                                    <outlet property="artistName" destination="pC1-lm-N8H" id="5Dm-gq-G1X"/>
+                                                    <outlet property="profileImage" destination="52z-pe-Fps" id="dM0-11-dJ2"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                         <connections>
