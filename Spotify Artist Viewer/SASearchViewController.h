@@ -12,6 +12,4 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset;
-
 @end

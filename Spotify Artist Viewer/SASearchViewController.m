@@ -20,7 +20,7 @@
 
 static NSInteger const kReturnLimit = 3;
 
-@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
@@ -41,7 +41,7 @@ static NSInteger const kReturnLimit = 3;
 }
 
 - (void)prepareArtistsArray {
-    self.artistsFromSearch = [[NSMutableArray alloc]init];
+    self.artistsFromSearch = [[NSMutableArray alloc] init];
 }
 
 - (void)setSearchBarDelegate {
@@ -49,12 +49,13 @@ static NSInteger const kReturnLimit = 3;
 }
 
 - (void)setUpInfiniteScroll {
-    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc]init];
-    [self.infiniteScrollHandler setUpInfiniteScrollOnViewController:self withSearchLimit:kReturnLimit];
+    self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
+    self.infiniteScrollHandler.delegate = self;
+    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:3];
 }
 
 - (void)saveTableViewStoryboardConstraints {
-    self.tableViewConstraints = [[NSMutableArray alloc]init];
+    self.tableViewConstraints = [[NSMutableArray alloc] init];
     for (NSLayoutConstraint *constraint in self.view.constraints){
         if (constraint.firstItem == self.tableView || constraint.secondItem == self.tableView){
             [self.tableViewConstraints addObject:constraint];
@@ -111,7 +112,7 @@ static NSInteger const kReturnLimit = 3;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self clearPreviousArtistSearchResults];
     [self resetInfiniteScrollOffset];
-    [self searchForSpotifyArtistWithOffset:0];
+    [self scrollHandler:nil requestAdditionalItemsFromOffset:0];
     [self.searchBar resignFirstResponder];
 }
 
@@ -123,16 +124,6 @@ static NSInteger const kReturnLimit = 3;
     self.infiniteScrollHandler.offset = 0;
 }
 
-- (void)searchForSpotifyArtistWithOffset:(NSInteger)offset {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
-        if (artists){
-            [self updateTableViewWithSearchResults:artists];
-        } else {
-            NSLog(@"Error calling Spotify API: %@", error);
-        }
-    }];
-}
-
 - (void)updateTableViewWithSearchResults:(NSArray *)results {
     [self.artistsFromSearch addObjectsFromArray:results];
     [self updateTableView];
@@ -142,7 +133,19 @@ static NSInteger const kReturnLimit = 3;
     [self.tableView reloadData];
 }
 
-#pragma mark - Table view data source
+#pragma mark - SAInfiniteScrollHandlerDelegate
+
+- (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
+    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
+        if (artists){
+            [self updateTableViewWithSearchResults:artists];
+        } else {
+            NSLog(@"Error calling Spotify API: %@", error);
+        }
+    }];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.artistsFromSearch.count;
@@ -170,8 +173,7 @@ static NSInteger const kReturnLimit = 3;
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
 }
 
@@ -179,13 +181,11 @@ static NSInteger const kReturnLimit = 3;
 //    return UIEdgeInsetsMake(0, 16, 0, 16);
 //}
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0.0;
 }
 
