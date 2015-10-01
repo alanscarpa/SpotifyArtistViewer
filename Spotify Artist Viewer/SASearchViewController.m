@@ -13,6 +13,7 @@
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
+#import "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
 #import <PureLayout/PureLayout.h>
 #import "SASearchCollectionViewCell.h"
@@ -68,6 +69,7 @@ static NSInteger const kReturnLimit = 3;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[SASearchCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class])];
     self.collectionView.backgroundColor = [UIColor orangeColor];
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
 - (IBAction)segmedControlTapped:(id)sender {
@@ -159,11 +161,12 @@ static NSInteger const kReturnLimit = 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 24;
+    return self.artistsFromSearch.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SASearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class]) forIndexPath:indexPath];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     return cell;
 }
 
