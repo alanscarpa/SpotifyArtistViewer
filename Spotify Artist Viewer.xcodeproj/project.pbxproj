@@ -35,6 +35,7 @@
 		45B1D6261BBDC6E3004CBBB9 /* SADataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6251BBDC6E3004CBBB9 /* SADataStore.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */; settings = {ASSET_TAGS = (); }; };
+		45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,8 @@
 		45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesViewController.h; sourceTree = "<group>"; };
 		45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesViewController.m; sourceTree = "<group>"; };
 		45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAFavoritesViewControllerCell.xib; sourceTree = "<group>"; };
+		45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesTableViewCell.h; sourceTree = "<group>"; };
+		45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesTableViewCell.m; sourceTree = "<group>"; };
 		45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchCollectionViewCell.h; sourceTree = "<group>"; };
 		45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchCollectionViewCell.m; sourceTree = "<group>"; };
 		6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */,
 				45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */,
 				45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */,
+				45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */,
+				45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */,
 			);
 			name = FavoritesViewController;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				4530795A1BB98D2200BDC8FB /* SARequestManager.m in Sources */,
 				45B1D61F1BBDC669004CBBB9 /* Artist.m in Sources */,
 				45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */,
+				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
 				45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
 				45B1D6231BBDC669004CBBB9 /* Song.m in Sources */,

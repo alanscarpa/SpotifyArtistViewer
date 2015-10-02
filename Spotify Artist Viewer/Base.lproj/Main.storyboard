@@ -254,7 +254,7 @@
         <!--Favorites-->
         <scene sceneID="u0A-6B-0qV">
             <objects>
-                <viewController id="it3-cf-gyV" customClass="SAFavoritesViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="it3-cf-gyV" customClass="SAFavoritesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AG0-Fk-XGF"/>
                         <viewControllerLayoutGuide type="bottom" id="Ot6-5K-lz8"/>
@@ -281,6 +281,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="EHl-2L-pyv"/>
+                    <connections>
+                        <outlet property="tableView" destination="css-Fx-9je" id="OQ5-tW-exA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tt2-cC-T9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
