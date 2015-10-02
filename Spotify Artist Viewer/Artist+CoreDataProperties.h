@@ -2,7 +2,7 @@
 //  Artist+CoreDataProperties.h
 //  Spotify Artist Viewer
 //
-//  Created by Alan Scarpa on 10/1/15.
+//  Created by Alan Scarpa on 10/2/15.
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -10,6 +10,7 @@
 //
 
 #import "Artist.h"
+#import "Album.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,16 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *imageLocalURL;
-@property (nullable, nonatomic, retain) NSSet<NSManagedObject *> *album;
+@property (nullable, nonatomic, retain) NSString *spotifyID;
+@property (nullable, nonatomic, retain) NSSet<Album *> *album;
 
 @end
 
 @interface Artist (CoreDataGeneratedAccessors)
 
-- (void)addAlbumObject:(NSManagedObject *)value;
-- (void)removeAlbumObject:(NSManagedObject *)value;
-- (void)addAlbum:(NSSet<NSManagedObject *> *)values;
-- (void)removeAlbum:(NSSet<NSManagedObject *> *)values;
+- (void)addAlbumObject:(Album *)value;
+- (void)removeAlbumObject:(Album *)value;
+- (void)addAlbum:(NSSet<Album *> *)values;
+- (void)removeAlbum:(NSSet<Album *> *)values;
 
 @end
 

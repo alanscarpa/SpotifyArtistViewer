@@ -8,8 +8,13 @@
 
 #import "SADataStore.h"
 
+@interface SADataStore ()
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+@end
+
 @implementation SADataStore
-@synthesize managedObjectContext = _managedObjectContext;
 
 + (instancetype)sharedDataStore {
     static id sharedDataStore = nil;
@@ -35,7 +40,6 @@
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
-    
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Model.sqlite"];
     NSError *error = nil;
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];

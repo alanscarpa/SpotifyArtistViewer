@@ -10,9 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "SADataStore.h"
 #import "SAArtist.h"
+#import "Artist.h"
 
 @interface SASavedDataHandler : NSObject
 
-+ (void)addArtist:(SAArtist *)artist andImage:(UIImage *)image toFavorites:(SADataStore *)dataStore;
++ (void)addArtist:(SAArtist *)artist toFavorites:(SADataStore *)dataStore;
++ (UIImage *)localImageWithArtist:(Artist *)artist;
 
 @end

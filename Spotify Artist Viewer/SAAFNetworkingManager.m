@@ -25,6 +25,21 @@
     
 }
 
++ (void)getArtistAlbums:(NSString *)spotifyID withCompletionHandler:(void (^)(NSArray  *albums, NSError *error))completionHandler {
+    if (completionHandler){
+        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/artists/%@/albums?album_type=album&market=ES", spotifyID] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            NSLog(@"%@", responseObject);
+            completionHandler(nil, nil);
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+           // <#code#>
+        }];
+    }
+    
+}
+
+
+
+
 + (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];
     for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {

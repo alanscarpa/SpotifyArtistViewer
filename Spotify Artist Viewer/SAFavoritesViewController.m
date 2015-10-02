@@ -9,6 +9,8 @@
 #import "SAFavoritesViewController.h"
 #import "SAFavoritesTableViewCell.h"
 #import "SADataStore.h"
+#import "SAAFNetworkingManager.h"
+#import "Artist.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,15 +40,18 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SAFavoritesViewControllerCell" bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//    [SAAFNetworkingManager getArtistAlbums:[self.favoriteArtists[indexPath.row] artistSpotifyID] withCompletionHandler:^(NSArray *albums, NSError *error) {
+//       // <#code#>
+//    }];
 }
-*/
+
 
 #pragma mark - UITableViewDataSource
 
@@ -59,5 +64,11 @@
     [cell customizeCellWithCoreDataArtist:self.favoriteArtists[indexPath.row]];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"favoriteDetailsSegue" sender:nil];
+}
+
+
 
 @end

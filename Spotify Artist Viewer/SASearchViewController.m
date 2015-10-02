@@ -22,10 +22,11 @@
 #import "Artist.h"
 #import "Album.h"
 #import "Song.h"
+#import "SDImageCache.h"
 
 static NSInteger const kReturnLimit = 3;
 
-@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate>
+@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
@@ -51,10 +52,6 @@ static NSInteger const kReturnLimit = 3;
 }
 
 # pragma mark - Save Artist To Favorites
-
-- (IBAction)favoriteButtonTapped:(UIButton *)favoriteButton {
-    [SASavedDataHandler addArtist:self.artistsFromSearch[favoriteButton.tag] andImage:[self artistImageFromFavoriteButton:favoriteButton] toFavorites:self.dataStore];
-}
 
 - (UIImage *)artistImageFromFavoriteButton:(UIButton *)favoriteButton {
     CGPoint location = [favoriteButton.superview convertPoint:favoriteButton.center toView:self.tableView];
@@ -186,7 +183,7 @@ static NSInteger const kReturnLimit = 3;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row] atIndexPath:indexPath];
-    cell.tag = indexPath.row;
+    cell.delegate = self;
     return cell;
 }
 
@@ -215,6 +212,16 @@ static NSInteger const kReturnLimit = 3;
         destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
     } else if ([segue.identifier isEqualToString:@"artistProfileSegue"]) {
         
+    }
+}
+
+#pragma mark - SASearchTableViewCell
+
+- (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath && indexPath.row < self.artistsFromSearch.count) {
+            [SASavedDataHandler addArtist:self.artistsFromSearch[indexPath.row]
+                              toFavorites:self.dataStore];
     }
 }
 

@@ -12,4 +12,6 @@
 
 + (void)sendGETRequestWithQuery:(NSString *)query withReturnLimit:(NSInteger)limit withOffset:(NSInteger)offSet withCompletionHandler:(void (^)(NSArray *artists, NSError *error))completionHandler;
 
++ (void)getArtistAlbums:(NSString *)spotifyID withCompletionHandler:(void (^)(NSArray  *albums, NSError *error))completionHandler;
+
 @end

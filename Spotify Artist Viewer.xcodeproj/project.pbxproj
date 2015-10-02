@@ -175,11 +175,8 @@
 				453079571BB98D0E00BDC8FB /* Utilities */,
 				453079551BB98A9300BDC8FB /* Controllers */,
 				453079561BB98A9D00BDC8FB /* Model */,
-				4530791F1BB9799800BDC8FB /* Main.storyboard */,
+				45B1D6361BBEF701004CBBB9 /* Storyboards */,
 				453079221BB9799800BDC8FB /* Assets.xcassets */,
-				453079241BB9799800BDC8FB /* LaunchScreen.storyboard */,
-				453079271BB9799800BDC8FB /* Info.plist */,
-				456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */,
 				453079161BB9799800BDC8FB /* Supporting Files */,
 			);
 			path = "Spotify Artist Viewer";
@@ -188,6 +185,9 @@
 		453079161BB9799800BDC8FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				453079241BB9799800BDC8FB /* LaunchScreen.storyboard */,
+				453079271BB9799800BDC8FB /* Info.plist */,
+				456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */,
 				453079191BB9799800BDC8FB /* AppDelegate.h */,
 				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
 				453079171BB9799800BDC8FB /* main.m */,
@@ -305,6 +305,14 @@
 				45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */,
 			);
 			name = FavoritesViewController;
+			sourceTree = "<group>";
+		};
+		45B1D6361BBEF701004CBBB9 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4530791F1BB9799800BDC8FB /* Main.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		834CB4E68DFAEFF27F5D5C0F /* Frameworks */ = {

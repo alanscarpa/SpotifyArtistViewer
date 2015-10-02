@@ -132,7 +132,7 @@
                                                                 <color key="titleColor" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="favoriteButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rI6-Dg-dcL"/>
+                                                                <action selector="didTapFavoritesButton:" destination="JLu-wZ-PhV" eventType="touchUpInside" id="Vo6-eE-UZb"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -283,11 +283,31 @@
                     <navigationItem key="navigationItem" title="Favorites" id="EHl-2L-pyv"/>
                     <connections>
                         <outlet property="tableView" destination="css-Fx-9je" id="OQ5-tW-exA"/>
+                        <segue destination="lhq-zg-Gfl" kind="show" identifier="favoriteDetailsSegue" id="JIV-7b-2MR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tt2-cC-T9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2301" y="-513"/>
+        </scene>
+        <!--Details-->
+        <scene sceneID="XyU-zn-rFN">
+            <objects>
+                <viewController id="lhq-zg-Gfl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fkT-K9-P1W"/>
+                        <viewControllerLayoutGuide type="bottom" id="t7f-wk-YDG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cec-8N-cbf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="l5O-qO-9Ww"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="maf-gn-d9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3054" y="-520"/>
         </scene>
         <!--Artist Profile-->
         <scene sceneID="sTb-kZ-jgu">

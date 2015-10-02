@@ -7,6 +7,7 @@
 //
 
 #import "SAFavoritesTableViewCell.h"
+#import "SASavedDataHandler.h"
 
 @implementation SAFavoritesTableViewCell
 
@@ -20,15 +21,10 @@
 
 - (void)customizeCellWithCoreDataArtist:(Artist *)artist {
     self.artistName.text = artist.name;
-    if (artist.imageLocalURL){
-        self.artistImage.image = [UIImage imageWithContentsOfFile:[self photoLocationForArist:artist]];
+    if (artist.imageLocalURL) {
+        self.artistImage.image = [SASavedDataHandler localImageWithArtist:artist];
     }
 }
 
-- (NSString *)photoLocationForArist:(Artist *)artist {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    return [NSString stringWithFormat:@"%@/Photos/%@", documentsDirectory, artist.imageLocalURL];
-}
 
 @end
