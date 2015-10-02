@@ -8,9 +8,12 @@
 
 #import "SAFavoritesViewController.h"
 #import "SAFavoritesTableViewCell.h"
+#import "SADataStore.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) SADataStore *dataStore;
+@property (strong, nonatomic) NSArray *favoriteArtists;
 
 @end
 
@@ -18,7 +21,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initializeCoreData];
+    [self retrieveFavoriteArtistsFromCoreData];
     [self registerTableViewCellNib];
+}
+
+- (void)initializeCoreData {
+    self.dataStore = [SADataStore sharedDataStore];
+}
+
+- (void)retrieveFavoriteArtistsFromCoreData {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    request.sortDescriptors = @[sortArtistsByName];
+    self.favoriteArtists = [self.dataStore.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (void)registerTableViewCellNib {
@@ -38,11 +54,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.favoriteArtists.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SAFavoritesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SAFavoritesTableViewCell class]) forIndexPath:indexPath];
+    [cell customizeCellWithCoreDataArtist:self.favoriteArtists[indexPath.row]];
     return cell;
 }
 

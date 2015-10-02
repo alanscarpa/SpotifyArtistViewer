@@ -8,18 +8,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SAFavoritesTableViewCell" rowHeight="174" id="lkh-l1-FRw" customClass="SAFavoritesTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="743" height="174"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SAFavoritesTableViewCell" rowHeight="224" id="lkh-l1-FRw" customClass="SAFavoritesTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="743" height="224"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lkh-l1-FRw" id="Cic-lG-5TZ">
-                <rect key="frame" x="0.0" y="0.0" width="743" height="174"/>
+                <rect key="frame" x="0.0" y="0.0" width="743" height="223.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="Pzi-FR-N1g">
-                        <rect key="frame" x="8" y="8" width="179" height="158"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="Pzi-FR-N1g">
+                        <rect key="frame" x="8" y="8" width="179" height="208"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBz-KA-2Oq">
-                        <rect key="frame" x="211" y="77" width="91" height="21"/>
+                        <rect key="frame" x="211" y="102" width="91" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                 <outlet property="artistImage" destination="Pzi-FR-N1g" id="xtW-8D-ow1"/>
                 <outlet property="artistName" destination="kBz-KA-2Oq" id="K7e-Tx-g0K"/>
             </connections>
-            <point key="canvasLocation" x="813.5" y="383"/>
+            <point key="canvasLocation" x="813.5" y="394"/>
         </tableViewCell>
     </objects>
     <resources>

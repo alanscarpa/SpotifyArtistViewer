@@ -49,26 +49,27 @@ static NSInteger const kReturnLimit = 3;
 - (IBAction)favoriteButtonTapped:(UIButton *)sender {
     SAArtist *artist = self.artistsFromSearch[sender.tag];
     
+    NSError *error = nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSString *photosDirectory = [documentsDirectory stringByAppendingPathComponent:@"/Photos"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:photosDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:photosDirectory withIntermediateDirectories:NO attributes:nil error:&error];
+    }
+    NSString *imageFileName = [NSString stringWithFormat:@"/Photos/%@", artist.artistSpotifyID];
+    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:imageFileName];
+
+    
+    // Save image.
+    CGPoint location = [sender.superview convertPoint:sender.center toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    SASearchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];    
+    [UIImagePNGRepresentation(cell.artistImage.image) writeToFile:imageFilePath atomically:YES];
+    
     Artist *artistToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
     artistToSave.name = artist.artistName;
-    
+    artistToSave.imageLocalURL = artist.artistSpotifyID;
     [self.dataStore save];
-    
-    // /////// FETCH
-    NSFetchRequest *requestArtists = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
-    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    requestArtists.sortDescriptors = @[sortArtistsByName];
-    
-    NSArray *savedArtists = [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil];
-    for (Artist *artist in savedArtists) {
-        NSLog(@"Name: %@", artist.name);
-        for (Album *albumm in artist.album){
-            NSLog(@"Albums: %@", albumm.name);
-            for (Song *songg in albumm.song){
-                NSLog(@"Songs: %@", songg.name);
-            }
-        }
-    };
 }
 
 - (void)prepareCoreData {
@@ -198,6 +199,7 @@ static NSInteger const kReturnLimit = 3;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row] atIndexPath:indexPath];
+    cell.tag = indexPath.row;
     return cell;
 }
 
