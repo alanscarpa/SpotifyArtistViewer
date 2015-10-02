@@ -53,4 +53,13 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - Data Retrieval Methods
+
+- (NSArray *)favoritedArtists {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    request.sortDescriptors = @[sortArtistsByName];
+    return [self.managedObjectContext executeFetchRequest:request error:nil];
+}
+
 @end

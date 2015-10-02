@@ -17,7 +17,7 @@
 #import "SAInfiniteScrollHandler.h"
 #import <PureLayout/PureLayout.h>
 #import "SASearchCollectionViewCell.h"
-
+#import "SASavedDataHandler.h"
 #import "SADataStore.h"
 #import "Artist.h"
 #import "Album.h"
@@ -46,34 +46,21 @@ static NSInteger const kReturnLimit = 3;
     [self setUpInfiniteScroll];
 }
 
-- (IBAction)favoriteButtonTapped:(UIButton *)sender {
-    SAArtist *artist = self.artistsFromSearch[sender.tag];
-    
-    NSError *error = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    NSString *photosDirectory = [documentsDirectory stringByAppendingPathComponent:@"/Photos"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:photosDirectory]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:photosDirectory withIntermediateDirectories:NO attributes:nil error:&error];
-    }
-    NSString *imageFileName = [NSString stringWithFormat:@"/Photos/%@", artist.artistSpotifyID];
-    NSString *imageFilePath = [documentsDirectory stringByAppendingPathComponent:imageFileName];
-
-    
-    // Save image.
-    CGPoint location = [sender.superview convertPoint:sender.center toView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-    SASearchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];    
-    [UIImagePNGRepresentation(cell.artistImage.image) writeToFile:imageFilePath atomically:YES];
-    
-    Artist *artistToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
-    artistToSave.name = artist.artistName;
-    artistToSave.imageLocalURL = artist.artistSpotifyID;
-    [self.dataStore save];
-}
-
 - (void)prepareCoreData {
     self.dataStore = [SADataStore sharedDataStore];
+}
+
+# pragma mark - Save Artist To Favorites
+
+- (IBAction)favoriteButtonTapped:(UIButton *)favoriteButton {
+    [SASavedDataHandler addArtist:self.artistsFromSearch[favoriteButton.tag] andImage:[self artistImageFromFavoriteButton:favoriteButton] toFavorites:self.dataStore];
+}
+
+- (UIImage *)artistImageFromFavoriteButton:(UIButton *)favoriteButton {
+    CGPoint location = [favoriteButton.superview convertPoint:favoriteButton.center toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    SASearchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    return cell.artistImage.image;
 }
 
 - (void)createDummyCoreData {

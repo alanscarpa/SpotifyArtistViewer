@@ -31,10 +31,7 @@
 }
 
 - (void)retrieveFavoriteArtistsFromCoreData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
-    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    request.sortDescriptors = @[sortArtistsByName];
-    self.favoriteArtists = [self.dataStore.managedObjectContext executeFetchRequest:request error:nil];
+    self.favoriteArtists = [self.dataStore favoritedArtists];
 }
 
 - (void)registerTableViewCellNib {

@@ -36,6 +36,7 @@
 		45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */; settings = {ASSET_TAGS = (); }; };
 		45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		45B1D6351BBEF35A004CBBB9 /* SASavedDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6341BBEF35A004CBBB9 /* SASavedDataHandler.m */; settings = {ASSET_TAGS = (); }; };
 		45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,8 @@
 		45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAFavoritesViewControllerCell.xib; sourceTree = "<group>"; };
 		45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesTableViewCell.h; sourceTree = "<group>"; };
 		45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesTableViewCell.m; sourceTree = "<group>"; };
+		45B1D6331BBEF35A004CBBB9 /* SASavedDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASavedDataHandler.h; sourceTree = "<group>"; };
+		45B1D6341BBEF35A004CBBB9 /* SASavedDataHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASavedDataHandler.m; sourceTree = "<group>"; };
 		45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchCollectionViewCell.h; sourceTree = "<group>"; };
 		45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchCollectionViewCell.m; sourceTree = "<group>"; };
 		6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */,
 				456ED7EF1BBC2FCF00791E01 /* SAInfiniteScrollHandler.h */,
 				456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */,
+				45B1D6331BBEF35A004CBBB9 /* SASavedDataHandler.h */,
+				45B1D6341BBEF35A004CBBB9 /* SASavedDataHandler.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,
+				45B1D6351BBEF35A004CBBB9 /* SASavedDataHandler.m in Sources */,
 				45B1D6261BBDC6E3004CBBB9 /* SADataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

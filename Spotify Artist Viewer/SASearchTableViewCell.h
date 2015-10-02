@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SAFavoriteButton.h"
 
 @interface SASearchTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIImageView *artistImage;
 @property (weak, nonatomic) IBOutlet UILabel *artistName;
 @property (weak, nonatomic) IBOutlet UILabel *artistGenres;
 @property (weak, nonatomic) IBOutlet UILabel *artistPopularity;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *artistNameOffset;
 @end

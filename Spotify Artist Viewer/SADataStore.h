@@ -15,4 +15,5 @@
 + (instancetype)sharedDataStore;
 - (void)save;
 - (NSURL *)applicationDocumentsDirectory;
+- (NSArray *)favoritedArtists;
 @end

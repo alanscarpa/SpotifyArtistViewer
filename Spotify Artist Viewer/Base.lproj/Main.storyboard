@@ -169,7 +169,7 @@
                                                     <outlet property="artistName" destination="fX7-Tl-B6Z" id="5BP-fa-Lka"/>
                                                     <outlet property="artistNameOffset" destination="KcW-Gb-EdN" id="80v-1I-eUa"/>
                                                     <outlet property="artistPopularity" destination="620-Q8-msv" id="m1P-1x-dNl"/>
-                                                    <outlet property="favoriteButton" destination="1si-hk-Gsl" id="I5I-64-kLh"/>
+                                                    <outlet property="favoriteButton" destination="1si-hk-Gsl" id="hrX-6J-bS7"/>
                                                     <segue destination="5f7-SC-lz8" kind="show" identifier="artistProfileSegue" id="lTY-r1-5eJ"/>
                                                 </connections>
                                             </tableViewCell>
