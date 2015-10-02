@@ -12,20 +12,23 @@
 @implementation SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
 
 - (void)customizeCellWithArtist:(SAArtist *)artist {
-    [self.activityIndicator startAnimating];
-    self.artistName.adjustsFontSizeToFitWidth = YES;
-    self.artistName.minimumScaleFactor = 0.7;
-    self.artistName.text = artist.artistName;
-    self.artistPopularity.text = artist.popularity;
+    [self.activityIndicatorView startAnimating];
+    [self setArtistNameLabelSize];
+    self.artistNameLabel.text = artist.artistName;
     [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
-    [self.profileImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
+    [self.profileImageView sd_setImageWithURL:artist.artistSearchThumbnailImageURL
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                   [self.activityIndicator stopAnimating];
+                                   [self.activityIndicatorView stopAnimating];
                                    if (error){
-                                       self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                       self.profileImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
+}
+
+- (void)setArtistNameLabelSize {
+    self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
+    self.artistNameLabel.minimumScaleFactor = 0.7;
 }
 
 - (void)setStyleBasedOnPopularity:(CGFloat)popularity {
@@ -37,8 +40,8 @@
         alphaBasedOnPopularity = 0.25;
     }
     self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];
-    self.profileImage.alpha = alphaBasedOnPopularity;
-    self.artistName.alpha = alphaBasedOnPopularity;
+    self.profileImageView.alpha = alphaBasedOnPopularity;
+    self.artistNameLabel.alpha = alphaBasedOnPopularity;
 }
 
 @end

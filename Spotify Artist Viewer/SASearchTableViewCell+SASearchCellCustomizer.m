@@ -12,20 +12,20 @@
 @implementation SASearchTableViewCell (SASearchCellCustomizer)
 
 - (void)customizeCellWithArtist:(SAArtist *)artist atIndexPath:(NSIndexPath *)indexPath {
-    [self.activityIndicator startAnimating];
+    [self.activityIndicatorView startAnimating];
     self.favoriteButton.tag = indexPath.row;
-    self.artistName.text = artist.artistName;
-    self.artistGenres.text = [artist.genres componentsJoinedByString:@", "];
-    if ([self.artistGenres.text isEqualToString:@""]){
-        self.artistNameOffset.constant = 0;
+    self.artistNameLabel.text = artist.artistName;
+    self.artistGenresLabel.text = [artist.genres componentsJoinedByString:@", "];
+    if ([self.artistGenresLabel.text isEqualToString:@""]){
+        self.artistNameOffsetConstraint.constant = 0;
     }
-    self.artistPopularity.text = artist.popularity;
-    [self.artistImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
+    self.artistPopularityPercentageLabel.text = artist.popularity;
+    [self.artistImageView sd_setImageWithURL:artist.artistSearchThumbnailImageURL
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                   [self.activityIndicator stopAnimating];
+                                   [self.activityIndicatorView stopAnimating];
                                    if (error){
-                                       self.artistImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                       self.artistImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
 }

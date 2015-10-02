@@ -12,12 +12,12 @@
 @interface SASearchTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
-@property (weak, nonatomic) IBOutlet UIImageView *artistImage;
-@property (weak, nonatomic) IBOutlet UILabel *artistName;
-@property (weak, nonatomic) IBOutlet UILabel *artistGenres;
-@property (weak, nonatomic) IBOutlet UILabel *artistPopularity;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *artistNameOffset;
+@property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistGenresLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistPopularityPercentageLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *artistNameOffsetConstraint;
 
 @property (weak, nonatomic) id<SASearchTableViewCellDelegate> delegate;
 

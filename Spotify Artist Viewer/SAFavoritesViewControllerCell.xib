@@ -35,8 +35,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="artistImage" destination="Pzi-FR-N1g" id="xtW-8D-ow1"/>
-                <outlet property="artistName" destination="kBz-KA-2Oq" id="K7e-Tx-g0K"/>
+                <outlet property="artistImageView" destination="Pzi-FR-N1g" id="71m-5V-dc7"/>
+                <outlet property="artistNameLabel" destination="kBz-KA-2Oq" id="JGp-ir-NLl"/>
             </connections>
             <point key="canvasLocation" x="813.5" y="394"/>
         </tableViewCell>

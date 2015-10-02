@@ -57,7 +57,7 @@ static NSInteger const kReturnLimit = 3;
     CGPoint location = [favoriteButton.superview convertPoint:favoriteButton.center toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
     SASearchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.artistImage.image;
+    return cell.artistImageView.image;
 }
 
 - (void)createDummyCoreData {

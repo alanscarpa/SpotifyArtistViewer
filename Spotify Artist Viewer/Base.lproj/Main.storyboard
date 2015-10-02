@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-Oj-Dxr" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <subviews>
-                                    <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UQf-Bn-JZP">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UQf-Bn-JZP">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="MRw-vx-WYg">
@@ -72,9 +72,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="52z-pe-Fps" secondAttribute="trailing" constant="8" id="uKc-pe-1Yu"/>
                                                 </constraints>
                                                 <connections>
-                                                    <outlet property="activityIndicator" destination="Ok7-Nf-9Yx" id="560-wD-69k"/>
-                                                    <outlet property="artistName" destination="pC1-lm-N8H" id="5Dm-gq-G1X"/>
-                                                    <outlet property="profileImage" destination="52z-pe-Fps" id="dM0-11-dJ2"/>
+                                                    <outlet property="activityIndicatorView" destination="Ok7-Nf-9Yx" id="PYO-TU-Xic"/>
+                                                    <outlet property="artistNameLabel" destination="pC1-lm-N8H" id="bKC-fU-Mgp"/>
+                                                    <outlet property="profileImageView" destination="52z-pe-Fps" id="qIO-yK-RAG"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -163,12 +163,12 @@
                                                     <constraint firstItem="YcN-yM-Eya" firstAttribute="top" secondItem="JLu-wZ-PhV" secondAttribute="top" constant="16" id="Ywk-wK-Y1i"/>
                                                 </constraints>
                                                 <connections>
-                                                    <outlet property="activityIndicator" destination="M7J-8u-TgV" id="DRa-9X-zjw"/>
-                                                    <outlet property="artistGenres" destination="ed4-gc-Y3G" id="ZMQ-0d-TC8"/>
-                                                    <outlet property="artistImage" destination="YcN-yM-Eya" id="XXV-w0-5D2"/>
-                                                    <outlet property="artistName" destination="fX7-Tl-B6Z" id="5BP-fa-Lka"/>
-                                                    <outlet property="artistNameOffset" destination="KcW-Gb-EdN" id="80v-1I-eUa"/>
-                                                    <outlet property="artistPopularity" destination="620-Q8-msv" id="m1P-1x-dNl"/>
+                                                    <outlet property="activityIndicatorView" destination="M7J-8u-TgV" id="Xq7-e0-Cgs"/>
+                                                    <outlet property="artistGenresLabel" destination="ed4-gc-Y3G" id="fBB-uK-B4W"/>
+                                                    <outlet property="artistImageView" destination="YcN-yM-Eya" id="2Cf-pS-HZD"/>
+                                                    <outlet property="artistNameLabel" destination="fX7-Tl-B6Z" id="cNQ-xh-qkf"/>
+                                                    <outlet property="artistNameOffsetConstraint" destination="KcW-Gb-EdN" id="7Tm-e5-81q"/>
+                                                    <outlet property="artistPopularityPercentageLabel" destination="620-Q8-msv" id="jKk-Vk-0bp"/>
                                                     <outlet property="favoriteButton" destination="1si-hk-Gsl" id="hrX-6J-bS7"/>
                                                     <segue destination="5f7-SC-lz8" kind="show" identifier="artistProfileSegue" id="lTY-r1-5eJ"/>
                                                 </connections>

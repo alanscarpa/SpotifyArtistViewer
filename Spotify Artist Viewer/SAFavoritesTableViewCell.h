@@ -12,7 +12,7 @@
 #import "Song.h"
 
 @interface SAFavoritesTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *artistImage;
-@property (weak, nonatomic) IBOutlet UILabel *artistName;
+@property (weak, nonatomic) IBOutlet UIImageView *artistImageView;
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 - (void)customizeCellWithCoreDataArtist:(Artist *)artist;
 @end

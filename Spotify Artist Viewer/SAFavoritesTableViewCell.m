@@ -20,9 +20,9 @@
 }
 
 - (void)customizeCellWithCoreDataArtist:(Artist *)artist {
-    self.artistName.text = artist.name;
+    self.artistNameLabel.text = artist.name;
     if (artist.imageLocalURL) {
-        self.artistImage.image = [SASavedDataHandler localImageWithArtist:artist];
+        self.artistImageView.image = [SASavedDataHandler localImageWithArtist:artist];
     }
 }
 
