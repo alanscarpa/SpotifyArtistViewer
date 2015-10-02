@@ -9,6 +9,7 @@
 #import "SAAFNetworkingManager.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SAArtist.h"
+#import "SAAlbum.h"
 
 @implementation SAAFNetworkingManager
 
@@ -28,8 +29,7 @@
 + (void)getArtistAlbums:(NSString *)spotifyID withCompletionHandler:(void (^)(NSArray  *albums, NSError *error))completionHandler {
     if (completionHandler){
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/artists/%@/albums?album_type=album&market=ES", spotifyID] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            NSLog(@"%@", responseObject);
-            completionHandler(nil, nil);
+            completionHandler([self albumsFromJSONDictionary:responseObject], nil);
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
            // <#code#>
         }];
@@ -37,8 +37,16 @@
     
 }
 
-
-
++ (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary {
+    NSMutableArray *albums = [[NSMutableArray alloc] init];
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+        SAAlbum *newAlbum = [[SAAlbum alloc] init];
+        newAlbum.title = dictionary[@"name"];
+        newAlbum.spotifyID = dictionary[@"id"];
+        [albums addObject:newAlbum];
+    }
+    return albums;
+}
 
 + (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *genres;
 @property (nonatomic, strong) NSString *popularity;
 @property (nonatomic, strong) NSString *artistSpotifyID;
+@property (nonatomic, strong) NSMutableArray *albumTitles;
 
 - (instancetype)initWithName:(NSString *)name
                   biography:(NSString *)bio

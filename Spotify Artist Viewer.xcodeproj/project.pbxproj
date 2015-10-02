@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E555198C1752D0D5DD18A5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A86C184B1E6397DADB529 /* libPods.a */; };
+		451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AED1BBF25690013226C /* SAAlbum.m */; settings = {ASSET_TAGS = (); }; };
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451F7AEC1BBF25690013226C /* SAAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbum.h; sourceTree = "<group>"; };
+		451F7AED1BBF25690013226C /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbum.m; sourceTree = "<group>"; };
 		453079131BB9799800BDC8FB /* Spotify Artist Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Artist Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 			children = (
 				4530794F1BB9879100BDC8FB /* SAArtist.h */,
 				453079501BB9879100BDC8FB /* SAArtist.m */,
+				451F7AEC1BBF25690013226C /* SAAlbum.h */,
+				451F7AED1BBF25690013226C /* SAAlbum.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
+				451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */,
 				45B1D6201BBDC669004CBBB9 /* Album+CoreDataProperties.m in Sources */,
 				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
 				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */,

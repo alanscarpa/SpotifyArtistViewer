@@ -23,6 +23,7 @@
 #import "Album.h"
 #import "Song.h"
 #import "SDImageCache.h"
+#import "SAAlbum.h"
 
 static NSInteger const kReturnLimit = 3;
 
@@ -89,8 +90,6 @@ static NSInteger const kReturnLimit = 3;
             }
         }
     };
-    //NSLog(@"%@", [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil]);
-
 }
 
 - (void)prepareArtistsArray {
@@ -157,14 +156,14 @@ static NSInteger const kReturnLimit = 3;
 - (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
     [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
-            [self updateTableViewWithSearchResults:artists];
+            [self updateDataWithSearchResults:artists];
         } else {
             NSLog(@"Error calling Spotify API: %@", error);
         }
     }];
 }
 
-- (void)updateTableViewWithSearchResults:(NSArray *)results {
+- (void)updateDataWithSearchResults:(NSArray *)results {
     [self.artistsFromSearch addObjectsFromArray:results];
     [self updateResults];
 }
@@ -210,8 +209,6 @@ static NSInteger const kReturnLimit = 3;
         SAArtistViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
         destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
-    } else if ([segue.identifier isEqualToString:@"artistProfileSegue"]) {
-        
     }
 }
 
@@ -223,6 +220,16 @@ static NSInteger const kReturnLimit = 3;
             [SASavedDataHandler addArtist:self.artistsFromSearch[indexPath.row]
                               toFavorites:self.dataStore];
     }
+    SAArtist *selectedArtist = self.artistsFromSearch[indexPath.row];
+    [SAAFNetworkingManager getArtistAlbums:selectedArtist.artistSpotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
+        for (SAAlbum *album in albums){
+            NSLog(@"%@", album.title);
+        }
+    }];
 }
 
+- (void)getArtistAlbums {
+    
+
+}
 @end

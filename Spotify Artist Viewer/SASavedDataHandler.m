@@ -8,6 +8,7 @@
 
 #import "SASavedDataHandler.h"
 #import "SDWebImageDownloader.h"
+#import "Album.h"
 
 NSString * const kPhotosDirectory = @"Photos";
 
@@ -30,6 +31,15 @@ NSString * const kPhotosDirectory = @"Photos";
     Artist *artistToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:dataStore.managedObjectContext];
     artistToSave.name = artist.artistName;
     artistToSave.imageLocalURL = artist.artistSpotifyID;
+    
+    NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
+    for (NSString *title in artist.albumTitles){
+        Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:dataStore.managedObjectContext];
+        album.name = title;
+        [artistAlbums addObject:album];
+    }
+    artistToSave.album = [NSSet setWithArray:artistAlbums];
+    
     [dataStore save];
 }
 
