@@ -301,12 +301,12 @@
 			children = (
 				453079491BB97E3200BDC8FB /* SASearchViewController.h */,
 				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
+				45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */,
 				456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */,
 				456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */,
 				456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */,
 				456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */,
 				45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */,
-				45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */,
 				458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h */,
 				458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */,
 			);

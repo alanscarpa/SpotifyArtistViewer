@@ -52,46 +52,6 @@ static NSInteger const kReturnLimit = 3;
     self.dataStore = [SADataStore sharedDataStore];
 }
 
-# pragma mark - Save Artist To Favorites
-
-- (UIImage *)artistImageFromFavoriteButton:(UIButton *)favoriteButton {
-    CGPoint location = [favoriteButton.superview convertPoint:favoriteButton.center toView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-    SASearchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.artistImageView.image;
-}
-
-- (void)createDummyCoreData {
-    Artist *newArtist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:self.dataStore.managedObjectContext];
-    newArtist.name = @"some band";
-    
-    Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:self.dataStore.managedObjectContext];
-    album.name = @"album111";
-    
-    Song *song1 = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.dataStore.managedObjectContext];
-    song1.name = @"song1";
-    Song *song2 = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:self.dataStore.managedObjectContext];
-    song2.name = @"song2";
-    [album addSong:[[NSSet alloc] initWithArray:@[song1, song2]]];
-    [newArtist addAlbumObject:album];
-    
-    [self.dataStore save];
-    NSFetchRequest *requestArtists = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
-    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    requestArtists.sortDescriptors = @[sortArtistsByName];
-    
-    NSArray *savedArtists = [self.dataStore.managedObjectContext executeFetchRequest:requestArtists error:nil];
-    for (Artist *artist in savedArtists) {
-        NSLog(@"Name: %@", artist.name);
-        for (Album *albumm in artist.album){
-            NSLog(@"Albums: %@", albumm.name);
-            for (Song *songg in albumm.song){
-                NSLog(@"Songs: %@", songg.name);
-            }
-        }
-    };
-}
-
 - (void)prepareArtistsArray {
     self.artistsFromSearch = [[NSMutableArray alloc] init];
 }
@@ -105,6 +65,8 @@ static NSInteger const kReturnLimit = 3;
     self.infiniteScrollHandler.delegate = self;
     [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
 }
+
+#pragma mark - Segmented Control
 
 - (IBAction)segmedControlTapped:(id)sender {
     [self checkWhichSegmentWasTapped];
