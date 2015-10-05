@@ -10,9 +10,9 @@
 
 @implementation SASongsTableViewCell
 
-- (void)customizeCellWithCoreDataAlbum:(Album *)album {
-    self.trackNumberLabel.text = @"1)";
-    self.songNameLabel.text = album.name;
+- (void)customizeCellWithCoreDataSong:(Song *)song {
+    self.trackNumberLabel.text = [NSString stringWithFormat:@"%@) ", [song.trackNumber stringValue]];
+    self.songNameLabel.text = song.name;
 }
 
 @end

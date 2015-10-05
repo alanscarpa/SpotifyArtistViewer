@@ -11,27 +11,28 @@
             <rect key="frame" x="0.0" y="0.0" width="557" height="110"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ysn-ut-X7t" id="W3a-0H-jCe">
-                <rect key="frame" x="0.0" y="0.0" width="557" height="110"/>
+                <rect key="frame" x="0.0" y="0.0" width="557" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upk-zH-xv6">
-                        <rect key="frame" x="38" y="46" width="89" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="100)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8o-r9-5YW">
+                        <rect key="frame" x="16" y="45" width="34" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8o-r9-5YW">
-                        <rect key="frame" x="16" y="45" width="14" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upk-zH-xv6">
+                        <rect key="frame" x="50" y="45" width="499" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Upk-zH-xv6" firstAttribute="leading" secondItem="h8o-r9-5YW" secondAttribute="trailing" constant="8" id="KTc-fY-S7F"/>
-                    <constraint firstItem="Upk-zH-xv6" firstAttribute="centerY" secondItem="h8o-r9-5YW" secondAttribute="centerY" id="Lix-SE-DtY"/>
-                    <constraint firstItem="h8o-r9-5YW" firstAttribute="leading" secondItem="W3a-0H-jCe" secondAttribute="leadingMargin" constant="8" id="bAc-CS-BbR"/>
-                    <constraint firstItem="h8o-r9-5YW" firstAttribute="centerY" secondItem="W3a-0H-jCe" secondAttribute="centerY" id="tHS-j9-Wf0"/>
+                    <constraint firstItem="h8o-r9-5YW" firstAttribute="centerY" secondItem="W3a-0H-jCe" secondAttribute="centerY" id="66m-TD-HAC"/>
+                    <constraint firstItem="Upk-zH-xv6" firstAttribute="leading" secondItem="h8o-r9-5YW" secondAttribute="trailing" id="BRQ-Uv-kFf"/>
+                    <constraint firstItem="h8o-r9-5YW" firstAttribute="leading" secondItem="W3a-0H-jCe" secondAttribute="leadingMargin" constant="8" id="F2P-XD-TdX"/>
+                    <constraint firstItem="Upk-zH-xv6" firstAttribute="trailing" secondItem="W3a-0H-jCe" secondAttribute="trailingMargin" id="TDR-Ex-T5h"/>
+                    <constraint firstItem="Upk-zH-xv6" firstAttribute="centerY" secondItem="W3a-0H-jCe" secondAttribute="centerY" id="npv-hB-aUu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

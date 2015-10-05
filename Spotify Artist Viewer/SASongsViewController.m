@@ -26,16 +26,18 @@
     [super viewDidLoad];
     [self registerTableViewCell];
     [self checkIfSongsHaveBeenPreviouslyDownloaded];
-    
 }
 
 - (void)registerTableViewCell {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SASongsTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SASongsTableViewCell class])];
 }
+
 - (void)checkIfSongsHaveBeenPreviouslyDownloaded {
     if (![self songsHaveBeenPreviouslyDownloadedToCoreData]) {
         [SAAFNetworkingManager getAlbumSongs:self.album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
             [SASavedDataHandler saveSongs:songs fromAlbum:self.album toCoreData:[SADataStore sharedDataStore]];
+            [self getSongsFromCoreData];
+            [self.tableView reloadData];
         }];
     } else {
         [self getSongsFromCoreData];
@@ -52,15 +54,11 @@
 
 - (void)getSongsFromCoreData {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
-    //   NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    //   request.sortDescriptors = @[sortArtistsByName];
+    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
+       request.sortDescriptors = @[sortSongsByTrackNumber];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", self.album];
     request.predicate = predicate;
-    
     self.songs = [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
-    for (Song *song in self.songs){
-        NSLog(@"%@", song.name);
-    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -71,7 +69,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASongsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASongsTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithCoreDataAlbum:self.songs[indexPath.row]];
+    [cell customizeCellWithCoreDataSong:self.songs[indexPath.row]];
     return cell;
 }
 

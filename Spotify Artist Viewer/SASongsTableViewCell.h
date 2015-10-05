@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Album.h"
+#import "Song.h"
 
 @interface SASongsTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *trackNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *songNameLabel;
-- (void)customizeCellWithCoreDataAlbum:(Album *)album;
+- (void)customizeCellWithCoreDataSong:(Song *)song;
 
 @end

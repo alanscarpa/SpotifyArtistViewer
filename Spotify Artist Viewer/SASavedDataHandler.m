@@ -53,6 +53,7 @@ NSString * const kPhotosDirectory = @"Photos";
     for (SASong *song in songs) {
         Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
         newSong.name = song.name;
+        newSong.trackNumber = song.trackNumber;
         [album addSongObject:newSong];
     }
     [dataStore save];

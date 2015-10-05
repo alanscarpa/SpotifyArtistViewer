@@ -10,4 +10,5 @@
 
 @interface SASong : NSObject
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *trackNumber;
 @end

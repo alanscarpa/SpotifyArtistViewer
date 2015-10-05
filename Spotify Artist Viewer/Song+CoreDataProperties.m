@@ -2,7 +2,7 @@
 //  Song+CoreDataProperties.m
 //  Spotify Artist Viewer
 //
-//  Created by Alan Scarpa on 10/1/15.
+//  Created by Alan Scarpa on 10/5/15.
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,6 +14,7 @@
 @implementation Song (CoreDataProperties)
 
 @dynamic name;
+@dynamic trackNumber;
 @dynamic album;
 
 @end
