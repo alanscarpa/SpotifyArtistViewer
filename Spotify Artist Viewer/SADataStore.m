@@ -62,6 +62,8 @@
 - (NSArray *)favoritedArtists {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
     NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
+    request.predicate = predicate;
     request.sortDescriptors = @[sortArtistsByName];
     return [self.managedObjectContext executeFetchRequest:request error:nil];
 }

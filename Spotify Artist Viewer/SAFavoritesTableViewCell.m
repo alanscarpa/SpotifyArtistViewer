@@ -17,6 +17,7 @@
 
 - (void)customizeCellWithCoreDataArtist:(Artist *)artist {
     self.artistNameLabel.text = artist.name;
+    
     if (artist.imageLocalURL) {
         self.artistImageView.image = [SASavedDataHandler localImageWithArtist:artist];
     }

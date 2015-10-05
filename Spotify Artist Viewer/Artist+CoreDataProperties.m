@@ -18,6 +18,7 @@
 @dynamic spotifyID;
 @dynamic popularity;
 @dynamic biography;
+@dynamic isFavorite;
 @dynamic album;
 @dynamic genre;
 

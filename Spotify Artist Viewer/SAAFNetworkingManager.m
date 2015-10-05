@@ -91,11 +91,11 @@
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *albums = [[NSMutableArray alloc] init];
     for (NSDictionary *dictionary in JSONDictionary[@"items"]){
-        SAAlbum *newAlbum = [[SAAlbum alloc] init];
-        newAlbum.title = dictionary[@"name"];
+        Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        newAlbum.name = dictionary[@"name"];
         newAlbum.spotifyID = dictionary[@"id"];
         if ([dictionary[@"images"] count]>0){
-            newAlbum.albumImageURL = dictionary[@"images"][0][@"url"];
+            newAlbum.imageLocalURL = dictionary[@"images"][0][@"url"];
         }
         [albums addObject:newAlbum];
     }

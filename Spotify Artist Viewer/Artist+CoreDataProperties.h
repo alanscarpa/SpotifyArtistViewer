@@ -10,8 +10,8 @@
 //
 
 #import "Artist.h"
-#import "Genre.h"
 #import "Album.h"
+#import "Genre.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *spotifyID;
 @property (nullable, nonatomic, retain) NSString *popularity;
 @property (nullable, nonatomic, retain) NSString *biography;
+@property (nullable, nonatomic, retain) NSNumber *isFavorite;
 @property (nullable, nonatomic, retain) NSSet<Album *> *album;
 @property (nullable, nonatomic, retain) NSSet<Genre *> *genre;
 
