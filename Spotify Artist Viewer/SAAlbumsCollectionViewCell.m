@@ -6,10 +6,10 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "SAFavoritesDetailCollectionViewCell.h"
+#import "SAAlbumsCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation SAFavoritesDetailCollectionViewCell
+@implementation SAAlbumsCollectionViewCell
 
 - (void)customizeCellWithAlbum:(Album *)album {
     [self.activityIndicatorView startAnimating];
@@ -23,7 +23,6 @@
                                            self.albumCoverImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                        }
                                    }];
-    
 }
 
 - (void)setAlbumTitleLabelSize {

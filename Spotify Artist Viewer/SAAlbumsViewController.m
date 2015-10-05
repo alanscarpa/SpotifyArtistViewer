@@ -6,36 +6,25 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "SAFavoritesDetailViewController.h"
+#import "SAAlbumsViewController.h"
 #import "Album.h"
-#import "SAFavoritesDetailCollectionViewCell.h"
+#import "SAAlbumsCollectionViewCell.h"
+#import "SASongsViewController.h"
 
-@interface SAFavoritesDetailViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SAAlbumsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *sortedAlbums;
 @end
 
-@implementation SAFavoritesDetailViewController
+@implementation SAAlbumsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self sortAlbums];
-
-    for (Album *album in self.artist.album){
-        NSLog(@"%@", album.name);
-        NSLog(@"URL: %@", album.imageLocalURL);
-        NSLog(@"%@", album.spotifyID);
-    }
-    
 }
 
 - (void)sortAlbums {
     self.sortedAlbums = [[self.artist.album allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark UICollectionViewDataSource
@@ -45,7 +34,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SAFavoritesDetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SAFavoritesDetailCollectionViewCell class]) forIndexPath:indexPath];
+    SAAlbumsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SAAlbumsCollectionViewCell class]) forIndexPath:indexPath];
     [cell customizeCellWithAlbum:self.sortedAlbums[indexPath.row]];
     return cell;
 }
@@ -54,5 +43,12 @@
     return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
 }
 
+#pragma mark Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+    SASongsViewController *destinationVC = [segue destinationViewController];
+    destinationVC.album = self.sortedAlbums[indexPath.row];
+}
 
 @end

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SASongsTableViewCell" rowHeight="110" id="ysn-ut-X7t" customClass="SASongsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="557" height="110"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ysn-ut-X7t" id="W3a-0H-jCe">
+                <rect key="frame" x="0.0" y="0.0" width="557" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upk-zH-xv6">
+                        <rect key="frame" x="38" y="46" width="89" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8o-r9-5YW">
+                        <rect key="frame" x="16" y="45" width="14" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Upk-zH-xv6" firstAttribute="leading" secondItem="h8o-r9-5YW" secondAttribute="trailing" constant="8" id="KTc-fY-S7F"/>
+                    <constraint firstItem="Upk-zH-xv6" firstAttribute="centerY" secondItem="h8o-r9-5YW" secondAttribute="centerY" id="Lix-SE-DtY"/>
+                    <constraint firstItem="h8o-r9-5YW" firstAttribute="leading" secondItem="W3a-0H-jCe" secondAttribute="leadingMargin" constant="8" id="bAc-CS-BbR"/>
+                    <constraint firstItem="h8o-r9-5YW" firstAttribute="centerY" secondItem="W3a-0H-jCe" secondAttribute="centerY" id="tHS-j9-Wf0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="songNameLabel" destination="Upk-zH-xv6" id="8Rm-AX-iaZ"/>
+                <outlet property="trackNumberLabel" destination="h8o-r9-5YW" id="iLf-lZ-E2X"/>
+            </connections>
+            <point key="canvasLocation" x="371.5" y="455"/>
+        </tableViewCell>
+    </objects>
+</document>

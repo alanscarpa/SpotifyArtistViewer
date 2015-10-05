@@ -10,6 +10,8 @@
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SAArtist.h"
 #import "SAAlbum.h"
+#import "SASong.h"
+#import "Song.h"
 
 @implementation SAAFNetworkingManager
 
@@ -31,10 +33,32 @@
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/artists/%@/albums?album_type=album&market=ES", spotifyID] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             completionHandler([self albumsFromJSONDictionary:responseObject], nil);
         } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-           // <#code#>
+            NSLog(@"Error getting artist albums from spotify: %@", error);
         }];
     }
     
+}
+
++ (void)getAlbumSongs:(NSString *)albumSpotifyID withCompletionHandler:(void (^)(NSArray *songs, NSError *error))completionHandler {
+    if (completionHandler){
+        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/albums/%@/tracks?market=ES", albumSpotifyID] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            completionHandler([self songsFromJSONDictionary:responseObject], nil);
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+            NSLog(@"Error getting artist albums from spotify: %@", error);
+        }];
+    }
+}
+
+#pragma mark - Helper Methods
+
++ (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary {
+    NSMutableArray *songs = [[NSMutableArray alloc] init];
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+        SASong *newSong = [[SASong alloc] init];
+        newSong.name = dictionary[@"name"];
+        [songs addObject:newSong];
+    }
+    return songs;
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary {

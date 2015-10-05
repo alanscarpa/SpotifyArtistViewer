@@ -207,7 +207,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="cSW-We-6eF"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="TMF-m7-IjI">
+                        <barButtonItem key="leftBarButtonItem" id="TMF-m7-IjI">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="phL-eg-mA1">
                                 <rect key="frame" x="20" y="7" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -217,7 +217,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="GOn-yK-DAy">
+                        <barButtonItem key="rightBarButtonItem" id="GOn-yK-DAy">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="dpS-kJ-fSP">
                                 <rect key="frame" x="510" y="7" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -290,10 +290,10 @@
             </objects>
             <point key="canvasLocation" x="2301" y="-513"/>
         </scene>
-        <!--Details-->
+        <!--Albums-->
         <scene sceneID="XyU-zn-rFN">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lhq-zg-Gfl" customClass="SAFavoritesDetailViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lhq-zg-Gfl" customClass="SAAlbumsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fkT-K9-P1W"/>
                         <viewControllerLayoutGuide type="bottom" id="t7f-wk-YDG"/>
@@ -312,7 +312,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SAFavoritesDetailCollectionViewCell" id="fcy-n9-fT7" customClass="SAFavoritesDetailCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SAAlbumsCollectionViewCell" id="fcy-n9-fT7" customClass="SAAlbumsCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="224" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -326,7 +326,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1IZ-iJ-pQw">
                                                     <rect key="frame" x="8" y="178" width="208" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Oo3-rN-arI">
@@ -352,6 +352,7 @@
                                             <outlet property="activityIndicatorView" destination="Oo3-rN-arI" id="a77-Qw-DxT"/>
                                             <outlet property="albumCoverImageView" destination="EcL-RO-xeo" id="11T-S5-Ww2"/>
                                             <outlet property="albumTitleLabel" destination="1IZ-iJ-pQw" id="rFN-UL-aaD"/>
+                                            <segue destination="LEC-NL-eKQ" kind="show" id="bIs-fV-Qsl"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -369,14 +370,52 @@
                             <constraint firstItem="PQc-rz-VpF" firstAttribute="leading" secondItem="cec-8N-cbf" secondAttribute="leading" id="lRw-3N-BQV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" id="l5O-qO-9Ww"/>
+                    <navigationItem key="navigationItem" title="Albums" id="l5O-qO-9Ww"/>
                     <connections>
                         <outlet property="collectionView" destination="PQc-rz-VpF" id="vEJ-P6-xPg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maf-gn-d9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3054" y="-520"/>
+            <point key="canvasLocation" x="3007" y="-513"/>
+        </scene>
+        <!--Songs-->
+        <scene sceneID="1yf-yA-TL7">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="LEC-NL-eKQ" customClass="SASongsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="m67-h0-EjP"/>
+                        <viewControllerLayoutGuide type="bottom" id="d92-He-99p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o1B-4G-w5Z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O6o-ga-5ky">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LEC-NL-eKQ" id="y8z-ve-nF4"/>
+                                    <outlet property="delegate" destination="LEC-NL-eKQ" id="xmX-q6-inx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d92-He-99p" firstAttribute="top" secondItem="O6o-ga-5ky" secondAttribute="bottom" id="4e9-aD-Lk9"/>
+                            <constraint firstItem="O6o-ga-5ky" firstAttribute="top" secondItem="m67-h0-EjP" secondAttribute="bottom" id="GMt-Fp-wAP"/>
+                            <constraint firstItem="O6o-ga-5ky" firstAttribute="leading" secondItem="o1B-4G-w5Z" secondAttribute="leading" id="adO-s4-Mty"/>
+                            <constraint firstAttribute="trailing" secondItem="O6o-ga-5ky" secondAttribute="trailing" id="ibX-qW-ooZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Songs" id="kjl-S2-OGf"/>
+                    <connections>
+                        <outlet property="tableView" destination="O6o-ga-5ky" id="pBg-rb-Fdw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDh-FT-B48" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3743" y="-513"/>
         </scene>
         <!--Artist Profile-->
         <scene sceneID="sTb-kZ-jgu">

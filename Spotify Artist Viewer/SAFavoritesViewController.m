@@ -11,7 +11,7 @@
 #import "SADataStore.h"
 #import "SAAFNetworkingManager.h"
 #import "Artist.h"
-#import "SAFavoritesDetailViewController.h"
+#import "SAAlbumsViewController.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,14 +38,14 @@
 }
 
 - (void)registerTableViewCellNib {
-    [self.tableView registerNib:[UINib nibWithNibName:@"SAFavoritesViewControllerCell" bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SAFavoritesTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    SAFavoritesDetailViewController *destinationVC = [segue destinationViewController];
+    SAAlbumsViewController *destinationVC = [segue destinationViewController];
     destinationVC.artist = self.favoriteArtists[indexPath.row];
 }
 

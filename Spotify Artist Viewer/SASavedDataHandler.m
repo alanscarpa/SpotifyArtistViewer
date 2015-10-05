@@ -11,6 +11,8 @@
 #import "Album.h"
 #import "SAAFNetworkingManager.h"
 #import "SAAlbum.h"
+#import "Song.h"
+#import "SASong.h"
 
 NSString * const kPhotosDirectory = @"Photos";
 
@@ -33,7 +35,6 @@ NSString * const kPhotosDirectory = @"Photos";
     Artist *artistToSave = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:dataStore.managedObjectContext];
     artistToSave.name = artist.artistName;
     artistToSave.imageLocalURL = artist.artistSpotifyID;
-    
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.artistSpotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
         for (SAAlbum *artistAlbum in albums){
@@ -48,6 +49,17 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
++ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
+    for (SASong *song in songs) {
+        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
+        newSong.name = song.name;
+        [album addSongObject:newSong];
+    }
+    [dataStore save];
+}
+
+#pragma mark - Helper Methods
+
 + (UIImage *)localImageWithArtist:(Artist *)artist {
     if (artist.imageLocalURL) {
         return [UIImage imageWithContentsOfFile:[[self photosDirectory] stringByAppendingPathComponent:artist.imageLocalURL]];
@@ -55,7 +67,6 @@ NSString * const kPhotosDirectory = @"Photos";
     return nil;
 }
 
-#pragma mark - Helper Methods
 
 + (void)saveImage:(UIImage *)image path:(NSString *)path {
     [self createPhotosDirectoryIfNecessary];

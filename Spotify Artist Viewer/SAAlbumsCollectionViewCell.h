@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Album.h"
 
-@interface SAFavoritesDetailCollectionViewCell : UICollectionViewCell
+@interface SAAlbumsCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *albumCoverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *albumTitleLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;

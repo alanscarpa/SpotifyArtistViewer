@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		2E555198C1752D0D5DD18A5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A86C184B1E6397DADB529 /* libPods.a */; };
 		451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AED1BBF25690013226C /* SAAlbum.m */; settings = {ASSET_TAGS = (); }; };
-		451F7AF11BC2B7DA0013226C /* SAFavoritesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		451F7AF41BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF01BC2B7DA0013226C /* SAAlbumsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AF41BC2C0710013226C /* SAAlbumsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF31BC2C0710013226C /* SAAlbumsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AF91BC2CBD60013226C /* SASongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF81BC2CBD60013226C /* SASongsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AFC1BC2E4150013226C /* SASong.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AFB1BC2E4150013226C /* SASong.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AFE1BC2EEB00013226C /* SASongsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
@@ -37,7 +41,7 @@
 		45B1D6231BBDC669004CBBB9 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D61D1BBDC669004CBBB9 /* Song.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6261BBDC6E3004CBBB9 /* SADataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6251BBDC6E3004CBBB9 /* SADataStore.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */; settings = {ASSET_TAGS = (); }; };
-		45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */; settings = {ASSET_TAGS = (); }; };
+		45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6351BBEF35A004CBBB9 /* SASavedDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6341BBEF35A004CBBB9 /* SASavedDataHandler.m */; settings = {ASSET_TAGS = (); }; };
 		45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -63,10 +67,17 @@
 /* Begin PBXFileReference section */
 		451F7AEC1BBF25690013226C /* SAAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbum.h; sourceTree = "<group>"; };
 		451F7AED1BBF25690013226C /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbum.m; sourceTree = "<group>"; };
-		451F7AEF1BC2B7DA0013226C /* SAFavoritesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesDetailViewController.h; sourceTree = "<group>"; };
-		451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesDetailViewController.m; sourceTree = "<group>"; };
-		451F7AF21BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesDetailCollectionViewCell.h; sourceTree = "<group>"; };
-		451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		451F7AEF1BC2B7DA0013226C /* SAAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbumsViewController.h; sourceTree = "<group>"; };
+		451F7AF01BC2B7DA0013226C /* SAAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbumsViewController.m; sourceTree = "<group>"; };
+		451F7AF21BC2C0710013226C /* SAAlbumsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbumsCollectionViewCell.h; sourceTree = "<group>"; };
+		451F7AF31BC2C0710013226C /* SAAlbumsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbumsCollectionViewCell.m; sourceTree = "<group>"; };
+		451F7AF71BC2CBD60013226C /* SASongsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASongsViewController.h; sourceTree = "<group>"; };
+		451F7AF81BC2CBD60013226C /* SASongsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASongsViewController.m; sourceTree = "<group>"; };
+		451F7AFA1BC2E4150013226C /* SASong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASong.h; sourceTree = "<group>"; };
+		451F7AFB1BC2E4150013226C /* SASong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASong.m; sourceTree = "<group>"; };
+		451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASongsTableViewCell.xib; sourceTree = "<group>"; };
+		451F7AFF1BC2EEC80013226C /* SASongsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASongsTableViewCell.h; sourceTree = "<group>"; };
+		451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASongsTableViewCell.m; sourceTree = "<group>"; };
 		453079131BB9799800BDC8FB /* Spotify Artist Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Artist Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,7 +128,7 @@
 		45B1D6251BBDC6E3004CBBB9 /* SADataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADataStore.m; sourceTree = "<group>"; };
 		45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesViewController.h; sourceTree = "<group>"; };
 		45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesViewController.m; sourceTree = "<group>"; };
-		45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAFavoritesViewControllerCell.xib; sourceTree = "<group>"; };
+		45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SAFavoritesTableViewCell.xib; sourceTree = "<group>"; };
 		45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesTableViewCell.h; sourceTree = "<group>"; };
 		45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesTableViewCell.m; sourceTree = "<group>"; };
 		45B1D6331BBEF35A004CBBB9 /* SASavedDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASavedDataHandler.h; sourceTree = "<group>"; };
@@ -155,6 +166,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451F7AF51BC2CAEA0013226C /* AlbumsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				451F7AEF1BC2B7DA0013226C /* SAAlbumsViewController.h */,
+				451F7AF01BC2B7DA0013226C /* SAAlbumsViewController.m */,
+				451F7AF21BC2C0710013226C /* SAAlbumsCollectionViewCell.h */,
+				451F7AF31BC2C0710013226C /* SAAlbumsCollectionViewCell.m */,
+			);
+			name = AlbumsViewController;
+			sourceTree = "<group>";
+		};
+		451F7AF61BC2CB070013226C /* SongsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				451F7AF71BC2CBD60013226C /* SASongsViewController.h */,
+				451F7AF81BC2CBD60013226C /* SASongsViewController.m */,
+				451F7AFF1BC2EEC80013226C /* SASongsTableViewCell.h */,
+				451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */,
+				451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */,
+			);
+			name = SongsViewController;
+			sourceTree = "<group>";
+		};
 		4530790A1BB9799800BDC8FB = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +259,8 @@
 		453079551BB98A9300BDC8FB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				451F7AF61BC2CB070013226C /* SongsViewController */,
+				451F7AF51BC2CAEA0013226C /* AlbumsViewController */,
 				45B1D6271BBDDD72004CBBB9 /* FavoritesViewController */,
 				456ED7E71BBB3B0E00791E01 /* SearchViewController */,
 				456ED7E81BBB3B1900791E01 /* ArtistViewController */,
@@ -239,6 +275,8 @@
 				453079501BB9879100BDC8FB /* SAArtist.m */,
 				451F7AEC1BBF25690013226C /* SAAlbum.h */,
 				451F7AED1BBF25690013226C /* SAAlbum.m */,
+				451F7AFA1BC2E4150013226C /* SASong.h */,
+				451F7AFB1BC2E4150013226C /* SASong.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -311,13 +349,9 @@
 			children = (
 				45B1D6281BBDDD8C004CBBB9 /* SAFavoritesViewController.h */,
 				45B1D6291BBDDD8C004CBBB9 /* SAFavoritesViewController.m */,
-				45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */,
+				45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib */,
 				45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */,
 				45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */,
-				451F7AEF1BC2B7DA0013226C /* SAFavoritesDetailViewController.h */,
-				451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */,
-				451F7AF21BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.h */,
-				451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */,
 			);
 			name = FavoritesViewController;
 			sourceTree = "<group>";
@@ -453,7 +487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				453079261BB9799800BDC8FB /* LaunchScreen.storyboard in Resources */,
-				45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib in Resources */,
+				45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib in Resources */,
+				451F7AFE1BC2EEB00013226C /* SASongsTableViewCell.xib in Resources */,
 				453079231BB9799800BDC8FB /* Assets.xcassets in Resources */,
 				453079211BB9799800BDC8FB /* Main.storyboard in Resources */,
 				456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */,
@@ -525,16 +560,19 @@
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
 				45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
-				451F7AF41BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m in Sources */,
+				451F7AF41BC2C0710013226C /* SAAlbumsCollectionViewCell.m in Sources */,
+				451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */,
 				45B1D6231BBDC669004CBBB9 /* Song.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
+				451F7AF91BC2CBD60013226C /* SASongsViewController.m in Sources */,
 				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
 				45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */,
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
-				451F7AF11BC2B7DA0013226C /* SAFavoritesDetailViewController.m in Sources */,
+				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
+				451F7AFC1BC2E4150013226C /* SASong.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,
