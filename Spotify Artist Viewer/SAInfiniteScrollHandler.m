@@ -11,9 +11,17 @@
 
 @implementation SAInfiniteScrollHandler
 
-- (void)setUpInfiniteScrollOnScrollView:(UIScrollView *)scrollView withSearchLimit:(NSInteger)limit {
+- (void)setUpInfiniteScrollOnScrollView:(UIScrollView *)scrollView andCollectionView:(UICollectionView *)collectionView withSearchLimit:(NSInteger)limit {
     __block NSInteger offset = limit;
     scrollView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
+    collectionView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
+    
+    [collectionView addInfiniteScrollWithHandler:^(UICollectionView* innerScrollView) {
+        self.offset += offset;
+        [self.delegate scrollHandler:self requestAdditionalItemsFromOffset:self.offset];
+        [innerScrollView finishInfiniteScroll];
+    }];
+    
     [scrollView addInfiniteScrollWithHandler:^(UIScrollView* innerScrollView) {
         self.offset += offset;
         [self.delegate scrollHandler:self requestAdditionalItemsFromOffset:self.offset];

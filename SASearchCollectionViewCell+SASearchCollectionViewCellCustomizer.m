@@ -36,7 +36,7 @@
     // If popularity is greater than 80%, then we give full alpha.
     CGFloat alphaBasedOnPopularity = popularity/80;
     // We don't want very unpopular artists to become invisible, so we set a minimum
-    if (alphaBasedOnPopularity < 0.25){
+    if (alphaBasedOnPopularity < 0.25) {
         alphaBasedOnPopularity = 0.25;
     }
     self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];

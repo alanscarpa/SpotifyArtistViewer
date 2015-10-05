@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) SADataStore *dataStore;
 @property (strong, nonatomic) NSArray *favoriteArtists;
-
 @end
 
 @implementation SAFavoritesViewController

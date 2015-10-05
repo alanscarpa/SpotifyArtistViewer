@@ -25,7 +25,7 @@
 #import "SDImageCache.h"
 #import "SAAlbum.h"
 
-static NSInteger const kReturnLimit = 3;
+static NSInteger const kReturnLimit = 10;
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -63,7 +63,7 @@ static NSInteger const kReturnLimit = 3;
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
-    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
+    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView andCollectionView:self.collectionView withSearchLimit:kReturnLimit];
 }
 
 #pragma mark - Segmented Control
