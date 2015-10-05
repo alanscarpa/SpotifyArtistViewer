@@ -9,7 +9,6 @@
 #import "SASearchViewController.h"
 #import "SAArtist.h"
 #import "SAArtistViewController.h"
-#import "SARequestManager.h"
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"

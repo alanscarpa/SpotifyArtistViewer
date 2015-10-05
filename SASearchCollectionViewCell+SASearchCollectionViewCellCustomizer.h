@@ -7,8 +7,8 @@
 //
 
 #import "SASearchCollectionViewCell.h"
-#import "SAArtist.h"
+#import "Artist.h"
 
 @interface SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
-- (void)customizeCellWithArtist:(SAArtist *)artist;
+- (void)customizeCellWithArtist:(Artist *)artist;
 @end

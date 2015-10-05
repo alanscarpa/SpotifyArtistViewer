@@ -11,12 +11,12 @@
 
 @implementation SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
 
-- (void)customizeCellWithArtist:(SAArtist *)artist {
+- (void)customizeCellWithArtist:(Artist *)artist {
     [self.activityIndicatorView startAnimating];
     [self setArtistNameLabelSize];
-    self.artistNameLabel.text = artist.artistName;
+    self.artistNameLabel.text = artist.name;
     [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
-    [self.profileImageView sd_setImageWithURL:artist.artistSearchThumbnailImageURL
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                    [self.activityIndicatorView stopAnimating];

@@ -1,5 +1,5 @@
 //
-//  Artist+CoreDataProperties.m
+//  Genre+CoreDataProperties.m
 //  Spotify Artist Viewer
 //
 //  Created by Alan Scarpa on 10/5/15.
@@ -9,16 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Artist+CoreDataProperties.h"
+#import "Genre+CoreDataProperties.h"
 
-@implementation Artist (CoreDataProperties)
+@implementation Genre (CoreDataProperties)
 
-@dynamic imageLocalURL;
 @dynamic name;
-@dynamic spotifyID;
-@dynamic popularity;
-@dynamic biography;
 @dynamic album;
-@dynamic genre;
 
 @end

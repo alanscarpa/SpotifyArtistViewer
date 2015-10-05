@@ -7,7 +7,7 @@
 //
 
 #import "SAArtistViewController.h"
-#import "SARequestManager.h"
+#import "SAAFNetworkingManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAArtistViewController ()
@@ -22,48 +22,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpUI];
-    [self getArtistInfoFromEchoNest];
+    [self getArtistBioFromEchoNest];
 }
 
 - (void)setUpUI {
     [self.activityIndicator startAnimating];
     [self setUpArtistNameLabel];
+    [self setArtistImage];
 }
 
 - (void)setUpArtistNameLabel {
     self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
     self.artistNameLabel.minimumScaleFactor = 0.7;
-    self.artistNameLabel.text = self.artist.artistName;
+    self.artistNameLabel.text = self.artist.name;
 }
 
-- (void)getArtistInfoFromEchoNest {
-    [[SARequestManager sharedManager] getArtistInfoWithSpotifyID:self.artist.artistSpotifyID success:^(SAArtist *artist) {
-        [self updateUIWithArtist:artist];
-    } failure:^(NSError *error) {
-        NSLog(@"Unable to get artist info from EchoNest");
+- (void)setArtistImage {
+    [self.profileImage sd_setImageWithURL:[NSURL URLWithString:self.artist.imageLocalURL]
+                         placeholderImage:nil
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    [self.activityIndicator stopAnimating];
+                                    if (error){
+                                        self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                    }
+                                }];
+}
+
+- (void)getArtistBioFromEchoNest {
+    [SAAFNetworkingManager getArtistBiography:self.artist.spotifyID withCompletionHandler:^(NSString *artistBio, NSError *error) {
+        if (!error){
+            self.biographyTextView.text = artistBio;
+            self.biographyTextView.hidden = NO;
+        } else {
+            NSLog(@"Erro calling echonest: %@", error);
+        }
     }];
-}
-
-- (void)updateUIWithArtist:(SAArtist *)artist {
-    self.artist = artist;
-    [self updateBioTextView];
-    [self updateArtistImage];
-}
-
-- (void)updateBioTextView {
-    self.biographyTextView.text = self.artist.artistBiography;
-    self.biographyTextView.hidden = NO;
-}
-
-- (void)updateArtistImage {
-    [self.profileImage sd_setImageWithURL:self.artist.artistImageURL
-                      placeholderImage:nil
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 [self.activityIndicator stopAnimating];
-                                 if (error){
-                                     self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
-                                 }
-                             }];
 }
 
 @end

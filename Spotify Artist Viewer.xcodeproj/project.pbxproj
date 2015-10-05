@@ -15,6 +15,8 @@
 		451F7AFC1BC2E4150013226C /* SASong.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AFB1BC2E4150013226C /* SASong.m */; settings = {ASSET_TAGS = (); }; };
 		451F7AFE1BC2EEB00013226C /* SASongsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		451F7B061BC30B870013226C /* Genre+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		451F7B071BC30B870013226C /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B051BC30B870013226C /* Genre.m */; settings = {ASSET_TAGS = (); }; };
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
@@ -25,7 +27,6 @@
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		453079511BB9879100BDC8FB /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079501BB9879100BDC8FB /* SAArtist.m */; settings = {ASSET_TAGS = (); }; };
 		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
-		4530795A1BB98D2200BDC8FB /* SARequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079591BB98D2200BDC8FB /* SARequestManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -78,6 +79,10 @@
 		451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASongsTableViewCell.xib; sourceTree = "<group>"; };
 		451F7AFF1BC2EEC80013226C /* SASongsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASongsTableViewCell.h; sourceTree = "<group>"; };
 		451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASongsTableViewCell.m; sourceTree = "<group>"; };
+		451F7B021BC30B870013226C /* Genre+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Genre+CoreDataProperties.h"; sourceTree = "<group>"; };
+		451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Genre+CoreDataProperties.m"; sourceTree = "<group>"; };
+		451F7B041BC30B870013226C /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
+		451F7B051BC30B870013226C /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
 		453079131BB9799800BDC8FB /* Spotify Artist Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Artist Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -98,8 +103,6 @@
 		453079501BB9879100BDC8FB /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtist.m; sourceTree = "<group>"; };
 		453079521BB98A8400BDC8FB /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
 		453079531BB98A8400BDC8FB /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
-		453079581BB98D2200BDC8FB /* SARequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SARequestManager.h; sourceTree = "<group>"; };
-		453079591BB98D2200BDC8FB /* SARequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SARequestManager.m; sourceTree = "<group>"; };
 		456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = SOURCE_ROOT; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
@@ -284,8 +287,6 @@
 		453079571BB98D0E00BDC8FB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				453079581BB98D2200BDC8FB /* SARequestManager.h */,
-				453079591BB98D2200BDC8FB /* SARequestManager.m */,
 				456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */,
 				456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */,
 				456ED7EF1BBC2FCF00791E01 /* SAInfiniteScrollHandler.h */,
@@ -325,6 +326,10 @@
 		45B1D60B1BBDC2B6004CBBB9 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				451F7B021BC30B870013226C /* Genre+CoreDataProperties.h */,
+				451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */,
+				451F7B041BC30B870013226C /* Genre.h */,
+				451F7B051BC30B870013226C /* Genre.m */,
 				45B1D6121BBDC669004CBBB9 /* Artist+CoreDataProperties.h */,
 				45B1D6131BBDC669004CBBB9 /* Artist+CoreDataProperties.m */,
 				45B1D6141BBDC669004CBBB9 /* Artist.h */,
@@ -554,7 +559,6 @@
 				45B1D6201BBDC669004CBBB9 /* Album+CoreDataProperties.m in Sources */,
 				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
 				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */,
-				4530795A1BB98D2200BDC8FB /* SARequestManager.m in Sources */,
 				45B1D61F1BBDC669004CBBB9 /* Artist.m in Sources */,
 				45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */,
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
@@ -564,6 +568,7 @@
 				451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */,
 				45B1D6231BBDC669004CBBB9 /* Song.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
+				451F7B061BC30B870013226C /* Genre+CoreDataProperties.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
 				451F7AF91BC2CBD60013226C /* SASongsViewController.m in Sources */,
 				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
@@ -573,6 +578,7 @@
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
 				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
 				451F7AFC1BC2E4150013226C /* SASong.m in Sources */,
+				451F7B071BC30B870013226C /* Genre.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,

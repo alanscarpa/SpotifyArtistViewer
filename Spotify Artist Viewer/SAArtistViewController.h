@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SAArtist.h"
+#import "Artist.h"
 
 @interface SAArtistViewController : UIViewController
 
-@property (nonatomic, strong) SAArtist *artist;
+@property (nonatomic, strong) Artist *artist;
 
 @end

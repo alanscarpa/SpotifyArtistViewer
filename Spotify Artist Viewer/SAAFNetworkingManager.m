@@ -12,6 +12,9 @@
 #import "SAAlbum.h"
 #import "SASong.h"
 #import "Song.h"
+#import "Artist.h"
+#import "Genre.h"
+#import "SADataStore.h"
 
 @implementation SAAFNetworkingManager
 
@@ -23,6 +26,17 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             completionHandler(nil, error);
+        }];
+    }
+    
+}
+
++ (void)getArtistBiography:(NSString *)spotifyID withCompletionHandler:(void (^)(NSString *artistBio, NSError *error))completionHandler {
+    if (completionHandler){
+        [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/profile?api_key=ZIJYLQIMEDOZIPP3C&id=spotify:artist:%@&bucket=biographies", spotifyID] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            completionHandler([self artistBioFromJSONDictionary:responseObject], nil);
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+            NSLog(@"Error getting artist albums from spotify: %@", error);
         }];
     }
     
@@ -50,6 +64,18 @@
 }
 
 #pragma mark - Helper Methods
+
++ (NSString *)artistBioFromJSONDictionary:(NSDictionary *)JSONDictionary {
+    NSString *artistBio = @"No bio available";
+    for (NSDictionary *bio in JSONDictionary[@"response"][@"artist"][@"biographies"]) {
+        // Find the first full biography if there is one
+        if ((NSUInteger)bio[@"truncated"] == 0) {
+            artistBio = [NSString stringWithFormat:@"%@", bio[@"text"]];
+            break;
+        }
+    }
+    return artistBio;
+}
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary {
     NSMutableArray *songs = [[NSMutableArray alloc] init];
@@ -84,7 +110,7 @@
     return artistsFromSearch;
 }
 
-+ (SAArtist *)artistFromDictionary:(NSDictionary *)artistDictionary {
++ (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
     NSString *artistName = [NSString stringWithFormat:@"%@", artistDictionary[@"name"]];
     NSString *spotifyID = [NSString stringWithFormat:@"%@", artistDictionary[@"id"]];
     NSURL *artistThumbnailURL = nil;
@@ -93,7 +119,16 @@
     }
     NSArray *artistGenres = [[NSArray alloc]initWithArray:artistDictionary[@"genres"]];
     NSString *popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
-    SAArtist *artist = [[SAArtist alloc]initWithName:artistName biography:nil imageURL:nil artistSearchThumbnailURL:artistThumbnailURL genres:artistGenres popularity:popularity spotifyID:spotifyID];
+    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    artist.name = artistName;
+    artist.spotifyID = spotifyID;
+    artist.imageLocalURL = [artistThumbnailURL absoluteString];
+    for (NSString *genreName in artistGenres){
+        Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        genre.name = genreName;
+        [artist addGenreObject:genre];
+    }
+    artist.popularity = popularity;
     return artist;
 }
 

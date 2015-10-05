@@ -7,10 +7,10 @@
 //
 
 #import "SASearchTableViewCell.h"
-#import "SAArtist.h"
+#import "Artist.h"
 
 @interface SASearchTableViewCell (SASearchCellCustomizer)
 
-- (void)customizeCellWithArtist:(SAArtist *)artist atIndexPath:(NSIndexPath *)indexPath;
+- (void)customizeCellWithArtist:(Artist *)artist atIndexPath:(NSIndexPath *)indexPath;
 
 @end
