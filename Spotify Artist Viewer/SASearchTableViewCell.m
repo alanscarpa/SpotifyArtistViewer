@@ -7,7 +7,6 @@
 //
 
 #import "SASearchTableViewCell.h"
-#import "SAArtist.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation SASearchTableViewCell

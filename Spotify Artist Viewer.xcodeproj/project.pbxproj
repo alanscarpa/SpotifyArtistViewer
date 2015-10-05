@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E555198C1752D0D5DD18A5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A86C184B1E6397DADB529 /* libPods.a */; };
-		451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AED1BBF25690013226C /* SAAlbum.m */; settings = {ASSET_TAGS = (); }; };
 		451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF01BC2B7DA0013226C /* SAAlbumsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		451F7AF41BC2C0710013226C /* SAAlbumsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF31BC2C0710013226C /* SAAlbumsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		451F7AF91BC2CBD60013226C /* SASongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF81BC2CBD60013226C /* SASongsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		451F7AFC1BC2E4150013226C /* SASong.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AFB1BC2E4150013226C /* SASong.m */; settings = {ASSET_TAGS = (); }; };
 		451F7AFE1BC2EEB00013226C /* SASongsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		451F7B061BC30B870013226C /* Genre+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
@@ -25,7 +23,6 @@
 		453079311BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079301BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m */; };
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
-		453079511BB9879100BDC8FB /* SAArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079501BB9879100BDC8FB /* SAArtist.m */; settings = {ASSET_TAGS = (); }; };
 		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -66,16 +63,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		451F7AEC1BBF25690013226C /* SAAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbum.h; sourceTree = "<group>"; };
-		451F7AED1BBF25690013226C /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbum.m; sourceTree = "<group>"; };
 		451F7AEF1BC2B7DA0013226C /* SAAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbumsViewController.h; sourceTree = "<group>"; };
 		451F7AF01BC2B7DA0013226C /* SAAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbumsViewController.m; sourceTree = "<group>"; };
 		451F7AF21BC2C0710013226C /* SAAlbumsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbumsCollectionViewCell.h; sourceTree = "<group>"; };
 		451F7AF31BC2C0710013226C /* SAAlbumsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbumsCollectionViewCell.m; sourceTree = "<group>"; };
 		451F7AF71BC2CBD60013226C /* SASongsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASongsViewController.h; sourceTree = "<group>"; };
 		451F7AF81BC2CBD60013226C /* SASongsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASongsViewController.m; sourceTree = "<group>"; };
-		451F7AFA1BC2E4150013226C /* SASong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASong.h; sourceTree = "<group>"; };
-		451F7AFB1BC2E4150013226C /* SASong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASong.m; sourceTree = "<group>"; };
 		451F7AFD1BC2EEB00013226C /* SASongsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SASongsTableViewCell.xib; sourceTree = "<group>"; };
 		451F7AFF1BC2EEC80013226C /* SASongsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASongsTableViewCell.h; sourceTree = "<group>"; };
 		451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASongsTableViewCell.m; sourceTree = "<group>"; };
@@ -99,8 +92,6 @@
 		4530793D1BB9799800BDC8FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		453079491BB97E3200BDC8FB /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
-		4530794F1BB9879100BDC8FB /* SAArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtist.h; sourceTree = "<group>"; };
-		453079501BB9879100BDC8FB /* SAArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtist.m; sourceTree = "<group>"; };
 		453079521BB98A8400BDC8FB /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
 		453079531BB98A8400BDC8FB /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
 		456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = SOURCE_ROOT; };
@@ -220,7 +211,6 @@
 				45B1D60B1BBDC2B6004CBBB9 /* Core Data */,
 				453079571BB98D0E00BDC8FB /* Utilities */,
 				453079551BB98A9300BDC8FB /* Controllers */,
-				453079561BB98A9D00BDC8FB /* Model */,
 				45B1D6361BBEF701004CBBB9 /* Storyboards */,
 				453079221BB9799800BDC8FB /* Assets.xcassets */,
 				453079161BB9799800BDC8FB /* Supporting Files */,
@@ -269,19 +259,6 @@
 				456ED7E81BBB3B1900791E01 /* ArtistViewController */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		453079561BB98A9D00BDC8FB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4530794F1BB9879100BDC8FB /* SAArtist.h */,
-				453079501BB9879100BDC8FB /* SAArtist.m */,
-				451F7AEC1BBF25690013226C /* SAAlbum.h */,
-				451F7AED1BBF25690013226C /* SAAlbum.m */,
-				451F7AFA1BC2E4150013226C /* SASong.h */,
-				451F7AFB1BC2E4150013226C /* SASong.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		453079571BB98D0E00BDC8FB /* Utilities */ = {
@@ -554,8 +531,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453079511BB9879100BDC8FB /* SAArtist.m in Sources */,
-				451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */,
 				45B1D6201BBDC669004CBBB9 /* Album+CoreDataProperties.m in Sources */,
 				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
 				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */,
@@ -577,7 +552,6 @@
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
 				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
-				451F7AFC1BC2E4150013226C /* SASong.m in Sources */,
 				451F7B071BC30B870013226C /* Genre.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,

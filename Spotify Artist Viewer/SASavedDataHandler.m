@@ -10,9 +10,7 @@
 #import "SDWebImageDownloader.h"
 #import "Album.h"
 #import "SAAFNetworkingManager.h"
-#import "SAAlbum.h"
 #import "Song.h"
-#import "SASong.h"
 
 NSString * const kPhotosDirectory = @"Photos";
 
@@ -43,15 +41,15 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
-+ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
-    for (SASong *song in songs) {
-        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
-        newSong.name = song.name;
-        newSong.trackNumber = song.trackNumber;
-        [album addSongObject:newSong];
-    }
-    [dataStore save];
-}
+//+ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
+//    for (SASong *song in songs) {
+//        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
+//        newSong.name = song.name;
+//        newSong.trackNumber = song.trackNumber;
+//        [album addSongObject:newSong];
+//    }
+//    [dataStore save];
+//}
 
 #pragma mark - Helper Methods
 

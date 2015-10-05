@@ -8,9 +8,6 @@
 
 #import "SAAFNetworkingManager.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
-#import "SAArtist.h"
-#import "SAAlbum.h"
-#import "SASong.h"
 #import "Song.h"
 #import "Artist.h"
 #import "Genre.h"
@@ -78,14 +75,14 @@
 }
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary {
-    NSMutableArray *songs = [[NSMutableArray alloc] init];
-    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
-        SASong *newSong = [[SASong alloc] init];
-        newSong.name = dictionary[@"name"];
-        newSong.trackNumber = dictionary[@"track_number"];
-        [songs addObject:newSong];
-    }
-    return songs;
+      NSMutableArray *songs = [[NSMutableArray alloc] init];
+//    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+//        SASong *newSong = [[SASong alloc] init];
+//        newSong.name = dictionary[@"name"];
+//        newSong.trackNumber = dictionary[@"track_number"];
+//        [songs addObject:newSong];
+//    }
+      return songs;
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary {

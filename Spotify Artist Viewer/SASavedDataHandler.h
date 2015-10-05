@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "SADataStore.h"
-#import "SAArtist.h"
 #import "Artist.h"
 
 @interface SASavedDataHandler : NSObject

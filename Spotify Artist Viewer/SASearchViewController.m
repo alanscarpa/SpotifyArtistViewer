@@ -7,7 +7,6 @@
 //
 
 #import "SASearchViewController.h"
-#import "SAArtist.h"
 #import "SAArtistViewController.h"
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
@@ -22,7 +21,6 @@
 #import "Album.h"
 #import "Song.h"
 #import "SDImageCache.h"
-#import "SAAlbum.h"
 
 static NSInteger const kReturnLimit = 10;
 
