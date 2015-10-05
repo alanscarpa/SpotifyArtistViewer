@@ -9,6 +9,8 @@
 #import "SASavedDataHandler.h"
 #import "SDWebImageDownloader.h"
 #import "Album.h"
+#import "SAAFNetworkingManager.h"
+#import "SAAlbum.h"
 
 NSString * const kPhotosDirectory = @"Photos";
 
@@ -33,14 +35,17 @@ NSString * const kPhotosDirectory = @"Photos";
     artistToSave.imageLocalURL = artist.artistSpotifyID;
     
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
-    for (NSString *title in artist.albumTitles){
-        Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:dataStore.managedObjectContext];
-        album.name = title;
-        [artistAlbums addObject:album];
-    }
-    artistToSave.album = [NSSet setWithArray:artistAlbums];
-    
-    [dataStore save];
+    [SAAFNetworkingManager getArtistAlbums:artist.artistSpotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
+        for (SAAlbum *artistAlbum in albums){
+            Album *album = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:dataStore.managedObjectContext];
+            album.name = artistAlbum.title;
+            album.imageLocalURL = artistAlbum.albumImageURL;
+            album.spotifyID = artistAlbum.spotifyID;
+            [artistAlbums addObject:album];
+        }
+        artistToSave.album = [NSSet setWithArray:artistAlbums];
+        [dataStore save];
+    }];
 }
 
 + (UIImage *)localImageWithArtist:(Artist *)artist {

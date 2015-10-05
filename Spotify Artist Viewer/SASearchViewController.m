@@ -220,16 +220,6 @@ static NSInteger const kReturnLimit = 3;
             [SASavedDataHandler addArtist:self.artistsFromSearch[indexPath.row]
                               toFavorites:self.dataStore];
     }
-    SAArtist *selectedArtist = self.artistsFromSearch[indexPath.row];
-    [SAAFNetworkingManager getArtistAlbums:selectedArtist.artistSpotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
-        for (SAAlbum *album in albums){
-            NSLog(@"%@", album.title);
-        }
-    }];
 }
 
-- (void)getArtistAlbums {
-    
-
-}
 @end

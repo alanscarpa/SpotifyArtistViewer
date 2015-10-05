@@ -12,5 +12,5 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *spotifyID;
-
+@property (nonatomic, strong) NSString *albumImageURL;
 @end

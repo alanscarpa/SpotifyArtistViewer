@@ -43,6 +43,9 @@
         SAAlbum *newAlbum = [[SAAlbum alloc] init];
         newAlbum.title = dictionary[@"name"];
         newAlbum.spotifyID = dictionary[@"id"];
+        if ([dictionary[@"images"] count]>0){
+            newAlbum.albumImageURL = dictionary[@"images"][0][@"url"];
+        }
         [albums addObject:newAlbum];
     }
     return albums;

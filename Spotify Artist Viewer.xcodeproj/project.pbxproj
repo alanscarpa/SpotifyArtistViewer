@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E555198C1752D0D5DD18A5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A86C184B1E6397DADB529 /* libPods.a */; };
 		451F7AEE1BBF25690013226C /* SAAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AED1BBF25690013226C /* SAAlbum.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AF11BC2B7DA0013226C /* SAFavoritesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		451F7AF41BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
@@ -61,6 +63,10 @@
 /* Begin PBXFileReference section */
 		451F7AEC1BBF25690013226C /* SAAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAlbum.h; sourceTree = "<group>"; };
 		451F7AED1BBF25690013226C /* SAAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAlbum.m; sourceTree = "<group>"; };
+		451F7AEF1BC2B7DA0013226C /* SAFavoritesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesDetailViewController.h; sourceTree = "<group>"; };
+		451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesDetailViewController.m; sourceTree = "<group>"; };
+		451F7AF21BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoritesDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoritesDetailCollectionViewCell.m; sourceTree = "<group>"; };
 		453079131BB9799800BDC8FB /* Spotify Artist Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Artist Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -308,6 +314,10 @@
 				45B1D62B1BBDDDF2004CBBB9 /* SAFavoritesViewControllerCell.xib */,
 				45B1D62D1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.h */,
 				45B1D62E1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m */,
+				451F7AEF1BC2B7DA0013226C /* SAFavoritesDetailViewController.h */,
+				451F7AF01BC2B7DA0013226C /* SAFavoritesDetailViewController.m */,
+				451F7AF21BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.h */,
+				451F7AF31BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m */,
 			);
 			name = FavoritesViewController;
 			sourceTree = "<group>";
@@ -515,6 +525,7 @@
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
 				45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
+				451F7AF41BC2C0710013226C /* SAFavoritesDetailCollectionViewCell.m in Sources */,
 				45B1D6231BBDC669004CBBB9 /* Song.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
@@ -523,6 +534,7 @@
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
+				451F7AF11BC2B7DA0013226C /* SAFavoritesDetailViewController.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,
