@@ -432,6 +432,7 @@
 				TargetAttributes = {
 					453079121BB9799800BDC8FB = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 98E8SVTQ29;
 					};
 					4530792B1BB9799800BDC8FB = {
 						CreatedOnToolsVersion = 7.0;
@@ -699,10 +700,13 @@
 			baseConfigurationReference = 6BA890A3323ABE38EAFCCBE9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Spotify Artist Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.intrepid.Spotify-Artist-Viewer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -711,10 +715,13 @@
 			baseConfigurationReference = A3CC5DB85B00813BC0F367B3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Spotify Artist Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.intrepid.Spotify-Artist-Viewer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

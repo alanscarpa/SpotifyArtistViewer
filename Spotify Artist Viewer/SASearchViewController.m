@@ -165,10 +165,15 @@ static NSInteger const kReturnLimit = 10;
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"artistProfileSegue"]) {
+    if (![segue.identifier isEqualToString:@"favoritesSegue"]){
         SAArtistViewController *destinationVC = [segue destinationViewController];
-        NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
-        destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
+        NSIndexPath *indexPath = [[NSIndexPath alloc] init];
+        if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {
+            indexPath = [self.collectionView indexPathForCell:sender];
+        } else {
+            indexPath = [self.tableView indexPathForSelectedRow];
+        }
+        destinationVC.artist = self.artistsFromSearch[indexPath.row];
     }
 }
 
