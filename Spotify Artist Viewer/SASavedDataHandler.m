@@ -43,7 +43,116 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
++ (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
+    Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
+    if (!artistFromCoreData){
+        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        [self setDetailsForArtist:artist FromDictionary:artistDictionary];
+        return artist;
+    } else {
+        [self setDetailsForArtist:artistFromCoreData FromDictionary:artistDictionary];
+        return artistFromCoreData;
+    }
+}
+
++ (Artist *)artistFromCoreDataWithID:(NSString *)spotifyID {
+    NSArray *existingArtists = [self fetchExistingArtistsFromCoreData];
+    if (existingArtists.count > 0){
+        for (int i = 0; i < existingArtists.count; i++) {
+            if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]){
+                return existingArtists[i];
+            }
+        }
+    }
+    return nil;
+}
+
++ (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
+    artist.name = artistDictionary[@"name"];
+    artist.spotifyID = artistDictionary[@"id"];
+    if ([artistDictionary[@"images"] count] > 0){
+        artist.imageLocalURL = [[NSURL URLWithString:artistDictionary[@"images"][0][@"url"]] absoluteString];
+    }
+    [self setGenres:artistDictionary[@"genres"] ForArtist:artist];
+    artist.popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
+}
+
++ (void)setGenres:(NSArray *)genres ForArtist:(Artist *)artist {
+    for (NSString *genreName in genres){
+        if (![self artist:artist HasGenreNamed:genreName]){
+            Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            genre.name = genreName;
+            [artist addGenreObject:genre];
+        }
+    }
+}
+
++ (BOOL)artist:(Artist *)artist HasGenreNamed:(NSString *)genreName {
+    for (Genre *genre in artist.genre) {
+        if ([genre.name isEqualToString:genreName]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (NSArray *)fetchExistingArtistsFromCoreData {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+}
+
++ (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
+    request.predicate = predicate;
+    return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
+}
+
+#pragma mark - Albums
+
++ (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
+    for (Album *album in [artist.album allObjects]){
+        if ([dictionary[@"id"] isEqualToString:album.spotifyID]){
+            [self updateArtist:artist album:album fromDictionary:dictionary];
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (void)updateArtist:(Artist *)artist album:(Album *)album fromDictionary:(NSDictionary *)dictionary {
+    album.name = dictionary[@"name"];
+    album.spotifyID = dictionary[@"id"];
+    if ([dictionary[@"images"] count]>0){
+        album.imageLocalURL = dictionary[@"images"][0][@"url"];
+    }
+}
+
 #pragma mark - Songs
+
++ (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
+    request.predicate = predicate;
+    return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
+}
+
++ (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary {
+    for (Song *song in album.song) {
+        if ([song.spotifyID isEqualToString:dictionary[@"id"]]){
+            [self updateSong:song withDetails:dictionary];
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (void)updateSong:(Song *)song withDetails:(NSDictionary *)dictionary {
+    song.name = dictionary[@"name"];
+    song.trackNumber = dictionary[@"track_number"];
+    song.spotifyID = dictionary[@"id"];
+}
+
 
 + (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock {
     if (album.song.count > 0){
