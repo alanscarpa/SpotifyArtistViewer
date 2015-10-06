@@ -76,12 +76,12 @@
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary {
       NSMutableArray *songs = [[NSMutableArray alloc] init];
-//    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
-//        SASong *newSong = [[SASong alloc] init];
-//        newSong.name = dictionary[@"name"];
-//        newSong.trackNumber = dictionary[@"track_number"];
-//        [songs addObject:newSong];
-//    }
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        newSong.name = dictionary[@"name"];
+        newSong.trackNumber = dictionary[@"track_number"];
+        [songs addObject:newSong];
+    }
       return songs;
 }
 
@@ -96,6 +96,7 @@
         }
         [albums addObject:newAlbum];
     }
+    [[SADataStore sharedDataStore] save];
     return albums;
 }
 

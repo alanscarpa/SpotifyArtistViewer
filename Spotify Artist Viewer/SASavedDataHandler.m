@@ -41,15 +41,15 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
-//+ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
-//    for (SASong *song in songs) {
-//        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
-//        newSong.name = song.name;
-//        newSong.trackNumber = song.trackNumber;
-//        [album addSongObject:newSong];
-//    }
-//    [dataStore save];
-//}
++ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
+    for (Song *song in songs) {
+        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
+        newSong.name = song.name;
+        newSong.trackNumber = song.trackNumber;
+        [album addSongObject:newSong];
+    }
+    [dataStore save];
+}
 
 #pragma mark - Helper Methods
 
@@ -59,7 +59,6 @@ NSString * const kPhotosDirectory = @"Photos";
     }
     return nil;
 }
-
 
 + (void)saveImage:(UIImage *)image path:(NSString *)path {
     [self createPhotosDirectoryIfNecessary];
