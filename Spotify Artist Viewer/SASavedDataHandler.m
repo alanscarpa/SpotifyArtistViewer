@@ -43,6 +43,14 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
++ (NSArray *)artistsFromDictionary:(NSDictionary *)JSONDictionary {
+    NSMutableArray *artistsFromSearch = [[NSMutableArray alloc] init];
+    for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {
+        [artistsFromSearch addObject:[self artistFromDictionary:artistDictionary]];
+    }
+    return artistsFromSearch;
+}
+
 + (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
     Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
     if (!artistFromCoreData){
@@ -65,6 +73,11 @@ NSString * const kPhotosDirectory = @"Photos";
         }
     }
     return nil;
+}
+
++ (NSArray *)fetchExistingArtistsFromCoreData {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
 + (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
@@ -96,11 +109,6 @@ NSString * const kPhotosDirectory = @"Photos";
     return NO;
 }
 
-+ (NSArray *)fetchExistingArtistsFromCoreData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
-}
-
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
@@ -109,6 +117,17 @@ NSString * const kPhotosDirectory = @"Photos";
 }
 
 #pragma mark - Albums
+
++ (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+        if (![self doesArtist:artist alreadyHaveAlbum:dictionary]){
+            Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            [self updateArtist:artist album:newAlbum fromDictionary:dictionary];
+            [artist addAlbumObject:newAlbum];
+        }
+    }
+    return [artist.album allObjects];
+}
 
 + (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
     for (Album *album in [artist.album allObjects]){
@@ -129,6 +148,17 @@ NSString * const kPhotosDirectory = @"Photos";
 }
 
 #pragma mark - Songs
+
++ (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
+        if (![SASavedDataHandler songOnAlbum:album existsInDictionary:dictionary]){
+            Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            [SASavedDataHandler updateSong:newSong withDetails:dictionary];
+            [album addSongObject:newSong];
+        }
+    }
+    return [album.song allObjects];
+}
 
 + (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];

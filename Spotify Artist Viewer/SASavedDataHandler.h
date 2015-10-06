@@ -18,12 +18,10 @@
 + (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore;
 + (NSArray *)songsFromCoreDataAlbum:(Album *)album;
 + (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock;
-+ (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary;
++ (NSArray *)artistsFromDictionary:(NSDictionary *)JSONDictionary;
++ (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist;
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
-+ (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary;
-+ (void)updateArtist:(Artist *)artist album:(Album *)album fromDictionary:(NSDictionary *)dictionary;
++ (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album;
 + (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
-+ (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary;
-+ (void)updateSong:(Song *)song withDetails:(NSDictionary *)dictionary;
 
 @end
