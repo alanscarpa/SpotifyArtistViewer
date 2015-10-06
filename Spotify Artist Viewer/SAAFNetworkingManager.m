@@ -137,7 +137,6 @@
             [artist addAlbumObject:newAlbum];
         }
     }
-    [[SADataStore sharedDataStore] save];
     return [artist.album allObjects];
 }
 
