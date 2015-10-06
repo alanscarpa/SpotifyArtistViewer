@@ -60,7 +60,8 @@ static NSInteger const kReturnLimit = 10;
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
-    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView andCollectionView:self.collectionView withSearchLimit:kReturnLimit];
+    [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
+    [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.collectionView withSearchLimit:kReturnLimit];
 }
 
 #pragma mark - Segmented Control
@@ -113,7 +114,7 @@ static NSInteger const kReturnLimit = 10;
 #pragma mark - SAInfiniteScrollHandlerDelegate
 
 - (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
+    [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists){
             [self updateDataWithSearchResults:artists];
         } else {

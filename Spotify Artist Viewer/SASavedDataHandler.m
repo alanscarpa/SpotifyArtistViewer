@@ -51,6 +51,16 @@ NSString * const kPhotosDirectory = @"Photos";
     [dataStore save];
 }
 
++ (NSArray *)songsFromCoreDataAlbum:(Album *)album {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
+    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
+    request.sortDescriptors = @[sortSongsByTrackNumber];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
+    request.predicate = predicate;
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+    
+
+}
 #pragma mark - Helper Methods
 
 + (UIImage *)localImageWithArtist:(Artist *)artist {

@@ -50,12 +50,7 @@
 }
 
 - (void)getSongsFromCoreData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
-    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
-       request.sortDescriptors = @[sortSongsByTrackNumber];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", self.album];
-    request.predicate = predicate;
-    self.songs = [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+    self.songs = [SASavedDataHandler songsFromCoreDataAlbum:self.album];
 }
 
 #pragma mark - UITableViewDataSource

@@ -15,7 +15,7 @@
 
 @implementation SAAFNetworkingManager
 
-+ (void)sendGETRequestWithQuery:(NSString *)query withReturnLimit:(NSInteger)limit withOffset:(NSInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
++ (void)searchForArtistsWithQuery:(NSString *)query withReturnLimit:(NSInteger)limit withOffset:(NSInteger)offset withCompletionHandler:(void (^)(NSArray  *artists, NSError *error))completionHandler {
     if (completionHandler){
         query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=%lu&offset=%lu", query, (long)limit, (long)offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -62,6 +62,56 @@
 
 #pragma mark - Helper Methods
 
++ (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
+    NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];
+    for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {
+        [artistsFromSearch addObject:[self artistFromDictionary:artistDictionary]];
+    }
+    return artistsFromSearch;
+}
+
++ (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
+    Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
+    if (!artistFromCoreData){
+        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        [self setDetailsForArtist:artist FromDictionary:artistDictionary];
+        return artist;
+    } else {
+        return artistFromCoreData;
+    }
+}
+
++ (Artist *)artistFromCoreDataWithID:(NSString *)spotifyID {
+    NSArray *existingArtists = [self fetchExistingArtistsFromCoreData];
+    if (existingArtists.count > 0){
+        for (int i = 0; i < existingArtists.count; i++) {
+            if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]){
+                return existingArtists[i];
+            }
+        }
+    }
+    return nil;
+}
+
++ (NSArray *)fetchExistingArtistsFromCoreData {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+}
+
++ (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
+    artist.name = artistDictionary[@"name"];
+    artist.spotifyID = artistDictionary[@"id"];
+    if ([artistDictionary[@"images"] count] > 0){
+        artist.imageLocalURL = [[NSURL URLWithString:artistDictionary[@"images"][0][@"url"]] absoluteString];
+    }
+    for (NSString *genreName in artistDictionary[@"genres"]){
+        Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        genre.name = genreName;
+        [artist addGenreObject:genre];
+    }
+    artist.popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
+}
+
 + (NSString *)artistBioFromJSONDictionary:(NSDictionary *)JSONDictionary {
     NSString *artistBio = @"No bio available";
     for (NSDictionary *bio in JSONDictionary[@"response"][@"artist"][@"biographies"]) {
@@ -75,14 +125,14 @@
 }
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary {
-      NSMutableArray *songs = [[NSMutableArray alloc] init];
-    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
+    NSMutableArray *songs = [[NSMutableArray alloc] init];
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
         newSong.name = dictionary[@"name"];
         newSong.trackNumber = dictionary[@"track_number"];
         [songs addObject:newSong];
     }
-      return songs;
+    return songs;
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary {
@@ -98,36 +148,6 @@
     }
     [[SADataStore sharedDataStore] save];
     return albums;
-}
-
-+ (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {
-    NSMutableArray *artistsFromSearch = [[NSMutableArray alloc]init];
-    for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {
-        [artistsFromSearch addObject:[self artistFromDictionary:artistDictionary]];
-    }
-    return artistsFromSearch;
-}
-
-+ (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
-    NSString *artistName = [NSString stringWithFormat:@"%@", artistDictionary[@"name"]];
-    NSString *spotifyID = [NSString stringWithFormat:@"%@", artistDictionary[@"id"]];
-    NSURL *artistThumbnailURL = nil;
-    if ([artistDictionary[@"images"] count] > 0){
-        artistThumbnailURL = [NSURL URLWithString:artistDictionary[@"images"][0][@"url"]];
-    }
-    NSArray *artistGenres = [[NSArray alloc]initWithArray:artistDictionary[@"genres"]];
-    NSString *popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
-    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
-    artist.name = artistName;
-    artist.spotifyID = spotifyID;
-    artist.imageLocalURL = [artistThumbnailURL absoluteString];
-    for (NSString *genreName in artistGenres){
-        Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
-        genre.name = genreName;
-        [artist addGenreObject:genre];
-    }
-    artist.popularity = popularity;
-    return artist;
 }
 
 @end

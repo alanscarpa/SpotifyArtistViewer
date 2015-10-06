@@ -16,5 +16,5 @@
 + (void)addArtist:(Artist *)artist toFavorites:(SADataStore *)dataStore;
 + (UIImage *)localImageWithArtist:(Artist *)artist;
 + (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore;
-
++ (NSArray *)songsFromCoreDataAlbum:(Album *)album;
 @end
