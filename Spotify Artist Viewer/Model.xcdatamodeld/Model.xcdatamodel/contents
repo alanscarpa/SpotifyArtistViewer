@@ -23,13 +23,14 @@
     </entity>
     <entity name="Song" representedClassName="Song" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spotifyID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="trackNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="song" inverseEntity="Album" syncable="YES"/>
     </entity>
     <elements>
         <element name="Album" positionX="70" positionY="-99" width="128" height="120"/>
         <element name="Artist" positionX="-144" positionY="-102" width="128" height="163"/>
-        <element name="Song" positionX="277" positionY="-87" width="128" height="90"/>
+        <element name="Song" positionX="277" positionY="-87" width="128" height="103"/>
         <element name="Genre" positionX="-200" positionY="66" width="128" height="73"/>
     </elements>
 </model>

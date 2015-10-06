@@ -16,6 +16,8 @@ NSString * const kPhotosDirectory = @"Photos";
 
 @implementation SASavedDataHandler
 
+#pragma mark - Artists
+
 + (void)addArtist:(Artist *)artist toFavorites:(SADataStore *)dataStore {
     [self saveArtistPhoto:artist];
     [self saveArtist:artist toCoreData:dataStore];
@@ -41,6 +43,28 @@ NSString * const kPhotosDirectory = @"Photos";
     }];
 }
 
+#pragma mark - Songs
+
++ (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock {
+    if (album.song.count > 0){
+        completionBlock([self songsFromCoreDataAlbum:album], nil);
+    } else {
+        [SAAFNetworkingManager getAlbumSongs:album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
+            [[SADataStore sharedDataStore] save];
+            completionBlock([songs sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES]]], nil);
+        }];
+    }
+}
+
++ (NSArray *)songsFromCoreDataAlbum:(Album *)album {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
+    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
+    request.sortDescriptors = @[sortSongsByTrackNumber];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
+    request.predicate = predicate;
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+}
+
 + (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
     for (Song *song in songs) {
         Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
@@ -51,16 +75,6 @@ NSString * const kPhotosDirectory = @"Photos";
     [dataStore save];
 }
 
-+ (NSArray *)songsFromCoreDataAlbum:(Album *)album {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
-    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
-    request.sortDescriptors = @[sortSongsByTrackNumber];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
-    request.predicate = predicate;
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
-    
-
-}
 #pragma mark - Helper Methods
 
 + (UIImage *)localImageWithArtist:(Artist *)artist {

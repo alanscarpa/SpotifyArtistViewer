@@ -17,4 +17,6 @@
 + (UIImage *)localImageWithArtist:(Artist *)artist;
 + (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore;
 + (NSArray *)songsFromCoreDataAlbum:(Album *)album;
++ (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock;
+
 @end

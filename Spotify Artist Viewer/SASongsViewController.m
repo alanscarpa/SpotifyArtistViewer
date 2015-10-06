@@ -22,35 +22,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self registerTableViewCell];
-    [self checkIfSongsHaveBeenPreviouslyDownloaded];
+    [self loadSongs];
 }
 
 - (void)registerTableViewCell {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SASongsTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SASongsTableViewCell class])];
 }
 
-- (void)checkIfSongsHaveBeenPreviouslyDownloaded {
-    if (![self songsHaveBeenPreviouslyDownloadedToCoreData]) {
-        [SAAFNetworkingManager getAlbumSongs:self.album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
-            [SASavedDataHandler saveSongs:songs fromAlbum:self.album toCoreData:[SADataStore sharedDataStore]];
-            [self getSongsFromCoreData];
-            [self.tableView reloadData];
-        }];
-    } else {
-        [self getSongsFromCoreData];
-    }
-}
-
-- (BOOL)songsHaveBeenPreviouslyDownloadedToCoreData{
-    if (self.album.song.count > 0){
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-- (void)getSongsFromCoreData {
-    self.songs = [SASavedDataHandler songsFromCoreDataAlbum:self.album];
+- (void)loadSongs {
+    [SASavedDataHandler songsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
+        self.songs = songs;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - UITableViewDataSource
