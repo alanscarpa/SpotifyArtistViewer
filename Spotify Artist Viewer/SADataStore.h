@@ -29,5 +29,6 @@
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album;
 + (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
++ (void)saveArtist:(Artist *)artist albumsToCoreData:(SADataStore *)dataStore;
 
 @end

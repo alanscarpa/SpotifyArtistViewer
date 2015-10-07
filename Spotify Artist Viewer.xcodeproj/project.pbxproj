@@ -24,7 +24,7 @@
 		453079311BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079301BB9799800BDC8FB /* Spotify_Artist_ViewerTests.m */; };
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
-		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
+		453079541BB98A8400BDC8FB /* SAArtistDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistDetailsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		453770301BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537702F1BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770361BC57A9F001478DA /* SASongsTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
@@ -95,8 +95,8 @@
 		4530793D1BB9799800BDC8FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		453079491BB97E3200BDC8FB /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
-		453079521BB98A8400BDC8FB /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
-		453079531BB98A8400BDC8FB /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
+		453079521BB98A8400BDC8FB /* SAArtistDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistDetailsViewController.h; sourceTree = "<group>"; };
+		453079531BB98A8400BDC8FB /* SAArtistDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistDetailsViewController.m; sourceTree = "<group>"; };
 		4537702E1BC5791F001478DA /* SAFavoritesTableViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAFavoritesTableViewCell+Customization.h"; sourceTree = "<group>"; };
 		4537702F1BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAFavoritesTableViewCell+Customization.m"; sourceTree = "<group>"; };
 		453770311BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAAlbumsCollectionViewCell+Customization.h"; sourceTree = "<group>"; };
@@ -265,8 +265,8 @@
 				451F7AF61BC2CB070013226C /* SongsViewController */,
 				451F7AF51BC2CAEA0013226C /* AlbumsViewController */,
 				45B1D6271BBDDD72004CBBB9 /* FavoritesViewController */,
+				456ED7E81BBB3B1900791E01 /* ArtistDetailsViewController */,
 				456ED7E71BBB3B0E00791E01 /* SearchViewController */,
-				456ED7E81BBB3B1900791E01 /* ArtistViewController */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -299,13 +299,13 @@
 			name = SearchViewController;
 			sourceTree = "<group>";
 		};
-		456ED7E81BBB3B1900791E01 /* ArtistViewController */ = {
+		456ED7E81BBB3B1900791E01 /* ArtistDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
-				453079521BB98A8400BDC8FB /* SAArtistViewController.h */,
-				453079531BB98A8400BDC8FB /* SAArtistViewController.m */,
+				453079521BB98A8400BDC8FB /* SAArtistDetailsViewController.h */,
+				453079531BB98A8400BDC8FB /* SAArtistDetailsViewController.m */,
 			);
-			name = ArtistViewController;
+			name = ArtistDetailsViewController;
 			sourceTree = "<group>";
 		};
 		45B1D60B1BBDC2B6004CBBB9 /* Core Data */ = {
@@ -574,7 +574,7 @@
 				453079181BB9799800BDC8FB /* main.m in Sources */,
 				453770301BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m in Sources */,
 				451F7AF91BC2CBD60013226C /* SASongsViewController.m in Sources */,
-				453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */,
+				453079541BB98A8400BDC8FB /* SAArtistDetailsViewController.m in Sources */,
 				45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */,
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,

@@ -11,7 +11,7 @@
 #import "SADataStore.h"
 #import "SAAFNetworkingManager.h"
 #import "Artist.h"
-#import "SAAlbumsViewController.h"
+#import "SAArtistDetailsViewController.h"
 #import "SAFavoritesTableViewCell+Customization.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -47,7 +47,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    SAAlbumsViewController *destinationVC = [segue destinationViewController];
+    SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
     destinationVC.artist = self.favoriteArtists[indexPath.row];
 }
 
@@ -64,7 +64,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"favoriteDetailsSegue" sender:nil];
+    [self performSegueWithIdentifier:@"artistDetailsSegue" sender:nil];
 }
 
 @end

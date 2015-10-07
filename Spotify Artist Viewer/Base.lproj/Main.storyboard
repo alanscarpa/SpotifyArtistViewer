@@ -284,7 +284,7 @@
                     <navigationItem key="navigationItem" title="Favorites" id="EHl-2L-pyv"/>
                     <connections>
                         <outlet property="tableView" destination="css-Fx-9je" id="OQ5-tW-exA"/>
-                        <segue destination="lhq-zg-Gfl" kind="show" identifier="favoriteDetailsSegue" id="JIV-7b-2MR"/>
+                        <segue destination="5f7-SC-lz8" kind="show" identifier="artistDetailsSegue" id="wgd-Je-URg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tt2-cC-T9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -378,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maf-gn-d9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3007" y="-513"/>
+            <point key="canvasLocation" x="3084" y="221"/>
         </scene>
         <!--Songs-->
         <scene sceneID="1yf-yA-TL7">
@@ -416,12 +416,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDh-FT-B48" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3743" y="-513"/>
+            <point key="canvasLocation" x="3775" y="221"/>
         </scene>
         <!--Artist Profile-->
         <scene sceneID="sTb-kZ-jgu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="5f7-SC-lz8" customClass="SAArtistViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="5f7-SC-lz8" customClass="SAArtistDetailsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RyH-sx-x11"/>
                         <viewControllerLayoutGuide type="bottom" id="DY7-dj-i7g"/>
@@ -443,10 +443,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-le-fv5">
-                                                <rect key="frame" x="210" y="93" width="180" height="180"/>
+                                                <rect key="frame" x="210" y="92" width="180" height="180"/>
                                             </imageView>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="M7S-x2-nuz">
-                                                <rect key="frame" x="282" y="164" width="37" height="37"/>
+                                                <rect key="frame" x="282" y="163" width="37" height="37"/>
                                                 <color key="color" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
@@ -456,15 +456,24 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLV-ab-UAo">
+                                                <rect key="frame" x="259" y="281" width="82" height="30"/>
+                                                <state key="normal" title="See Albums"/>
+                                                <connections>
+                                                    <segue destination="lhq-zg-Gfl" kind="show" id="xVT-8Z-UYI"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="FLV-ab-UAo" firstAttribute="top" secondItem="EXz-le-fv5" secondAttribute="bottom" constant="8" id="APo-5o-sI8"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="centerX" secondItem="Bcx-Ql-aWe" secondAttribute="centerX" id="Bic-Dc-lbu"/>
                                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="ifs-jR-bFf" secondAttribute="bottom" constant="36" id="G9i-ke-K5M"/>
-                                            <constraint firstItem="8YC-SY-IAz" firstAttribute="top" secondItem="EXz-le-fv5" secondAttribute="bottom" constant="36" id="JXi-np-Gfo"/>
+                                            <constraint firstItem="8YC-SY-IAz" firstAttribute="top" secondItem="FLV-ab-UAo" secondAttribute="bottom" constant="-2" id="HQs-Hm-Ix5"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="leading" secondItem="Bcx-Ql-aWe" secondAttribute="leading" constant="16" id="NK4-yH-BPw"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="NU5-mm-Ram"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerY" secondItem="EXz-le-fv5" secondAttribute="centerY" id="VaP-Rb-dEk"/>
+                                            <constraint firstItem="FLV-ab-UAo" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="ZNh-cS-5ja"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="cZU-00-gzW"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="leading" secondItem="Bcx-Ql-aWe" secondAttribute="leading" constant="30" id="ezV-ik-Ghc"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="36" id="l0A-8p-pjW"/>
@@ -526,6 +535,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nQ3-Fr-V6a"/>
+        <segue reference="wgd-Je-URg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -6,11 +6,12 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "SAArtistViewController.h"
+#import "SAArtistDetailsViewController.h"
 #import "SAAFNetworkingManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SAAlbumsViewController.h"
 
-@interface SAArtistViewController ()
+@interface SAArtistDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
@@ -19,7 +20,7 @@
 
 @end
 
-@implementation SAArtistViewController
+@implementation SAArtistDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,6 +58,13 @@
             NSLog(@"Erro calling echonest: %@", error);
         }
     }];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SAAlbumsViewController *destinationVC = [segue destinationViewController];
+    destinationVC.artist = self.artist;
 }
 
 @end

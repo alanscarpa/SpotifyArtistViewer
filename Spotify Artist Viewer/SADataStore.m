@@ -175,6 +175,17 @@ NSString *const kPhotosDirectory = @"Photos";
 
 #pragma mark - Album Methods
 
++ (void)saveArtist:(Artist *)artist albumsToCoreData:(SADataStore *)dataStore {
+    NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
+    [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
+        for (Album *artistAlbum in albums) {
+            [artistAlbums addObject:artistAlbum];
+        }
+        artist.album = [NSSet setWithArray:artistAlbums];
+        [dataStore save];
+    }];
+}
+
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         if (![self doesArtist:artist alreadyHaveAlbum:dictionary]) {
