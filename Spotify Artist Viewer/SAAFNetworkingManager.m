@@ -12,7 +12,7 @@
 #import "Artist.h"
 #import "Genre.h"
 #import "SADataStore.h"
-#import "SASavedDataHandler.h"
+#import "SADataStore.h"
 
 @implementation SAAFNetworkingManager
 
@@ -64,15 +64,15 @@
 #pragma mark - Helper Methods
 
 + (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {    
-    return [SASavedDataHandler artistsFromDictionary:JSONDictionary];
+    return [SADataStore artistsFromDictionary:JSONDictionary];
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
-    return [SASavedDataHandler albumsFromDictionary:JSONDictionary forArtist:[SASavedDataHandler fetchArtistWithSpotifyID:spotifyID]];
+    return [SADataStore albumsFromDictionary:JSONDictionary forArtist:[SADataStore fetchArtistWithSpotifyID:spotifyID]];
 }
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary withAlbumSpotifyID:(NSString *)spotifyID {
-    return [SASavedDataHandler songsFromDictionary:JSONDictionary forAlbum:[SASavedDataHandler fetchAlbumWithSpotifyID:spotifyID]];
+    return [SADataStore songsFromDictionary:JSONDictionary forAlbum:[SADataStore fetchAlbumWithSpotifyID:spotifyID]];
 }
 
 + (NSString *)artistBioFromJSONDictionary:(NSDictionary *)JSONDictionary {
