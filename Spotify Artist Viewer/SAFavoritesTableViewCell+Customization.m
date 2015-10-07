@@ -14,7 +14,7 @@
 - (void)customizeCellWithArtist:(Artist *)artist {
     self.artistNameLabel.text = artist.name;
     if (artist.imageLocalURL) {
-        self.artistImageView.image = [SADataStore localImageWithArtist:artist];
+        self.artistImageView.image = [[SADataStore sharedDataStore] fetchLocalImageWithArtist:artist];
     }
 }
 

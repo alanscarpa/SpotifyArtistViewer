@@ -7,10 +7,11 @@
 //
 
 #import "SADataStore.h"
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "Artist.h"
-#import "SDWebImageDownloader.h"
-#import "SAAFNetworkingManager.h"
-#import "SACoreDataTransformer.h"
+#import "Album.h"
+#import "Song.h"
 
 NSString *const kPhotosDirectory = @"Photos";
 
@@ -111,6 +112,15 @@ NSString *const kPhotosDirectory = @"Photos";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
+}
+
+#pragma mark - Data Insert Methods
+
+- (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID {
+    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName
+                                                   inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    artist.spotifyID = spotifyID;
+    return artist;
 }
 
 #pragma mark - Data Save Methods

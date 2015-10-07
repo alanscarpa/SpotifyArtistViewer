@@ -8,6 +8,7 @@
 
 #import "SACoreDataTransformer.h"
 #import "SADataStore.h"
+#import "Artist.h"
 
 @implementation SACoreDataTransformer
 
@@ -22,27 +23,15 @@
 }
 
 + (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
-    Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
+    Artist *artistFromCoreData = [[SADataStore sharedDataStore] fetchArtistWithSpotifyID:artistDictionary[@"id"]];
     if (!artistFromCoreData) {
-        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        Artist *artist = [[SADataStore sharedDataStore] insertNewArtistWithSpotifyID:artistDictionary[@"id"]];
         [self setDetailsForArtist:artist FromDictionary:artistDictionary];
         return artist;
     } else {
         [self setDetailsForArtist:artistFromCoreData FromDictionary:artistDictionary];
         return artistFromCoreData;
     }
-}
-
-+ (Artist *)artistFromCoreDataWithID:(NSString *)spotifyID {
-    NSArray *existingArtists = [SADataStore fetchAllArtists];
-    if (existingArtists.count > 0) {
-        for (int i = 0; i < existingArtists.count; i++) {
-            if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]) {
-                return existingArtists[i];
-            }
-        }
-    }
-    return nil;
 }
 
 + (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {

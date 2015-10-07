@@ -7,25 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
-#import "SADataStore.h"
-#import "Artist.h"
+@class UIImage;
+@class NSManagedObjectContext;
+@class Artist;
+@class Album;
+@class Song;
 
 @interface SADataStore : NSObject
 
 @property (readonly, nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 + (instancetype)sharedDataStore;
+
 - (void)save;
-- (NSURL *)applicationDocumentsDirectory;
-- (NSArray *)favoritedArtists;
-+ (void)saveArtistToFavorites:(Artist *)artist;
-+ (UIImage *)localImageWithArtist:(Artist *)artist;
-+ (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock;
-+ (NSArray *)songsFromCoreDataAlbum:(Album *)album;
-+ (NSArray *)fetchAllArtists;
-+ (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
-+ (void)saveArtistAlbums:(Artist *)artist;
-+ (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
+
+- (NSArray *)fetchFavoritedArtists;
+- (NSArray *)fetchAllArtists;
+- (UIImage *)fetchLocalImageWithArtist:(Artist *)artist;
+- (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
+- (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID;
+- (void)saveArtistToFavorites:(Artist *)artist;
+
+- (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
+- (void)saveArtistAlbums:(Album *)album;
+
+- (void)fetchSongsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock; ///?????
+- (NSArray *)songsFromCoreDataAlbum:(Album *)album;
 
 @end
