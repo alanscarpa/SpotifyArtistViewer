@@ -167,15 +167,18 @@ static NSInteger const kReturnLimit = 10;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
         SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
-        NSIndexPath *indexPath = [[NSIndexPath alloc] init];
-        if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {
-            indexPath = [self.collectionView indexPathForCell:sender];
-            [SADataStore saveArtist:self.artistsFromSearch[indexPath.row] albumsToCoreData:[SADataStore sharedDataStore]];
-        } else {
-            indexPath = [self.tableView indexPathForSelectedRow];
-            [SADataStore saveArtist:self.artistsFromSearch[indexPath.row] albumsToCoreData:[SADataStore sharedDataStore]];
-        }
+        NSIndexPath *indexPath = [self indexPathFromSegue:segue andSender:sender];
+        [SADataStore saveArtist:self.artistsFromSearch[indexPath.row]
+               albumsToCoreData:[SADataStore sharedDataStore]];
         destinationVC.artist = self.artistsFromSearch[indexPath.row];
+    }
+}
+
+- (NSIndexPath *)indexPathFromSegue:(UIStoryboardSegue *)segue andSender:(id)sender {
+    if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {
+        return [self.collectionView indexPathForCell:sender];
+    } else {
+        return [self.tableView indexPathForSelectedRow];
     }
 }
 
@@ -184,7 +187,7 @@ static NSInteger const kReturnLimit = 10;
 - (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.artistsFromSearch.count) {
-            [SADataStore addArtist:self.artistsFromSearch[indexPath.row]
+            [SADataStore saveArtist:self.artistsFromSearch[indexPath.row]
                               toFavorites:self.dataStore];
     }
 }

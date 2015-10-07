@@ -28,6 +28,7 @@
 		453770301BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537702F1BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770361BC57A9F001478DA /* SASongsTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
+		453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770381BC58E7C001478DA /* SACoreDataTransformer.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
@@ -103,6 +104,8 @@
 		453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAAlbumsCollectionViewCell+Customization.m"; sourceTree = "<group>"; };
 		453770341BC57A9F001478DA /* SASongsTableViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SASongsTableViewCell+Customization.h"; sourceTree = "<group>"; };
 		453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASongsTableViewCell+Customization.m"; sourceTree = "<group>"; };
+		453770371BC58E7C001478DA /* SACoreDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACoreDataTransformer.h; sourceTree = "<group>"; };
+		453770381BC58E7C001478DA /* SACoreDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACoreDataTransformer.m; sourceTree = "<group>"; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */,
 				456ED7EF1BBC2FCF00791E01 /* SAInfiniteScrollHandler.h */,
 				456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */,
+				453770371BC58E7C001478DA /* SACoreDataTransformer.h */,
+				453770381BC58E7C001478DA /* SACoreDataTransformer.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
 				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
 				451F7B071BC30B870013226C /* Genre.m in Sources */,
+				453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
 				456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */,
