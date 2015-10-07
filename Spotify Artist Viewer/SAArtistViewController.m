@@ -29,13 +29,11 @@
 
 - (void)setUpUI {
     [self.activityIndicator startAnimating];
-    [self setUpArtistNameLabel];
+    [self setArtistName];
     [self setArtistImage];
 }
 
-- (void)setUpArtistNameLabel {
-    self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
-    self.artistNameLabel.minimumScaleFactor = 0.7;
+- (void)setArtistName {
     self.artistNameLabel.text = self.artist.name;
 }
 

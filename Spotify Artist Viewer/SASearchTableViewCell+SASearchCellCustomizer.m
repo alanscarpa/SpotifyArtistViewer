@@ -12,9 +12,8 @@
 
 @implementation SASearchTableViewCell (SASearchCellCustomizer)
 
-- (void)customizeCellWithArtist:(Artist *)artist atIndexPath:(NSIndexPath *)indexPath {
+- (void)customizeCellWithArtist:(Artist *)artist {
     [self.activityIndicatorView startAnimating];
-    self.favoriteButton.tag = indexPath.row;
     self.artistNameLabel.text = artist.name;
     [self setGenresOnArtist:artist];
     self.artistPopularityPercentageLabel.text = artist.popularity;

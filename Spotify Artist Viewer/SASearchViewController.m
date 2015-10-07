@@ -142,7 +142,7 @@ static NSInteger const kReturnLimit = 10;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row] atIndexPath:indexPath];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     cell.delegate = self;
     return cell;
 }

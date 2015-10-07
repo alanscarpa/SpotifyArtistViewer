@@ -7,6 +7,7 @@
 //
 
 #import "SADataStore.h"
+#import "Artist.h"
 
 @interface SADataStore ()
 
