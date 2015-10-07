@@ -13,6 +13,10 @@
 #import "Album.h"
 #import "Song.h"
 
+// get rid of these two
+#import "SAAFNetworkingManager.h"
+#import "SDWebImageDownloader.h"
+
 NSString *const kPhotosDirectory = @"Photos";
 
 @interface SADataStore ()
@@ -66,7 +70,7 @@ NSString *const kPhotosDirectory = @"Photos";
 
 #pragma mark - Data Retrieval Methods
 
-- (NSArray *)favoritedArtists {
+- (NSArray *)fetchFavoritedArtists {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
@@ -75,21 +79,21 @@ NSString *const kPhotosDirectory = @"Photos";
     return [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
-+ (NSArray *)fetchAllArtists {
+- (NSArray *)fetchAllArtists {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
-+ (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
+- (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
-+ (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock {
+- (void)fetchSongsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock {
     if (album.song.count > 0) {
-        completionBlock([self songsFromCoreDataAlbum:album], nil);
+        completionBlock([self fetchSongsFromAlbum:album], nil);
     } else {
         [SAAFNetworkingManager getAlbumSongs:album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
             [[SADataStore sharedDataStore] save];
@@ -98,7 +102,7 @@ NSString *const kPhotosDirectory = @"Photos";
     }
 }
 
-+ (NSArray *)songsFromCoreDataAlbum:(Album *)album {
+- (NSArray *)fetchSongsFromAlbum:(Album *)album {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kSongEntityName];
     NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
     request.sortDescriptors = @[sortSongsByTrackNumber];
@@ -107,7 +111,7 @@ NSString *const kPhotosDirectory = @"Photos";
     return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
-+ (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
+- (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kAlbumEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
@@ -117,15 +121,14 @@ NSString *const kPhotosDirectory = @"Photos";
 #pragma mark - Data Insert Methods
 
 - (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID {
-    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName
-                                                   inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
     artist.spotifyID = spotifyID;
     return artist;
 }
 
 #pragma mark - Data Save Methods
 
-+ (void)saveArtistAlbums:(Artist *)artist {
+- (void)saveArtistAlbums:(Artist *)artist {
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
         for (Album *artistAlbum in albums) {
@@ -136,12 +139,12 @@ NSString *const kPhotosDirectory = @"Photos";
     }];
 }
 
-+ (void)saveArtistToFavorites:(Artist *)artist {
+- (void)saveArtistToFavorites:(Artist *)artist {
     [self saveArtistPhoto:artist];
     [self saveArtist:artist];
 }
 
-+ (void)saveArtistPhoto:(Artist *)artist {
+- (void)saveArtistPhoto:(Artist *)artist {
     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:artist.imageLocalURL] options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
         if (image) {
             [self saveImage:image path:artist.spotifyID];
@@ -149,7 +152,7 @@ NSString *const kPhotosDirectory = @"Photos";
     }];
 }
 
-+ (void)saveArtist:(Artist *)artist {
+- (void)saveArtist:(Artist *)artist {
     artist.isFavorite = @(YES);
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
@@ -163,29 +166,29 @@ NSString *const kPhotosDirectory = @"Photos";
 
 #pragma mark - Helper Methods
 
-+ (UIImage *)localImageWithArtist:(Artist *)artist {
+- (UIImage *)fetchLocalImageWithArtist:(Artist *)artist {
     if (artist.imageLocalURL) {
         return [UIImage imageWithContentsOfFile:[[self photosDirectory] stringByAppendingPathComponent:artist.spotifyID]];
     }
     return nil;
 }
 
-+ (void)saveImage:(UIImage *)image path:(NSString *)path {
+- (void)saveImage:(UIImage *)image path:(NSString *)path {
     [self createPhotosDirectoryIfNecessary];
     [UIImagePNGRepresentation(image) writeToFile:[[self photosDirectory] stringByAppendingPathComponent:path]
                                       atomically:YES];
 }
 
-+ (NSString *)documentsDirectory {
+- (NSString *)documentsDirectory {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths objectAtIndex:0];
 }
 
-+ (NSString *)photosDirectory {
+- (NSString *)photosDirectory {
     return [[self documentsDirectory] stringByAppendingPathComponent:kPhotosDirectory];
 }
 
-+ (void)createPhotosDirectoryIfNecessary {
+- (void)createPhotosDirectoryIfNecessary {
     NSError *error = nil;
     NSString *photosDirectory = [self photosDirectory];
     if (![[NSFileManager defaultManager] fileExistsAtPath:photosDirectory]) {

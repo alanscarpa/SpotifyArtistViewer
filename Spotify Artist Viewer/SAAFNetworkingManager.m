@@ -63,15 +63,15 @@
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer albumsFromDictionary:JSONDictionary forArtist:[SADataStore fetchArtistWithSpotifyID:spotifyID]];
+    return [SACoreDataTransformer albumsFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
 }
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary withAlbumSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer songsFromDictionary:JSONDictionary forAlbum:[SADataStore fetchAlbumWithSpotifyID:spotifyID]];
+    return [SACoreDataTransformer songsFromDictionary:JSONDictionary forAlbum:[[SADataStore sharedDataStore] fetchAlbumWithSpotifyID:spotifyID]];
 }
 
 + (NSString *)artistBioFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer bioFromDictionary:JSONDictionary forArtist:[SADataStore fetchArtistWithSpotifyID:spotifyID]];
+    return [SACoreDataTransformer bioFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
 }
 
 @end

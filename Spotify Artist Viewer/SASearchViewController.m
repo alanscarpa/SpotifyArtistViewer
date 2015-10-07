@@ -168,7 +168,7 @@ static NSInteger const kReturnLimit = 10;
     if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
         SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self indexPathFromSegue:segue andSender:sender];
-        [SADataStore saveArtistAlbums:self.artistsFromSearch[indexPath.row]];
+        [self.dataStore saveArtistAlbums:[self.artistsFromSearch[indexPath.row] album]];
         destinationVC.artist = self.artistsFromSearch[indexPath.row];
     }
 }
@@ -186,7 +186,7 @@ static NSInteger const kReturnLimit = 10;
 - (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.artistsFromSearch.count) {
-        [SADataStore saveArtistToFavorites:self.artistsFromSearch[indexPath.row]];
+        [self.dataStore saveArtistToFavorites:self.artistsFromSearch[indexPath.row]];
     }
 }
 

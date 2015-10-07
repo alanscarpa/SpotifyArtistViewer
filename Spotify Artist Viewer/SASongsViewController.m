@@ -32,7 +32,7 @@
 }
 
 - (void)loadSongs {
-    [SADataStore songsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
+    [[SADataStore sharedDataStore] fetchSongsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
         self.songs = songs;
         [self.tableView reloadData];
     }];

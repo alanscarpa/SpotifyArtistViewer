@@ -32,6 +32,6 @@
 - (void)saveArtistAlbums:(Album *)album;
 
 - (void)fetchSongsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock; ///?????
-- (NSArray *)songsFromCoreDataAlbum:(Album *)album;
+- (NSArray *)fetchSongsFromAlbum:(Album *)album;
 
 @end
