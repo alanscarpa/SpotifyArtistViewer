@@ -16,7 +16,7 @@ NSString * const kPhotosDirectory = @"Photos";
 
 @implementation SASavedDataHandler
 
-#pragma mark - Artists
+#pragma mark - Artist Methods
 
 + (void)addArtist:(Artist *)artist toFavorites:(SADataStore *)dataStore {
     [self saveArtistPhoto:artist];
@@ -116,7 +116,7 @@ NSString * const kPhotosDirectory = @"Photos";
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
-#pragma mark - Albums
+#pragma mark - Album Methods
 
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]){
@@ -147,7 +147,7 @@ NSString * const kPhotosDirectory = @"Photos";
     }
 }
 
-#pragma mark - Songs
+#pragma mark - Song Methods
 
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {

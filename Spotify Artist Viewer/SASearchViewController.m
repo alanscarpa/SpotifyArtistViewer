@@ -13,7 +13,6 @@
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
-#import <PureLayout/PureLayout.h>
 #import "SASearchCollectionViewCell.h"
 #import "SASavedDataHandler.h"
 #import "SADataStore.h"
@@ -159,7 +158,7 @@ static NSInteger const kReturnLimit = 10;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
+    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4);
 }
 
 #pragma mark - Navigation
