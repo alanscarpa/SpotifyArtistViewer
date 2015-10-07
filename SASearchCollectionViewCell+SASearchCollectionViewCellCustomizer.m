@@ -13,7 +13,6 @@
 
 - (void)customizeCellWithArtist:(Artist *)artist {
     [self.activityIndicatorView startAnimating];
-    [self setArtistNameLabelSize];
     self.artistNameLabel.text = artist.name;
     [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
     [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
@@ -24,11 +23,6 @@
                                        self.profileImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
-}
-
-- (void)setArtistNameLabelSize {
-    self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
-    self.artistNameLabel.minimumScaleFactor = 0.7;
 }
 
 - (void)setStyleBasedOnPopularity:(CGFloat)popularity {
