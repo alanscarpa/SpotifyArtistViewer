@@ -7,7 +7,6 @@
 //
 
 #import "SASearchTableViewCell.h"
-#import "SAArtist.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation SASearchTableViewCell
@@ -17,13 +16,12 @@
 }
 
 - (void)makeArtistImageCircular {
-    self.artistImage.layer.masksToBounds = YES;
-    self.artistImage.layer.cornerRadius = self.artistImage.frame.size.height/2;
+    self.artistImageView.layer.masksToBounds = YES;
+    self.artistImageView.layer.cornerRadius = self.artistImageView.frame.size.height / 2;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (IBAction)didTapFavoritesButton:(id)sender {
+    [self.delegate didTapFavoritesWithSearchTableViewCell:self];
 }
-
 
 @end

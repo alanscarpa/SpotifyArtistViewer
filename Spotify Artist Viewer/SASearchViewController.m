@@ -7,20 +7,24 @@
 //
 
 #import "SASearchViewController.h"
-#import "SAArtist.h"
 #import "SAArtistViewController.h"
-#import "SARequestManager.h"
 #import "SAAFNetworkingManager.h"
 #import "SASearchTableViewCell.h"
 #import "SASearchTableViewCell+SASearchCellCustomizer.h"
 #import "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"
 #import "SAInfiniteScrollHandler.h"
-#import <PureLayout/PureLayout.h>
 #import "SASearchCollectionViewCell.h"
+#import "SASavedDataHandler.h"
+#import "SADataStore.h"
+#import "Artist.h"
+#import "Album.h"
+#import "Song.h"
+#import "SDImageCache.h"
 
-static NSInteger const kReturnLimit = 3;
+static NSInteger const kReturnLimit = 10;
 
-@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate>
+@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
+
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
@@ -28,15 +32,22 @@ static NSInteger const kReturnLimit = 3;
 @property (strong, nonatomic) NSMutableArray *tableViewConstraints;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) SADataStore *dataStore;
+
 @end
 
 @implementation SASearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self prepareCoreData];
     [self prepareArtistsArray];
     [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
+}
+
+- (void)prepareCoreData {
+    self.dataStore = [SADataStore sharedDataStore];
 }
 
 - (void)prepareArtistsArray {
@@ -50,15 +61,18 @@ static NSInteger const kReturnLimit = 3;
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
-    [self.infiniteScrollHandler setUpInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
+    [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.tableView withSearchLimit:kReturnLimit];
+    [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.collectionView withSearchLimit:kReturnLimit];
 }
+
+#pragma mark - Segmented Control
 
 - (IBAction)segmedControlTapped:(id)sender {
     [self checkWhichSegmentWasTapped];
 }
 
 - (void)checkWhichSegmentWasTapped {
-    if (self.segmentedControl.selectedSegmentIndex == 0){
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         [self showTableView];
     } else {
         [self showCollectionView];
@@ -81,7 +95,6 @@ static NSInteger const kReturnLimit = 3;
                     completion:nil];
 }
 
-
 #pragma mark - Search function
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -102,16 +115,16 @@ static NSInteger const kReturnLimit = 3;
 #pragma mark - SAInfiniteScrollHandlerDelegate
 
 - (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
-    [SAAFNetworkingManager sendGETRequestWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
-        if (artists){
-            [self updateTableViewWithSearchResults:artists];
+    [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
+        if (artists) {
+            [self updateDataWithSearchResults:artists];
         } else {
             NSLog(@"Error calling Spotify API: %@", error);
         }
     }];
 }
 
-- (void)updateTableViewWithSearchResults:(NSArray *)results {
+- (void)updateDataWithSearchResults:(NSArray *)results {
     [self.artistsFromSearch addObjectsFromArray:results];
     [self updateResults];
 }
@@ -129,7 +142,8 @@ static NSInteger const kReturnLimit = 3;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
+    [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row] atIndexPath:indexPath];
+    cell.delegate = self;
     return cell;
 }
 
@@ -145,24 +159,33 @@ static NSInteger const kReturnLimit = 3;
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4);
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SAArtistViewController *destinationVC = [segue destinationViewController];
-    NSIndexPath *selectedRowIndexPath = [self.tableView indexPathForSelectedRow];
-    destinationVC.artist = self.artistsFromSearch[selectedRowIndexPath.row];
+    if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
+        SAArtistViewController *destinationVC = [segue destinationViewController];
+        NSIndexPath *indexPath = [[NSIndexPath alloc] init];
+        if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {
+            indexPath = [self.collectionView indexPathForCell:sender];
+        } else {
+            indexPath = [self.tableView indexPathForSelectedRow];
+        }
+        destinationVC.artist = self.artistsFromSearch[indexPath.row];
+    }
+}
+
+#pragma mark - SASearchTableViewCell
+
+- (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath && indexPath.row < self.artistsFromSearch.count) {
+            [SASavedDataHandler addArtist:self.artistsFromSearch[indexPath.row]
+                              toFavorites:self.dataStore];
+    }
 }
 
 @end

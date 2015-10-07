@@ -11,34 +11,37 @@
 
 @implementation SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
 
-- (void)customizeCellWithArtist:(SAArtist *)artist {
-    [self.activityIndicator startAnimating];
-    self.artistName.adjustsFontSizeToFitWidth = YES;
-    self.artistName.minimumScaleFactor = 0.7;
-    self.artistName.text = artist.artistName;
-    self.artistPopularity.text = artist.popularity;
+- (void)customizeCellWithArtist:(Artist *)artist {
+    [self.activityIndicatorView startAnimating];
+    [self setArtistNameLabelSize];
+    self.artistNameLabel.text = artist.name;
     [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
-    [self.profileImage sd_setImageWithURL:artist.artistSearchThumbnailImageURL
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                   [self.activityIndicator stopAnimating];
-                                   if (error){
-                                       self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                   [self.activityIndicatorView stopAnimating];
+                                   if (error) {
+                                       self.profileImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
 }
 
+- (void)setArtistNameLabelSize {
+    self.artistNameLabel.adjustsFontSizeToFitWidth = YES;
+    self.artistNameLabel.minimumScaleFactor = 0.7;
+}
+
 - (void)setStyleBasedOnPopularity:(CGFloat)popularity {
-    CGFloat colorBasedOnPopularity = (110 - popularity)/255.0f;
+    CGFloat colorBasedOnPopularity = (110 - popularity) / 255.0f;
     // If popularity is greater than 80%, then we give full alpha.
-    CGFloat alphaBasedOnPopularity = popularity/80;
+    CGFloat alphaBasedOnPopularity = popularity / 80;
     // We don't want very unpopular artists to become invisible, so we set a minimum
-    if (alphaBasedOnPopularity < 0.25){
+    if (alphaBasedOnPopularity < 0.25) {
         alphaBasedOnPopularity = 0.25;
     }
     self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];
-    self.profileImage.alpha = alphaBasedOnPopularity;
-    self.artistName.alpha = alphaBasedOnPopularity;
+    self.profileImageView.alpha = alphaBasedOnPopularity;
+    self.artistNameLabel.alpha = alphaBasedOnPopularity;
 }
 
 @end

@@ -10,7 +10,9 @@
 #import <PureLayout/PureLayout.h>
 
 @interface SASearchCollectionViewCell ()
+
 @property (nonatomic, strong) NSArray *views;
+
 @end
 
 @implementation SASearchCollectionViewCell

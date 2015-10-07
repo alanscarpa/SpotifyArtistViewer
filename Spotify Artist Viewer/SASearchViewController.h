@@ -10,5 +10,4 @@
 
 @interface SASearchViewController : UIViewController
 
-
 @end
