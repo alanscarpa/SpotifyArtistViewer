@@ -66,7 +66,7 @@ NSString *const kPhotosDirectory = @"Photos";
 #pragma mark - Data Retrieval Methods
 
 - (NSArray *)favoritedArtists {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
     request.predicate = predicate;
@@ -74,8 +74,13 @@ NSString *const kPhotosDirectory = @"Photos";
     return [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
++ (NSArray *)fetchAllArtists {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+}
+
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
@@ -93,7 +98,7 @@ NSString *const kPhotosDirectory = @"Photos";
 }
 
 + (NSArray *)songsFromCoreDataAlbum:(Album *)album {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kSongEntityName];
     NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
     request.sortDescriptors = @[sortSongsByTrackNumber];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
@@ -102,7 +107,7 @@ NSString *const kPhotosDirectory = @"Photos";
 }
 
 + (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Album"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kAlbumEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
@@ -110,20 +115,20 @@ NSString *const kPhotosDirectory = @"Photos";
 
 #pragma mark - Data Save Methods
 
-+ (void)saveArtist:(Artist *)artist albumsToCoreData:(SADataStore *)dataStore {
++ (void)saveArtistAlbums:(Artist *)artist {
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
         for (Album *artistAlbum in albums) {
             [artistAlbums addObject:artistAlbum];
         }
         artist.album = [NSSet setWithArray:artistAlbums];
-        [dataStore save];
+        [[SADataStore sharedDataStore] save];
     }];
 }
 
-+ (void)saveArtist:(Artist *)artist toFavorites:(SADataStore *)dataStore {
++ (void)saveArtistToFavorites:(Artist *)artist {
     [self saveArtistPhoto:artist];
-    [self saveArtist:artist toCoreData:dataStore];
+    [self saveArtist:artist];
 }
 
 + (void)saveArtistPhoto:(Artist *)artist {
@@ -134,7 +139,7 @@ NSString *const kPhotosDirectory = @"Photos";
     }];
 }
 
-+ (void)saveArtist:(Artist *)artist toCoreData:(SADataStore *)dataStore {
++ (void)saveArtist:(Artist *)artist {
     artist.isFavorite = @(YES);
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
@@ -142,7 +147,7 @@ NSString *const kPhotosDirectory = @"Photos";
             [artistAlbums addObject:artistAlbum];
         }
         artist.album = [NSSet setWithArray:artistAlbums];
-        [dataStore save];
+        [[SADataStore sharedDataStore] save];
     }];
 }
 

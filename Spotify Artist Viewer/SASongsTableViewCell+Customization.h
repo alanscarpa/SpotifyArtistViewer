@@ -10,6 +10,6 @@
 
 @interface SASongsTableViewCell (Customization)
 
-- (void)customizeCellWithCoreDataSong:(Song *)song;
+- (void)customizeCellWithSong:(Song *)song;
 
 @end

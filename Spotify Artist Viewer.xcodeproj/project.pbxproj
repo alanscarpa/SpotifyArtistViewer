@@ -29,6 +29,7 @@
 		453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770361BC57A9F001478DA /* SASongsTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770381BC58E7C001478DA /* SACoreDataTransformer.m */; settings = {ASSET_TAGS = (); }; };
+		4537703D1BC5A752001478DA /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537703C1BC5A752001478DA /* SAConstants.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
@@ -106,6 +107,8 @@
 		453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASongsTableViewCell+Customization.m"; sourceTree = "<group>"; };
 		453770371BC58E7C001478DA /* SACoreDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACoreDataTransformer.h; sourceTree = "<group>"; };
 		453770381BC58E7C001478DA /* SACoreDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACoreDataTransformer.m; sourceTree = "<group>"; };
+		4537703B1BC5A752001478DA /* SAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
+		4537703C1BC5A752001478DA /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
@@ -221,6 +224,7 @@
 		453079151BB9799800BDC8FB /* Spotify Artist Viewer */ = {
 			isa = PBXGroup;
 			children = (
+				4537703A1BC5A70C001478DA /* Constants */,
 				45B1D60B1BBDC2B6004CBBB9 /* Core Data */,
 				453079571BB98D0E00BDC8FB /* Utilities */,
 				453079551BB98A9300BDC8FB /* Controllers */,
@@ -285,6 +289,15 @@
 				453770381BC58E7C001478DA /* SACoreDataTransformer.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		4537703A1BC5A70C001478DA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4537703B1BC5A752001478DA /* SAConstants.h */,
+				4537703C1BC5A752001478DA /* SAConstants.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		456ED7E71BBB3B0E00791E01 /* SearchViewController */ = {
@@ -569,6 +582,7 @@
 				453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */,
 				45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */,
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
+				4537703D1BC5A752001478DA /* SAConstants.m in Sources */,
 				45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
 				451F7AF41BC2C0710013226C /* SAAlbumsCollectionViewCell.m in Sources */,

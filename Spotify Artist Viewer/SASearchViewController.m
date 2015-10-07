@@ -168,8 +168,7 @@ static NSInteger const kReturnLimit = 10;
     if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
         SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self indexPathFromSegue:segue andSender:sender];
-        [SADataStore saveArtist:self.artistsFromSearch[indexPath.row]
-               albumsToCoreData:[SADataStore sharedDataStore]];
+        [SADataStore saveArtistAlbums:self.artistsFromSearch[indexPath.row]];
         destinationVC.artist = self.artistsFromSearch[indexPath.row];
     }
 }
@@ -182,13 +181,12 @@ static NSInteger const kReturnLimit = 10;
     }
 }
 
-#pragma mark - SASearchTableViewCell
+#pragma mark - SASearchTableViewCell Delegate Methods
 
 - (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.artistsFromSearch.count) {
-            [SADataStore saveArtist:self.artistsFromSearch[indexPath.row]
-                              toFavorites:self.dataStore];
+        [SADataStore saveArtistToFavorites:self.artistsFromSearch[indexPath.row]];
     }
 }
 

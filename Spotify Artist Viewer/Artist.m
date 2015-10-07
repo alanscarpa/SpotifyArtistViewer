@@ -8,7 +8,7 @@
 
 #import "Artist.h"
 
-NSString *const ArtistEntityName = @"Artist";
+NSString *const kArtistEntityName = @"Artist";
 
 @implementation Artist
 

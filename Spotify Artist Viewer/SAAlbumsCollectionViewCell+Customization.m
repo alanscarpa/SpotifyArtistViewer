@@ -8,6 +8,7 @@
 
 #import "SAAlbumsCollectionViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SAConstants.h"
 
 @implementation SAAlbumsCollectionViewCell (Customization)
 
@@ -19,7 +20,7 @@
                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                            [self.activityIndicatorView stopAnimating];
                                            if (error) {
-                                               self.albumCoverImageView.image = [UIImage imageNamed:@"noImage.jpg"];
+                                               self.albumCoverImageView.image = [UIImage imageNamed:kNoImagePhotoName];
                                            }
                                        }];
 }

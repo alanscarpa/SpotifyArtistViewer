@@ -10,6 +10,7 @@
 #import "SAAFNetworkingManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SAAlbumsViewController.h"
+#import "SAConstants.h"
 
 @interface SAArtistDetailsViewController ()
 
@@ -44,7 +45,7 @@
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     [self.activityIndicator stopAnimating];
                                     if (error) {
-                                        self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
+                                        self.profileImage.image = [UIImage imageNamed:kNoImagePhotoName];
                                     }
                                 }];
 }
@@ -55,7 +56,7 @@
             self.biographyTextView.text = artistBio;
             self.biographyTextView.hidden = NO;
         } else {
-            NSLog(@"Erro calling echonest: %@", error);
+            NSLog(@"Error calling echonest: %@", error);
         }
     }];
 }

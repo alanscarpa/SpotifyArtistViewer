@@ -8,10 +8,6 @@
 
 #import "SAAFNetworkingManager.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
-#import "Song.h"
-#import "Artist.h"
-#import "Genre.h"
-#import "SADataStore.h"
 #import "SADataStore.h"
 #import "SACoreDataTransformer.h"
 

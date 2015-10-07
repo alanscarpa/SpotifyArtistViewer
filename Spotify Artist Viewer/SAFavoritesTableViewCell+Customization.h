@@ -10,6 +10,6 @@
 
 @interface SAFavoritesTableViewCell (Customization)
 
-- (void)customizeCellWithCoreDataArtist:(Artist *)artist;
+- (void)customizeCellWithArtist:(Artist *)artist;
 
 @end

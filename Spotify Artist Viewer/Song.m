@@ -9,6 +9,8 @@
 #import "Song.h"
 #import "Album.h"
 
+NSString *const kSongEntityName = @"Song";
+
 @implementation Song
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString *const kSongEntityName;
+
 @class Album;
 
 NS_ASSUME_NONNULL_BEGIN

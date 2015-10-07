@@ -46,7 +46,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SASongsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASongsTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithCoreDataSong:self.songs[indexPath.row]];
+    [cell customizeCellWithSong:self.songs[indexPath.row]];
     return cell;
 }
 

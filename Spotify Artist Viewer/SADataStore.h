@@ -19,12 +19,13 @@
 - (void)save;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSArray *)favoritedArtists;
-+ (void)saveArtist:(Artist *)artist toFavorites:(SADataStore *)dataStore;
++ (void)saveArtistToFavorites:(Artist *)artist;
 + (UIImage *)localImageWithArtist:(Artist *)artist;
 + (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock;
 + (NSArray *)songsFromCoreDataAlbum:(Album *)album;
++ (NSArray *)fetchAllArtists;
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
-+ (void)saveArtist:(Artist *)artist albumsToCoreData:(SADataStore *)dataStore;
++ (void)saveArtistAlbums:(Artist *)artist;
 + (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
 
 @end

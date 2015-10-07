@@ -8,6 +8,7 @@
 
 #import "SASearchCollectionViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SAConstants.h"
 
 @implementation SASearchCollectionViewCell (Customization)
 
@@ -20,7 +21,7 @@
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                    [self.activityIndicatorView stopAnimating];
                                    if (error) {
-                                       self.profileImageView.image = [UIImage imageNamed:@"noImage.jpg"];
+                                       self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
                                    }
                                }];
 }

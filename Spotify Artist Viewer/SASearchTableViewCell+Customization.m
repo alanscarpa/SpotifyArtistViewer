@@ -9,6 +9,7 @@
 #import "SASearchTableViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Genre.h"
+#import "SAConstants.h"
 
 @implementation SASearchTableViewCell (Customization)
 
@@ -22,7 +23,7 @@
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                    [self.activityIndicatorView stopAnimating];
                                    if (error) {
-                                       self.artistImageView.image = [UIImage imageNamed:@"noImage.jpg"];
+                                       self.artistImageView.image = [UIImage imageNamed:kNoImagePhotoName];
                                    }
                                }];
 }

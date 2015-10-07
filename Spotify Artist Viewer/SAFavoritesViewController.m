@@ -59,7 +59,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SAFavoritesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SAFavoritesTableViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithCoreDataArtist:self.favoriteArtists[indexPath.row]];
+    [cell customizeCellWithArtist:self.favoriteArtists[indexPath.row]];
     return cell;
 }
 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString *const ArtistEntityName;
+extern NSString *const kArtistEntityName;
 
 NS_ASSUME_NONNULL_BEGIN
 

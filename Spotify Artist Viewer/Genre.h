@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString *const kGenreEntityName;
+
 @class Artist;
 
 NS_ASSUME_NONNULL_BEGIN

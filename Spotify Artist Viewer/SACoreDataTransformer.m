@@ -24,7 +24,7 @@
 + (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
     Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
     if (!artistFromCoreData) {
-        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:ArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
         [self setDetailsForArtist:artist FromDictionary:artistDictionary];
         return artist;
     } else {
@@ -34,7 +34,7 @@
 }
 
 + (Artist *)artistFromCoreDataWithID:(NSString *)spotifyID {
-    NSArray *existingArtists = [self fetchExistingArtistsFromCoreData];
+    NSArray *existingArtists = [SADataStore fetchAllArtists];
     if (existingArtists.count > 0) {
         for (int i = 0; i < existingArtists.count; i++) {
             if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]) {
@@ -43,11 +43,6 @@
         }
     }
     return nil;
-}
-
-+ (NSArray *)fetchExistingArtistsFromCoreData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
 + (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
@@ -63,7 +58,7 @@
 + (void)setGenres:(NSArray *)genres ForArtist:(Artist *)artist {
     for (NSString *genreName in genres) {
         if (![self artist:artist HasGenreNamed:genreName]) {
-            Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:kGenreEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             genre.name = genreName;
             [artist addGenreObject:genre];
         }
@@ -98,7 +93,7 @@
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         if (![self doesArtist:artist alreadyHaveAlbum:dictionary]) {
-            Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:kAlbumEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             [self updateArtist:artist album:newAlbum fromDictionary:dictionary];
             [artist addAlbumObject:newAlbum];
         }
@@ -129,7 +124,7 @@
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         if (![self songOnAlbum:album existsInDictionary:dictionary]) {
-            Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:kSongEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             [self updateSong:newSong withDetails:dictionary];
             [album addSongObject:newSong];
         }
@@ -151,16 +146,6 @@
     song.name = dictionary[@"name"];
     song.trackNumber = dictionary[@"track_number"];
     song.spotifyID = dictionary[@"id"];
-}
-
-+ (void)saveSongs:(NSArray *)songs fromAlbum:(Album *)album toCoreData:(SADataStore *)dataStore {
-    for (Song *song in songs) {
-        Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:dataStore.managedObjectContext];
-        newSong.name = song.name;
-        newSong.trackNumber = song.trackNumber;
-        [album addSongObject:newSong];
-    }
-    [dataStore save];
 }
 
 @end

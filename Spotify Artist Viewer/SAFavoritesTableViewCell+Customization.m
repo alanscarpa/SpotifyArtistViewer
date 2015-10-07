@@ -11,7 +11,7 @@
 
 @implementation SAFavoritesTableViewCell (Customization)
 
-- (void)customizeCellWithCoreDataArtist:(Artist *)artist {
+- (void)customizeCellWithArtist:(Artist *)artist {
     self.artistNameLabel.text = artist.name;
     if (artist.imageLocalURL) {
         self.artistImageView.image = [SADataStore localImageWithArtist:artist];

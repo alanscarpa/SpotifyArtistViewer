@@ -9,6 +9,8 @@
 #import "Genre.h"
 #import "Artist.h"
 
+NSString *const kGenreEntityName = @"Genre";
+
 @implementation Genre
 
 @end
