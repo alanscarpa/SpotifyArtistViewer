@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString *const ArtistEntityName;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSManagedObject

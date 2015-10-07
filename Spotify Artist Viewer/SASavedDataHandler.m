@@ -54,7 +54,7 @@ NSString *const kPhotosDirectory = @"Photos";
 + (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
     Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
     if (!artistFromCoreData) {
-        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+        Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:ArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
         [self setDetailsForArtist:artist FromDictionary:artistDictionary];
         return artist;
     } else {
@@ -76,7 +76,7 @@ NSString *const kPhotosDirectory = @"Photos";
 }
 
 + (NSArray *)fetchExistingArtistsFromCoreData {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
     return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
@@ -110,7 +110,7 @@ NSString *const kPhotosDirectory = @"Photos";
 }
 
 + (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];

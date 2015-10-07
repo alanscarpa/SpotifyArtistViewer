@@ -60,7 +60,7 @@
 #pragma mark - Data Retrieval Methods
 
 - (NSArray *)favoritedArtists {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Artist"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:ArtistEntityName];
     NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
     request.predicate = predicate;
