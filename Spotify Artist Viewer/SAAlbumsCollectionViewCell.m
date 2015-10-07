@@ -13,7 +13,6 @@
 
 - (void)customizeCellWithAlbum:(Album *)album {
     [self.activityIndicatorView startAnimating];
-    [self setAlbumTitleLabelSize];
     self.albumTitleLabel.text = album.name;
     [self.albumCoverImageView sd_setImageWithURL:[NSURL URLWithString:album.imageLocalURL]
                             placeholderImage:nil
@@ -23,11 +22,6 @@
                                            self.albumCoverImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                        }
                                    }];
-}
-
-- (void)setAlbumTitleLabelSize {
-    self.albumTitleLabel.adjustsFontSizeToFitWidth = YES;
-    self.albumTitleLabel.minimumScaleFactor = 0.7;
 }
 
 @end
