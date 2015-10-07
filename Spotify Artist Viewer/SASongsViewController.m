@@ -13,8 +13,10 @@
 #import "SASongsTableViewCell.h"
 
 @interface SASongsViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (nonatomic, strong) NSArray *songs;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation SASongsViewController

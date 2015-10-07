@@ -11,10 +11,12 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAArtistViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation SAArtistViewController
@@ -42,7 +44,7 @@
                          placeholderImage:nil
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     [self.activityIndicator stopAnimating];
-                                    if (error){
+                                    if (error) {
                                         self.profileImage.image = [UIImage imageNamed:@"noImage.jpg"];
                                     }
                                 }];
@@ -50,7 +52,7 @@
 
 - (void)getArtistBioFromEchoNest {
     [SAAFNetworkingManager getArtistBiography:self.artist.spotifyID withCompletionHandler:^(NSString *artistBio, NSError *error) {
-        if (!error){
+        if (!error) {
             self.biographyTextView.text = artistBio;
             self.biographyTextView.hidden = NO;
         } else {

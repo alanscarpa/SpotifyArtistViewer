@@ -14,9 +14,11 @@
 #import "SAAlbumsViewController.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) SADataStore *dataStore;
 @property (strong, nonatomic) NSArray *favoriteArtists;
+
 @end
 
 @implementation SAFavoritesViewController
@@ -48,7 +50,6 @@
     destinationVC.artist = self.favoriteArtists[indexPath.row];
 }
 
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -64,7 +65,5 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"favoriteDetailsSegue" sender:nil];
 }
-
-
 
 @end

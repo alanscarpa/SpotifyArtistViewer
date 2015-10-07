@@ -11,4 +11,5 @@
 
 @interface SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
 - (void)customizeCellWithArtist:(Artist *)artist;
+
 @end

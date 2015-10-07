@@ -24,6 +24,7 @@
 static NSInteger const kReturnLimit = 10;
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
+
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *artistsFromSearch;
 @property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
@@ -32,6 +33,7 @@ static NSInteger const kReturnLimit = 10;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) SADataStore *dataStore;
+
 @end
 
 @implementation SASearchViewController
@@ -70,7 +72,7 @@ static NSInteger const kReturnLimit = 10;
 }
 
 - (void)checkWhichSegmentWasTapped {
-    if (self.segmentedControl.selectedSegmentIndex == 0){
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
         [self showTableView];
     } else {
         [self showCollectionView];
@@ -114,7 +116,7 @@ static NSInteger const kReturnLimit = 10;
 
 - (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset {
     [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:offset withCompletionHandler:^(NSArray *artists, NSError *error) {
-        if (artists){
+        if (artists) {
             [self updateDataWithSearchResults:artists];
         } else {
             NSLog(@"Error calling Spotify API: %@", error);
@@ -157,14 +159,14 @@ static NSInteger const kReturnLimit = 10;
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4);
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if (![segue.identifier isEqualToString:@"favoritesSegue"]){
+    if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
         SAArtistViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *indexPath = [[NSIndexPath alloc] init];
         if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {

@@ -15,6 +15,7 @@
 		451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B001BC2EEC80013226C /* SASongsTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		451F7B061BC30B870013226C /* Genre+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		451F7B071BC30B870013226C /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 451F7B051BC30B870013226C /* Genre.m */; settings = {ASSET_TAGS = (); }; };
+		451F7B091BC55C690013226C /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 451F7B081BC55C690013226C /* StyleSettings.plist */; settings = {ASSET_TAGS = (); }; };
 		453079181BB9799800BDC8FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079171BB9799800BDC8FB /* main.m */; };
 		4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530791A1BB9799800BDC8FB /* AppDelegate.m */; };
 		453079211BB9799800BDC8FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4530791F1BB9799800BDC8FB /* Main.storyboard */; };
@@ -24,7 +25,6 @@
 		4530793C1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530793B1BB9799800BDC8FB /* Spotify_Artist_ViewerUITests.m */; };
 		4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530794A1BB97E3200BDC8FB /* SASearchViewController.m */; settings = {ASSET_TAGS = (); }; };
 		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
-		456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
@@ -76,6 +76,7 @@
 		451F7B031BC30B870013226C /* Genre+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Genre+CoreDataProperties.m"; sourceTree = "<group>"; };
 		451F7B041BC30B870013226C /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genre.h; sourceTree = "<group>"; };
 		451F7B051BC30B870013226C /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Genre.m; sourceTree = "<group>"; };
+		451F7B081BC55C690013226C /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = "<group>"; };
 		453079131BB9799800BDC8FB /* Spotify Artist Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Artist Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453079171BB9799800BDC8FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		453079191BB9799800BDC8FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		4530794A1BB97E3200BDC8FB /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 		453079521BB98A8400BDC8FB /* SAArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAArtistViewController.h; sourceTree = "<group>"; };
 		453079531BB98A8400BDC8FB /* SAArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAArtistViewController.m; sourceTree = "<group>"; };
-		456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StyleSettings.plist; sourceTree = SOURCE_ROOT; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 			children = (
 				453079241BB9799800BDC8FB /* LaunchScreen.storyboard */,
 				453079271BB9799800BDC8FB /* Info.plist */,
-				456ED7E21BBAC7BB00791E01 /* StyleSettings.plist */,
+				451F7B081BC55C690013226C /* StyleSettings.plist */,
 				453079191BB9799800BDC8FB /* AppDelegate.h */,
 				4530791A1BB9799800BDC8FB /* AppDelegate.m */,
 				453079171BB9799800BDC8FB /* main.m */,
@@ -375,6 +375,7 @@
 				453079101BB9799800BDC8FB /* Frameworks */,
 				453079111BB9799800BDC8FB /* Resources */,
 				88564FB088CBD9B8A53D71E4 /* Copy Pods Resources */,
+				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 			);
 			buildRules = (
 			);
@@ -470,11 +471,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				453079261BB9799800BDC8FB /* LaunchScreen.storyboard in Resources */,
+				451F7B091BC55C690013226C /* StyleSettings.plist in Resources */,
 				45B1D62C1BBDDDF2004CBBB9 /* SAFavoritesTableViewCell.xib in Resources */,
 				451F7AFE1BC2EEB00013226C /* SASongsTableViewCell.xib in Resources */,
 				453079231BB9799800BDC8FB /* Assets.xcassets in Resources */,
 				453079211BB9799800BDC8FB /* Main.storyboard in Resources */,
-				456ED7E31BBAC7BB00791E01 /* StyleSettings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +525,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Objective-Clean Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then \n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\" \nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\" \nfi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -12,7 +12,7 @@
 #import "SAAFNetworkingManager.h"
 #import "Song.h"
 
-NSString * const kPhotosDirectory = @"Photos";
+NSString *const kPhotosDirectory = @"Photos";
 
 @implementation SASavedDataHandler
 
@@ -35,7 +35,7 @@ NSString * const kPhotosDirectory = @"Photos";
     artist.isFavorite = @(YES);
     NSMutableArray *artistAlbums = [[NSMutableArray alloc] init];
     [SAAFNetworkingManager getArtistAlbums:artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
-        for (Album *artistAlbum in albums){
+        for (Album *artistAlbum in albums) {
             [artistAlbums addObject:artistAlbum];
         }
         artist.album = [NSSet setWithArray:artistAlbums];
@@ -53,7 +53,7 @@ NSString * const kPhotosDirectory = @"Photos";
 
 + (Artist *)artistFromDictionary:(NSDictionary *)artistDictionary {
     Artist *artistFromCoreData = [self artistFromCoreDataWithID:artistDictionary[@"id"]];
-    if (!artistFromCoreData){
+    if (!artistFromCoreData) {
         Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:@"Artist" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
         [self setDetailsForArtist:artist FromDictionary:artistDictionary];
         return artist;
@@ -65,9 +65,9 @@ NSString * const kPhotosDirectory = @"Photos";
 
 + (Artist *)artistFromCoreDataWithID:(NSString *)spotifyID {
     NSArray *existingArtists = [self fetchExistingArtistsFromCoreData];
-    if (existingArtists.count > 0){
+    if (existingArtists.count > 0) {
         for (int i = 0; i < existingArtists.count; i++) {
-            if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]){
+            if ([[existingArtists[i] spotifyID] isEqualToString:spotifyID]) {
                 return existingArtists[i];
             }
         }
@@ -83,7 +83,7 @@ NSString * const kPhotosDirectory = @"Photos";
 + (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
     artist.name = artistDictionary[@"name"];
     artist.spotifyID = artistDictionary[@"id"];
-    if ([artistDictionary[@"images"] count] > 0){
+    if ([artistDictionary[@"images"] count] > 0) {
         artist.imageLocalURL = [[NSURL URLWithString:artistDictionary[@"images"][0][@"url"]] absoluteString];
     }
     [self setGenres:artistDictionary[@"genres"] ForArtist:artist];
@@ -91,8 +91,8 @@ NSString * const kPhotosDirectory = @"Photos";
 }
 
 + (void)setGenres:(NSArray *)genres ForArtist:(Artist *)artist {
-    for (NSString *genreName in genres){
-        if (![self artist:artist HasGenreNamed:genreName]){
+    for (NSString *genreName in genres) {
+        if (![self artist:artist HasGenreNamed:genreName]) {
             Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:@"Genre" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             genre.name = genreName;
             [artist addGenreObject:genre];
@@ -102,7 +102,7 @@ NSString * const kPhotosDirectory = @"Photos";
 
 + (BOOL)artist:(Artist *)artist HasGenreNamed:(NSString *)genreName {
     for (Genre *genre in artist.genre) {
-        if ([genre.name isEqualToString:genreName]){
+        if ([genre.name isEqualToString:genreName]) {
             return YES;
         }
     }
@@ -119,8 +119,8 @@ NSString * const kPhotosDirectory = @"Photos";
 #pragma mark - Album Methods
 
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
-    for (NSDictionary *dictionary in JSONDictionary[@"items"]){
-        if (![self doesArtist:artist alreadyHaveAlbum:dictionary]){
+    for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
+        if (![self doesArtist:artist alreadyHaveAlbum:dictionary]) {
             Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             [self updateArtist:artist album:newAlbum fromDictionary:dictionary];
             [artist addAlbumObject:newAlbum];
@@ -130,8 +130,8 @@ NSString * const kPhotosDirectory = @"Photos";
 }
 
 + (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
-    for (Album *album in [artist.album allObjects]){
-        if ([dictionary[@"id"] isEqualToString:album.spotifyID]){
+    for (Album *album in [artist.album allObjects]) {
+        if ([dictionary[@"id"] isEqualToString:album.spotifyID]) {
             [self updateArtist:artist album:album fromDictionary:dictionary];
             return YES;
         }
@@ -142,7 +142,7 @@ NSString * const kPhotosDirectory = @"Photos";
 + (void)updateArtist:(Artist *)artist album:(Album *)album fromDictionary:(NSDictionary *)dictionary {
     album.name = dictionary[@"name"];
     album.spotifyID = dictionary[@"id"];
-    if ([dictionary[@"images"] count]>0){
+    if ([dictionary[@"images"] count]>0) {
         album.imageLocalURL = dictionary[@"images"][0][@"url"];
     }
 }
@@ -151,7 +151,7 @@ NSString * const kPhotosDirectory = @"Photos";
 
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
-        if (![SASavedDataHandler songOnAlbum:album existsInDictionary:dictionary]){
+        if (![SASavedDataHandler songOnAlbum:album existsInDictionary:dictionary]) {
             Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
             [SASavedDataHandler updateSong:newSong withDetails:dictionary];
             [album addSongObject:newSong];
@@ -169,7 +169,7 @@ NSString * const kPhotosDirectory = @"Photos";
 
 + (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary {
     for (Song *song in album.song) {
-        if ([song.spotifyID isEqualToString:dictionary[@"id"]]){
+        if ([song.spotifyID isEqualToString:dictionary[@"id"]]) {
             [self updateSong:song withDetails:dictionary];
             return YES;
         }
@@ -183,9 +183,8 @@ NSString * const kPhotosDirectory = @"Photos";
     song.spotifyID = dictionary[@"id"];
 }
 
-
 + (void)songsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock {
-    if (album.song.count > 0){
+    if (album.song.count > 0) {
         completionBlock([self songsFromCoreDataAlbum:album], nil);
     } else {
         [SAAFNetworkingManager getAlbumSongs:album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {

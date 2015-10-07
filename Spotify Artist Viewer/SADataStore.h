@@ -16,4 +16,5 @@
 - (void)save;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSArray *)favoritedArtists;
+
 @end

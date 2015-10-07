@@ -22,16 +22,16 @@
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                    [self.activityIndicatorView stopAnimating];
-                                   if (error){
+                                   if (error) {
                                        self.artistImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
 }
 
 - (void)setGenresOnArtist:(Artist *)artist {
-    if (artist.genre.count > 0){
+    if (artist.genre.count > 0) {
         NSMutableArray *allGenres = [[NSMutableArray alloc] init];
-        for (Genre *genre in [artist.genre allObjects]){
+        for (Genre *genre in [artist.genre allObjects]) {
             [allGenres addObject:genre.name];
         }
         self.artistGenresLabel.text = [allGenres componentsJoinedByString:@", "];

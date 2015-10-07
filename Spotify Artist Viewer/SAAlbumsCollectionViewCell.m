@@ -19,7 +19,7 @@
                             placeholderImage:nil
                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                        [self.activityIndicatorView stopAnimating];
-                                       if (error){
+                                       if (error) {
                                            self.albumCoverImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                        }
                                    }];
@@ -29,6 +29,5 @@
     self.albumTitleLabel.adjustsFontSizeToFitWidth = YES;
     self.albumTitleLabel.minimumScaleFactor = 0.7;
 }
-
 
 @end

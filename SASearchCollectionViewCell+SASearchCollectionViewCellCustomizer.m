@@ -20,7 +20,7 @@
                         placeholderImage:nil
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                    [self.activityIndicatorView stopAnimating];
-                                   if (error){
+                                   if (error) {
                                        self.profileImageView.image = [UIImage imageNamed:@"noImage.jpg"];
                                    }
                                }];
@@ -32,9 +32,9 @@
 }
 
 - (void)setStyleBasedOnPopularity:(CGFloat)popularity {
-    CGFloat colorBasedOnPopularity = (110 - popularity)/255.0f;
+    CGFloat colorBasedOnPopularity = (110 - popularity) / 255.0f;
     // If popularity is greater than 80%, then we give full alpha.
-    CGFloat alphaBasedOnPopularity = popularity/80;
+    CGFloat alphaBasedOnPopularity = popularity / 80;
     // We don't want very unpopular artists to become invisible, so we set a minimum
     if (alphaBasedOnPopularity < 0.25) {
         alphaBasedOnPopularity = 0.25;

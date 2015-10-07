@@ -12,8 +12,10 @@
 #import "SASongsViewController.h"
 
 @interface SAAlbumsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *sortedAlbums;
+
 @end
 
 @implementation SAAlbumsViewController
@@ -39,8 +41,8 @@
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.frame.size.width/2,self.view.frame.size.height/4.5);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4);
 }
 
 #pragma mark Navigation

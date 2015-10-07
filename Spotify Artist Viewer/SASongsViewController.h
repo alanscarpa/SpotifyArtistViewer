@@ -10,5 +10,7 @@
 #import "Album.h"
 
 @interface SASongsViewController : UIViewController
+
 @property (nonatomic, strong) Album *album;
+
 @end
