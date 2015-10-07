@@ -9,6 +9,7 @@
 #import "SAAlbumsViewController.h"
 #import "Album.h"
 #import "SAAlbumsCollectionViewCell.h"
+#import "SAAlbumsCollectionViewCell+Customization.h"
 #import "SASongsViewController.h"
 
 @interface SAAlbumsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>

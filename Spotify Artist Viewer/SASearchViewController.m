@@ -14,7 +14,6 @@
 #import "SASearchCollectionViewCell+Customization.h"
 #import "SAInfiniteScrollHandler.h"
 #import "SASearchCollectionViewCell.h"
-#import "SASavedDataHandler.h"
 #import "SADataStore.h"
 #import "Artist.h"
 #import "Album.h"
@@ -183,7 +182,7 @@ static NSInteger const kReturnLimit = 10;
 - (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.artistsFromSearch.count) {
-            [SASavedDataHandler addArtist:self.artistsFromSearch[indexPath.row]
+            [SADataStore addArtist:self.artistsFromSearch[indexPath.row]
                               toFavorites:self.dataStore];
     }
 }

@@ -12,6 +12,7 @@
 #import "SAAFNetworkingManager.h"
 #import "Artist.h"
 #import "SAAlbumsViewController.h"
+#import "SAFavoritesTableViewCell+Customization.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate>
 

@@ -8,9 +8,9 @@
 
 #import "SASongsViewController.h"
 #import "SAAFNetworkingManager.h"
-#import "SASavedDataHandler.h"
 #import "SADataStore.h"
 #import "SASongsTableViewCell.h"
+#import "SASongsTableViewCell+Customization.h"
 
 @interface SASongsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -32,7 +32,7 @@
 }
 
 - (void)loadSongs {
-    [SASavedDataHandler songsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
+    [SADataStore songsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
         self.songs = songs;
         [self.tableView reloadData];
     }];

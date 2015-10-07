@@ -14,6 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *albumCoverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *albumTitleLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
-- (void)customizeCellWithAlbum:(Album *)album;
 
 @end
