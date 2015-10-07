@@ -6,10 +6,10 @@
 //
 //
 
-#import "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"
+#import "SASearchCollectionViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
+@implementation SASearchCollectionViewCell (Customization)
 
 - (void)customizeCellWithArtist:(Artist *)artist {
     [self.activityIndicatorView startAnimating];

@@ -9,7 +9,7 @@
 #import "SASearchCollectionViewCell.h"
 #import "Artist.h"
 
-@interface SASearchCollectionViewCell (SASearchCollectionViewCellCustomizer)
+@interface SASearchCollectionViewCell (Customization)
 - (void)customizeCellWithArtist:(Artist *)artist;
 
 @end

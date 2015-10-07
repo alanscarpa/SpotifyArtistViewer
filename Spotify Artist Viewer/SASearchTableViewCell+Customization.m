@@ -6,11 +6,11 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "SASearchTableViewCell+SASearchCellCustomizer.h"
+#import "SASearchTableViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Genre.h"
 
-@implementation SASearchTableViewCell (SASearchCellCustomizer)
+@implementation SASearchTableViewCell (Customization)
 
 - (void)customizeCellWithArtist:(Artist *)artist {
     [self.activityIndicatorView startAnimating];

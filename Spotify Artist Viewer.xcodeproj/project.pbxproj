@@ -27,9 +27,9 @@
 		453079541BB98A8400BDC8FB /* SAArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453079531BB98A8400BDC8FB /* SAArtistViewController.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
+		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */; settings = {ASSET_TAGS = (); }; };
-		458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */; settings = {ASSET_TAGS = (); }; };
+		458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D60F1BBDC2ED004CBBB9 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6131BBDC669004CBBB9 /* Artist+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D61F1BBDC669004CBBB9 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6151BBDC669004CBBB9 /* Artist.m */; settings = {ASSET_TAGS = (); }; };
@@ -99,12 +99,12 @@
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
 		456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchTableViewCell.m; sourceTree = "<group>"; };
-		456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SASearchTableViewCell+SASearchCellCustomizer.h"; sourceTree = "<group>"; };
-		456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASearchTableViewCell+SASearchCellCustomizer.m"; sourceTree = "<group>"; };
+		456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SASearchTableViewCell+Customization.h"; sourceTree = "<group>"; };
+		456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SASearchTableViewCell+Customization.m"; sourceTree = "<group>"; };
 		456ED7EF1BBC2FCF00791E01 /* SAInfiniteScrollHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAInfiniteScrollHandler.h; sourceTree = "<group>"; };
 		456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAInfiniteScrollHandler.m; sourceTree = "<group>"; };
-		458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"; path = "../SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h"; sourceTree = "<group>"; };
-		458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m"; path = "../SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m"; sourceTree = "<group>"; };
+		458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SASearchCollectionViewCell+Customization.h"; path = "../SASearchCollectionViewCell+Customization.h"; sourceTree = "<group>"; };
+		458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SASearchCollectionViewCell+Customization.m"; path = "../SASearchCollectionViewCell+Customization.m"; sourceTree = "<group>"; };
 		45B1D6101BBDC2ED004CBBB9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		45B1D6121BBDC669004CBBB9 /* Artist+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Artist+CoreDataProperties.h"; sourceTree = "<group>"; };
 		45B1D6131BBDC669004CBBB9 /* Artist+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Artist+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -281,12 +281,12 @@
 				4530794A1BB97E3200BDC8FB /* SASearchViewController.m */,
 				456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */,
 				456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */,
-				456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.h */,
-				456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m */,
+				456ED7EC1BBC241F00791E01 /* SASearchTableViewCell+Customization.h */,
+				456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */,
 				45DAFE181BBC7CA9003F4EAA /* SASearchCollectionViewCell.h */,
 				45DAFE191BBC7CA9003F4EAA /* SASearchCollectionViewCell.m */,
-				458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.h */,
-				458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m */,
+				458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.h */,
+				458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m */,
 			);
 			name = SearchViewController;
 			sourceTree = "<group>";
@@ -548,8 +548,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B1D6201BBDC669004CBBB9 /* Album+CoreDataProperties.m in Sources */,
-				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+SASearchCellCustomizer.m in Sources */,
-				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+SASearchCollectionViewCellCustomizer.m in Sources */,
+				456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */,
+				458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m in Sources */,
 				45B1D61F1BBDC669004CBBB9 /* Artist.m in Sources */,
 				45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */,
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
