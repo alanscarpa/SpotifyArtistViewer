@@ -12,6 +12,7 @@
 #import "Artist.h"
 #import "Album.h"
 #import "Song.h"
+#import "Genre.h"
 
 NSString *const kPhotosDirectory = @"Photos";
 
@@ -30,17 +31,6 @@ NSString *const kPhotosDirectory = @"Photos";
         sharedDataStore = [[self alloc] init];
     });
     return sharedDataStore;
-}
-
-- (void)save {
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -64,16 +54,32 @@ NSString *const kPhotosDirectory = @"Photos";
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark - Data Retrieval Methods
+#pragma mark - Save Methods
 
-- (NSArray *)fetchFavoritedArtists {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
-    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
-    request.predicate = predicate;
-    request.sortDescriptors = @[sortArtistsByName];
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+- (void)save {
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
 }
+
+#pragma mark - Update Methods
+
+- (void)flagArtistAsFavorite:(Artist *)artist {
+    artist.isFavorite = @(YES);
+    [[SADataStore sharedDataStore] save];
+}
+
+- (void)unflagArtistAsFavorite:(Artist *)artist {
+    artist.isFavorite = @(NO);
+    [[SADataStore sharedDataStore] save];
+}
+
+#pragma mark - Retrieval Methods
 
 - (NSArray *)fetchAllArtists {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
@@ -87,12 +93,12 @@ NSString *const kPhotosDirectory = @"Photos";
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
-- (NSArray *)fetchSongsFromAlbum:(Album *)album {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kSongEntityName];
-    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
-    request.sortDescriptors = @[sortSongsByTrackNumber];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
+- (NSArray *)fetchFavoritedArtists {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
+    NSSortDescriptor *sortArtistsByName = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
     request.predicate = predicate;
+    request.sortDescriptors = @[sortArtistsByName];
     return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
 }
 
@@ -103,6 +109,15 @@ NSString *const kPhotosDirectory = @"Photos";
     return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
+- (NSArray *)fetchAllSongsFromAlbum:(Album *)album {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kSongEntityName];
+    NSSortDescriptor *sortSongsByTrackNumber = [NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES];
+    request.sortDescriptors = @[sortSongsByTrackNumber];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
+    request.predicate = predicate;
+    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+}
+
 #pragma mark - Insert Methods
 
 - (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID {
@@ -111,18 +126,16 @@ NSString *const kPhotosDirectory = @"Photos";
     return artist;
 }
 
-#pragma mark - Save Methods
-
-- (void)saveArtistToFavorites:(Artist *)artist {
-    artist.isFavorite = @(YES);
-    [[SADataStore sharedDataStore] save];
+- (Album *)insertNewAlbum {
+    return [NSEntityDescription insertNewObjectForEntityForName:kAlbumEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
 }
 
-#pragma mark - Delete Methods
+- (Song *)insertNewSong {
+    return [NSEntityDescription insertNewObjectForEntityForName:kSongEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+}
 
-- (void)deleteArtistFromFavorites:(Artist *)artist {
-    artist.isFavorite = @NO;
-    [[SADataStore sharedDataStore] save];
+- (Genre *)insertNewGenre {
+    return [NSEntityDescription insertNewObjectForEntityForName:kGenreEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
 }
 
 @end

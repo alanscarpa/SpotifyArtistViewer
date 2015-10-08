@@ -17,7 +17,7 @@
     if (completionHandler) {
         query = [query stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"https://api.spotify.com/v1/search?q=%@&type=artist&limit=%lu&offset=%lu", query, (long)limit, (long)offset] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            completionHandler([self artistsWithJSONDictionary:responseObject], nil);
+            completionHandler([self artistsFromJSONDictionary:responseObject], nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
             completionHandler(nil, error);
@@ -48,7 +48,7 @@
 + (void)getArtistBiography:(NSString *)spotifyID withCompletionHandler:(void (^)(NSString *artistBio, NSError *error))completionHandler {
     if (completionHandler) {
         [[AFHTTPRequestOperationManager manager] GET:[NSString stringWithFormat:@"http://developer.echonest.com/api/v4/artist/profile?api_key=ZIJYLQIMEDOZIPP3C&id=spotify:artist:%@&bucket=biographies", spotifyID] parameters:nil success:^(AFHTTPRequestOperation *_Nonnull operation, id  _Nonnull responseObject) {
-            completionHandler([self artistBioFromJSONDictionary:responseObject withArtistSpotifyID:spotifyID], nil);
+            completionHandler([self bioFromJSONDictionary:responseObject withArtistSpotifyID:spotifyID], nil);
         } failure:^(AFHTTPRequestOperation *_Nonnull operation, NSError *_Nonnull error) {
             NSLog(@"Error getting artist albums from spotify: %@", error);
         }];
@@ -58,7 +58,7 @@
 
 #pragma mark - Helper Methods
 
-+ (NSArray *)artistsWithJSONDictionary:(NSDictionary *)JSONDictionary {    
++ (NSArray *)artistsFromJSONDictionary:(NSDictionary *)JSONDictionary {
     return [SACoreDataTransformer artistsFromDictionary:JSONDictionary];
 }
 
@@ -70,7 +70,7 @@
     return [SACoreDataTransformer songsFromDictionary:JSONDictionary forAlbum:[[SADataStore sharedDataStore] fetchAlbumWithSpotifyID:spotifyID]];
 }
 
-+ (NSString *)artistBioFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
++ (NSString *)bioFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
     return [SACoreDataTransformer bioFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
 }
 

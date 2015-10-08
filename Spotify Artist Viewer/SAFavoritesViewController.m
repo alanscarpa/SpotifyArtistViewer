@@ -137,7 +137,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (editingStyle) {
         case UITableViewCellEditingStyleDelete: {
-            [self.dataStore deleteArtistFromFavorites:self.favoriteArtists[indexPath.row]];
+            [self.dataStore unflagArtistAsFavorite:self.favoriteArtists[indexPath.row]];
         }
             break;
         default:

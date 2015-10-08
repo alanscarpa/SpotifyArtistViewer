@@ -12,6 +12,7 @@
 @class Artist;
 @class Album;
 @class Song;
+@class Genre;
 
 @interface SADataStore : NSObject
 
@@ -25,10 +26,15 @@
 - (NSArray *)fetchAllArtists;
 - (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
 - (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID;
-- (void)saveArtistToFavorites:(Artist *)artist;
-- (void)deleteArtistFromFavorites:(Artist *)artist;
+- (void)flagArtistAsFavorite:(Artist *)artist;
+- (void)unflagArtistAsFavorite:(Artist *)artist;
 
 - (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
-- (NSArray *)fetchSongsFromAlbum:(Album *)album;
+- (Album *)insertNewAlbum;
+
+- (NSArray *)fetchAllSongsFromAlbum:(Album *)album;
+- (Song *)insertNewSong;
+
+- (Genre *)insertNewGenre;
 
 @end

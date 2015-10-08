@@ -185,7 +185,7 @@ static NSInteger const kReturnLimit = 10;
 - (void)didTapFavoritesWithSearchTableViewCell:(SASearchTableViewCell *)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath && indexPath.row < self.artistsFromSearch.count) {
-        [self.dataStore saveArtistToFavorites:self.artistsFromSearch[indexPath.row]];
+        [self.dataStore flagArtistAsFavorite:self.artistsFromSearch[indexPath.row]];
     }
 }
 

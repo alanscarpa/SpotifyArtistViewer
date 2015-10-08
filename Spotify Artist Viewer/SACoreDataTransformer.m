@@ -9,6 +9,7 @@
 #import "SACoreDataTransformer.h"
 #import "SADataStore.h"
 #import "Artist.h"
+#import "NSSet+Organizer.h"
 
 @implementation SACoreDataTransformer
 
@@ -26,28 +27,29 @@
     Artist *artistFromCoreData = [[SADataStore sharedDataStore] fetchArtistWithSpotifyID:artistDictionary[@"id"]];
     if (!artistFromCoreData) {
         Artist *artist = [[SADataStore sharedDataStore] insertNewArtistWithSpotifyID:artistDictionary[@"id"]];
-        [self setDetailsForArtist:artist FromDictionary:artistDictionary];
+        [self updateDetailsForArtist:artist FromDictionary:artistDictionary];
         return artist;
     } else {
-        [self setDetailsForArtist:artistFromCoreData FromDictionary:artistDictionary];
+        [self updateDetailsForArtist:artistFromCoreData FromDictionary:artistDictionary];
         return artistFromCoreData;
     }
 }
 
-+ (void)setDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
++ (void)updateDetailsForArtist:(Artist *)artist FromDictionary:(NSDictionary *)artistDictionary {
     artist.name = artistDictionary[@"name"];
     artist.spotifyID = artistDictionary[@"id"];
     if ([artistDictionary[@"images"] count] > 0) {
         artist.imageLocalURL = [[NSURL URLWithString:artistDictionary[@"images"][0][@"url"]] absoluteString];
     }
-    [self setGenres:artistDictionary[@"genres"] ForArtist:artist];
     artist.popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
+    [self setGenres:artistDictionary[@"genres"] ForArtist:artist];
+    [[SADataStore sharedDataStore] save];
 }
 
 + (void)setGenres:(NSArray *)genres ForArtist:(Artist *)artist {
     for (NSString *genreName in genres) {
         if (![self artist:artist HasGenreNamed:genreName]) {
-            Genre *genre = [NSEntityDescription insertNewObjectForEntityForName:kGenreEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
             genre.name = genreName;
             [artist addGenreObject:genre];
         }
@@ -82,25 +84,25 @@
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         if (![self doesArtist:artist alreadyHaveAlbum:dictionary]) {
-            Album *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:kAlbumEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
-            [self updateArtist:artist album:newAlbum fromDictionary:dictionary];
+            Album *newAlbum = [[SADataStore sharedDataStore] insertNewAlbum];
+            [self updateArtist:artist withAlbum:newAlbum fromDictionary:dictionary];
             [artist addAlbumObject:newAlbum];
         }
     }
-    return [[artist.album allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+    return [artist.album albumsSortedByName];
 }
 
 + (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
     for (Album *album in [artist.album allObjects]) {
         if ([dictionary[@"id"] isEqualToString:album.spotifyID]) {
-            [self updateArtist:artist album:album fromDictionary:dictionary];
+            [self updateArtist:artist withAlbum:album fromDictionary:dictionary];
             return YES;
         }
     }
     return NO;
 }
 
-+ (void)updateArtist:(Artist *)artist album:(Album *)album fromDictionary:(NSDictionary *)dictionary {
++ (void)updateArtist:(Artist *)artist withAlbum:(Album *)album fromDictionary:(NSDictionary *)dictionary {
     album.name = dictionary[@"name"];
     album.spotifyID = dictionary[@"id"];
     if ([dictionary[@"images"] count]>0) {
@@ -114,13 +116,13 @@
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         if (![self songOnAlbum:album existsInDictionary:dictionary]) {
-            Song *newSong = [NSEntityDescription insertNewObjectForEntityForName:kSongEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+            Song *newSong = [[SADataStore sharedDataStore] insertNewSong];
             [self updateSong:newSong withDetails:dictionary];
             [album addSongObject:newSong];
         }
     }
     [[SADataStore sharedDataStore] save];
-    return [[album.song allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES]]];
+    return [album.song songsSortedByTrackNumber];
 }
 
 + (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary {
