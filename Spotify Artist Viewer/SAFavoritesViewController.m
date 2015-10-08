@@ -30,12 +30,10 @@
     [self initializeCoreData];
     [self retrieveFavoriteArtistsFromCoreData];
     [self registerTableViewCellNib];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditMode)];
+    [self createDeleteButton];
 }
 
-- (void)toggleEditMode {
-    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
-}
+# pragma mark - ViewController Setup
 
 - (void)initializeCoreData {
     self.dataStore = [SADataStore sharedDataStore];
@@ -64,6 +62,28 @@
         self.favoriteArtists = self.fetchedResultsController.fetchedObjects;
     }
 }
+
+- (void)registerTableViewCellNib {
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SAFavoritesTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
+}
+
+- (void)createDeleteButton {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditMode)];
+}
+
+- (void)toggleEditMode {
+    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
+    destinationVC.artist = self.favoriteArtists[indexPath.row];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
@@ -96,18 +116,6 @@
     }
 }
 
-- (void)registerTableViewCellNib {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SAFavoritesTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
-    destinationVC.artist = self.favoriteArtists[indexPath.row];
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -129,9 +137,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (editingStyle) {
         case UITableViewCellEditingStyleDelete: {
-            Artist *artist = self.favoriteArtists[indexPath.row];
-            artist.isFavorite = @NO;
-            [self.dataStore save];
+            [self.dataStore deleteArtistFromFavorites:self.favoriteArtists[indexPath.row]];
         }
             break;
         default:

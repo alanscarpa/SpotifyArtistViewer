@@ -164,6 +164,13 @@ NSString *const kPhotosDirectory = @"Photos";
     }];
 }
 
+#pragma mark - Delete Methods
+
+- (void)deleteArtistFromFavorites:(Artist *)artist {
+    artist.isFavorite = @NO;
+    [[SADataStore sharedDataStore] save];
+}
+
 #pragma mark - Helper Methods
 
 - (UIImage *)fetchLocalImageWithArtist:(Artist *)artist {

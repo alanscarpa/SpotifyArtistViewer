@@ -27,6 +27,7 @@
 - (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
 - (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID;
 - (void)saveArtistToFavorites:(Artist *)artist;
+- (void)deleteArtistFromFavorites:(Artist *)artist;
 
 - (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
 - (void)saveArtistAlbums:(Album *)album;
