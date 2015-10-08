@@ -87,7 +87,7 @@
             [artist addAlbumObject:newAlbum];
         }
     }
-    return [artist.album allObjects];
+    return [[artist.album allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 }
 
 + (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
@@ -106,6 +106,7 @@
     if ([dictionary[@"images"] count]>0) {
         album.imageLocalURL = dictionary[@"images"][0][@"url"];
     }
+    [[SADataStore sharedDataStore] save];
 }
 
 #pragma mark - Song Methods
@@ -118,7 +119,8 @@
             [album addSongObject:newSong];
         }
     }
-    return [album.song allObjects];
+    [[SADataStore sharedDataStore] save];
+    return [[album.song allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES]]];
 }
 
 + (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary {

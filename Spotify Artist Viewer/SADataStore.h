@@ -23,16 +23,12 @@
 
 - (NSArray *)fetchFavoritedArtists;
 - (NSArray *)fetchAllArtists;
-- (UIImage *)fetchLocalImageWithArtist:(Artist *)artist;
 - (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
 - (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID;
 - (void)saveArtistToFavorites:(Artist *)artist;
 - (void)deleteArtistFromFavorites:(Artist *)artist;
 
 - (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
-- (void)saveArtistAlbums:(Album *)album;
-
-- (void)fetchSongsFromAlbum:(Album *)album withCompletionBlock:(void (^)(NSArray  *songs, NSError *error))completionBlock; ///?????
 - (NSArray *)fetchSongsFromAlbum:(Album *)album;
 
 @end

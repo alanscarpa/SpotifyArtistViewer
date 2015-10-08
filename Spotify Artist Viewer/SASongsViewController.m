@@ -32,10 +32,15 @@
 }
 
 - (void)loadSongs {
-    [[SADataStore sharedDataStore] fetchSongsFromAlbum:self.album withCompletionBlock:^(NSArray *songs, NSError *error) {
-        self.songs = songs;
-        [self.tableView reloadData];
+    [SAAFNetworkingManager getAlbumSongs:self.album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
+        if (!error) {
+            self.songs = songs;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error loading songs");
+        }
     }];
+    
 }
 
 #pragma mark - UITableViewDataSource

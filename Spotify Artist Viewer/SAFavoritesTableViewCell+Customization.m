@@ -8,14 +8,20 @@
 
 #import "SAFavoritesTableViewCell+Customization.h"
 #import "SADataStore.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "SAConstants.h"
 
 @implementation SAFavoritesTableViewCell (Customization)
 
 - (void)customizeCellWithArtist:(Artist *)artist {
     self.artistNameLabel.text = artist.name;
-    if (artist.imageLocalURL) {
-        self.artistImageView.image = [[SADataStore sharedDataStore] fetchLocalImageWithArtist:artist];
-    }
+    [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
+                            placeholderImage:nil
+                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                       if (error) {
+                                           self.artistImageView.image = [UIImage imageNamed:kNoImagePhotoName];
+                                       }
+                                   }];
 }
 
 @end

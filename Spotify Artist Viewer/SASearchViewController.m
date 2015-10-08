@@ -168,7 +168,6 @@ static NSInteger const kReturnLimit = 10;
     if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
         SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self indexPathFromSegue:segue andSender:sender];
-        [self.dataStore saveArtistAlbums:self.artistsFromSearch[indexPath.row]];
         destinationVC.artist = self.artistsFromSearch[indexPath.row];
     }
 }

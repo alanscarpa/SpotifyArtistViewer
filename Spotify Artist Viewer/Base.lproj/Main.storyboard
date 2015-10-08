@@ -508,7 +508,7 @@
                         <outlet property="activityIndicator" destination="M7S-x2-nuz" id="ubI-oy-NCF"/>
                         <outlet property="artistNameLabel" destination="ifs-jR-bFf" id="8k8-s5-QZ6"/>
                         <outlet property="biographyTextView" destination="8YC-SY-IAz" id="nlI-3K-xZO"/>
-                        <outlet property="profileImage" destination="EXz-le-fv5" id="1LZ-IY-WgM"/>
+                        <outlet property="profileImageView" destination="EXz-le-fv5" id="PKU-pa-hQq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdT-PN-MuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

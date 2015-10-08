@@ -15,7 +15,7 @@
 @interface SAArtistDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *biographyTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -40,12 +40,12 @@
 }
 
 - (void)setArtistImage {
-    [self.profileImage sd_setImageWithURL:[NSURL URLWithString:self.artist.imageLocalURL]
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.artist.imageLocalURL]
                          placeholderImage:nil
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     [self.activityIndicator stopAnimating];
                                     if (error) {
-                                        self.profileImage.image = [UIImage imageNamed:kNoImagePhotoName];
+                                        self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
                                     }
                                 }];
 }
