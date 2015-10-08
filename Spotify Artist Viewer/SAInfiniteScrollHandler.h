@@ -14,12 +14,12 @@
 
 @property (nonatomic) NSInteger offset;
 @property (nonatomic, weak) id<SAInfiniteScrollHandlerDelegate> delegate;
-- (void)addInfiniteScrollOnScrollView:(UIScrollView *)scrollView withSearchLimit:(NSInteger)limit;
+- (void)addInfiniteScrollOnScrollView:(UIScrollView *)scrollView;
 
 @end
 
 @protocol SAInfiniteScrollHandlerDelegate <NSObject>
 
-- (void)scrollHandler:(SAInfiniteScrollHandler *)scrollHandler requestAdditionalItemsFromOffset:(NSInteger)offset;
+- (void)requestAdditionalIemsWithScrollHandler:(SAInfiniteScrollHandler *)scrollHandler;
 
 @end

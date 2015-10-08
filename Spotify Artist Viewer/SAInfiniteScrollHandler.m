@@ -11,12 +11,10 @@
 
 @implementation SAInfiniteScrollHandler
 
-- (void)addInfiniteScrollOnScrollView:(UIScrollView *)scrollView withSearchLimit:(NSInteger)limit {
-    __block NSInteger offset = limit;
+- (void)addInfiniteScrollOnScrollView:(UIScrollView *)scrollView {
     scrollView.infiniteScrollIndicatorStyle = UIActivityIndicatorViewStyleGray;
     [scrollView addInfiniteScrollWithHandler:^(UIScrollView *innerScrollView) {
-        self.offset += offset;
-        [self.delegate scrollHandler:self requestAdditionalItemsFromOffset:self.offset];
+        [self.delegate requestAdditionalIemsWithScrollHandler:self];
         [innerScrollView finishInfiniteScroll];
     }];
 }
