@@ -13,6 +13,7 @@
 #import "Artist.h"
 #import "SAArtistDetailsViewController.h"
 #import "SAFavoritesTableViewCell+Customization.h"
+#import "NSFetchedResultsController+Setup.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -45,11 +46,7 @@
 }
 
 - (void)setUpFetchedResultsController {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Artist"];
-    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
-    fetchRequest.predicate = predicate;
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.dataStore.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResultsController = [NSFetchedResultsController observeFavoriteArtistsInManageObjectContext:self.dataStore.managedObjectContext];
     self.fetchedResultsController.delegate = self;
 }
 

@@ -116,14 +116,14 @@ static NSInteger const kReturnLimit = 10;
 - (void)requestAdditionalIemsWithScrollHandler:(SAInfiniteScrollHandler *)scrollHandler {
     [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:self.artistsFromSearch.count withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists) {
-            [self updateDataWithSearchResults:artists];
+            [self updateArtistsWithSearchResults:artists];
         } else {
             NSLog(@"Error calling Spotify API: %@", error);
         }
     }];
 }
 
-- (void)updateDataWithSearchResults:(NSArray *)results {
+- (void)updateArtistsWithSearchResults:(NSArray *)results {
     [self.artistsFromSearch addObjectsFromArray:results];
     [self updateResults];
 }
