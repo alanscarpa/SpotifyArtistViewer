@@ -29,9 +29,9 @@
 }
 
 - (void)setGenresOnArtist:(Artist *)artist {
-    if (artist.genre.count > 0) {
+    if (artist.genres.count > 0) {
         NSMutableArray *allGenres = [[NSMutableArray alloc] init];
-        for (Genre *genre in [artist.genre allObjects]) {
+        for (Genre *genre in [artist.genres allObjects]) {
             [allGenres addObject:genre.name];
         }
         self.artistGenresLabel.text = [allGenres componentsJoinedByString:@", "];

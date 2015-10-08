@@ -13,9 +13,12 @@
 + (NSFetchedResultsController *)observeFavoriteArtistsInManageObjectContext:(NSManagedObjectContext *)managedObjectContext {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Artist"];
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
-    fetchRequest.predicate = predicate;
-    return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
+    
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                               managedObjectContext:managedObjectContext
+                                                 sectionNameKeyPath:nil
+                                                          cacheName:nil];
 }
 
 @end

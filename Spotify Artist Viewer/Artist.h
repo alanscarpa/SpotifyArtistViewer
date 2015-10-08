@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSManagedObject
 
+- (NSArray *)albumsSortedByName;
+
 @end
 
 NS_ASSUME_NONNULL_END

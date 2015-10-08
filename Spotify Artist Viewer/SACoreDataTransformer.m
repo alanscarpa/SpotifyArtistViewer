@@ -1,3 +1,4 @@
+
 //
 //  SACoreDataTransformer.m
 //  Spotify Artist Viewer
@@ -9,7 +10,9 @@
 #import "SACoreDataTransformer.h"
 #import "SADataStore.h"
 #import "Artist.h"
-#import "NSSet+Organizer.h"
+#import "Genre.h"
+#import "Album.h"
+#import "Song.h"
 
 @implementation SACoreDataTransformer
 
@@ -51,13 +54,13 @@
         if (![self artist:artist HasGenreNamed:genreName]) {
             Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
             genre.name = genreName;
-            [artist addGenreObject:genre];
+            [artist addGenresObject:genre];
         }
     }
 }
 
 + (BOOL)artist:(Artist *)artist HasGenreNamed:(NSString *)genreName {
-    for (Genre *genre in artist.genre) {
+    for (Genre *genre in artist.genres) {
         if ([genre.name isEqualToString:genreName]) {
             return YES;
         }
@@ -86,14 +89,14 @@
         if (![self doesArtist:artist alreadyHaveAlbum:dictionary]) {
             Album *newAlbum = [[SADataStore sharedDataStore] insertNewAlbum];
             [self updateArtist:artist withAlbum:newAlbum fromDictionary:dictionary];
-            [artist addAlbumObject:newAlbum];
+            [artist addAlbumsObject:newAlbum];
         }
     }
-    return [artist.album albumsSortedByName];
+    return [artist albumsSortedByName];
 }
 
 + (BOOL)doesArtist:(Artist *)artist alreadyHaveAlbum:(NSDictionary *)dictionary {
-    for (Album *album in [artist.album allObjects]) {
+    for (Album *album in [artist.albums allObjects]) {
         if ([dictionary[@"id"] isEqualToString:album.spotifyID]) {
             [self updateArtist:artist withAlbum:album fromDictionary:dictionary];
             return YES;
@@ -115,30 +118,18 @@
 
 + (NSArray *)songsFromDictionary:(NSDictionary *)JSONDictionary forAlbum:(Album *)album {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
-        if (![self songOnAlbum:album existsInDictionary:dictionary]) {
-            Song *newSong = [[SADataStore sharedDataStore] insertNewSong];
-            [self updateSong:newSong withDetails:dictionary];
-            [album addSongObject:newSong];
+        Song *song = [album songWithSpotifyID:dictionary[@"id"]];
+        if (!song) {
+            song = [[SADataStore sharedDataStore] insertNewSong];
+            [album addSongsObject:song];
         }
+        
+        song.name = dictionary[@"name"];
+        song.trackNumber = dictionary[@"track_number"];
+        song.spotifyID = dictionary[@"id"];
     }
     [[SADataStore sharedDataStore] save];
-    return [album.song songsSortedByTrackNumber];
-}
-
-+ (BOOL)songOnAlbum:(Album *)album existsInDictionary:(NSDictionary *)dictionary {
-    for (Song *song in album.song) {
-        if ([song.spotifyID isEqualToString:dictionary[@"id"]]) {
-            [self updateSong:song withDetails:dictionary];
-            return YES;
-        }
-    }
-    return NO;
-}
-
-+ (void)updateSong:(Song *)song withDetails:(NSDictionary *)dictionary {
-    song.name = dictionary[@"name"];
-    song.trackNumber = dictionary[@"track_number"];
-    song.spotifyID = dictionary[@"id"];
+    return [album songsSortedByTrackNumber];
 }
 
 @end

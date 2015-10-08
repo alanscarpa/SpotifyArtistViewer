@@ -10,10 +10,6 @@
 
 @implementation NSSet (Organizer)
 
-- (NSArray *)albumsSortedByName {
-    return [[self allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-}
-
 - (NSArray *)songsSortedByTrackNumber {
     return [[self allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES]]];
 }

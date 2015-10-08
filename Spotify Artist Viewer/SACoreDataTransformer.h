@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Artist.h"
+@class Artist;
+@class Album;
 
 @interface SACoreDataTransformer : NSObject
 

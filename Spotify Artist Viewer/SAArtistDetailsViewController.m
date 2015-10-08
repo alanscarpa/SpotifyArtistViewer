@@ -23,6 +23,8 @@
 
 @implementation SAArtistDetailsViewController
 
+#warning add ability to favorite/unfavorite from here
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpUI];
@@ -53,6 +55,7 @@
 - (void)getArtistBioFromEchoNest {
     [SAAFNetworkingManager getArtistBiography:self.artist.spotifyID withCompletionHandler:^(NSString *artistBio, NSError *error) {
         if (!error) {
+#warning show cached version when enting VC, but update after download
             self.biographyTextView.text = artistBio;
             self.biographyTextView.hidden = NO;
         } else {

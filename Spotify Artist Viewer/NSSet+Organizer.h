@@ -10,7 +10,7 @@
 
 @interface NSSet (Organizer)
 
-- (NSArray *)albumsSortedByName;
+#warning re-organize
 - (NSArray *)songsSortedByTrackNumber;
 
 @end

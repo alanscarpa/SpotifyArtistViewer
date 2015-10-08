@@ -12,10 +12,14 @@
 extern NSString *const kAlbumEntityName;
 
 @class Artist;
+@class Song;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Album : NSManagedObject
+
+- (Song *)songWithSpotifyID:(NSString *)spotifyID;
+- (NSArray *)songsSortedByTrackNumber;
 
 @end
 

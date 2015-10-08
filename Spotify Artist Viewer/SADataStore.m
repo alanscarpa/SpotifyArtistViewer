@@ -33,6 +33,14 @@ NSString *const kPhotosDirectory = @"Photos";
     return sharedDataStore;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self registerForApplicationNotifications];
+    }
+    return self;
+}
+
 - (NSManagedObjectContext *)managedObjectContext {
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
@@ -52,6 +60,27 @@ NSString *const kPhotosDirectory = @"Photos";
 
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Notifications
+
+- (void)registerForApplicationNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleApplicationWillTerminateNotification:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:[UIApplication sharedApplication]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleApplicationWillTerminateNotification:)
+                                                 name:UIApplicationWillTerminateNotification
+                                               object:[UIApplication sharedApplication]];
+#warning also save on will resign active
+}
+
+- (void)handleApplicationWillTerminateNotification:(NSNotification *)notification {
+    if (self.managedObjectContext.hasChanges) {
+        [self save];
+    }
 }
 
 #pragma mark - Save Methods

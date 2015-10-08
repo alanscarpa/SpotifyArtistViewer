@@ -12,4 +12,8 @@ NSString *const kArtistEntityName = @"Artist";
 
 @implementation Artist
 
+- (NSArray *)albumsSortedByName {
+    return [[self.albums allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+}
+
 @end
