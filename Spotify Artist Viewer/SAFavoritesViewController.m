@@ -42,17 +42,23 @@
 }
 
 - (void)retrieveFavoriteArtistsFromCoreData {
+    [self setUpFetchedResultsController];
+    [self fetchArtistsFromFetchedResultsController];
+}
+
+- (void)setUpFetchedResultsController {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Artist"];
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
     fetchRequest.predicate = predicate;
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.dataStore.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     self.fetchedResultsController.delegate = self;
+}
+
+- (void)fetchArtistsFromFetchedResultsController {
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
-    
     if (error) {
-        NSLog(@"Unable to perform fetch.");
         NSLog(@"%@, %@", error, error.localizedDescription);
     } else {
         self.favoriteArtists = self.fetchedResultsController.fetchedObjects;
