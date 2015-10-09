@@ -35,30 +35,6 @@
     return artistsFromSearch;
 }
 
-#pragma mark - Helper Methods
-         
-+ (NSString *)imageURLFromDictionary:(NSDictionary *)dictionary {
-    if ([dictionary[@"images"] count] > 0) {
-        return [[NSURL URLWithString:dictionary[@"images"][0][@"url"]] absoluteString];
-    } else {
-        return nil;
-    }
-}
-
-+ (NSSet *)genresFromDictionary:(NSDictionary *)dictionary {
-    if ([dictionary[@"genres"] count] > 0) {
-        NSMutableSet *genreSet = [[NSMutableSet alloc] init];
-        for (NSString *genreName in dictionary[@"genres"]){
-            Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
-            genre.name = genreName;
-            [genreSet addObject:genre];
-        }
-        return genreSet;
-    } else {
-        return nil;
-    }
-}
-
 #pragma mark - Album Methods
 
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
@@ -90,15 +66,44 @@
 #pragma mark - Biography Methods
 
 + (NSString *)bioFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
+    NSString *artistBio = [self biographyFromDictionary:JSONDictionary];
+    artist.biography = artistBio;
+    return artistBio;
+}
+
+#pragma mark - Helper Methods
+
++ (NSString *)imageURLFromDictionary:(NSDictionary *)dictionary {
+    if ([dictionary[@"images"] count] > 0) {
+        return [[NSURL URLWithString:dictionary[@"images"][0][@"url"]] absoluteString];
+    } else {
+        return nil;
+    }
+}
+
++ (NSSet *)genresFromDictionary:(NSDictionary *)dictionary {
+    if ([dictionary[@"genres"] count] > 0) {
+        NSMutableSet *genreSet = [[NSMutableSet alloc] init];
+        for (NSString *genreName in dictionary[@"genres"]){
+            Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
+            genre.name = genreName;
+            [genreSet addObject:genre];
+        }
+        return genreSet;
+    } else {
+        return nil;
+    }
+}
+
++ (NSString *)biographyFromDictionary:(NSDictionary *)dictionary {
     NSString *artistBio = @"No bio available";
-    for (NSDictionary *bio in JSONDictionary[@"response"][@"artist"][@"biographies"]) {
+    for (NSDictionary *bio in dictionary[@"response"][@"artist"][@"biographies"]) {
         // Find the first full biography if there is one
         if ((NSUInteger)bio[@"truncated"] == 0) {
             artistBio = [NSString stringWithFormat:@"%@", bio[@"text"]];
             break;
         }
     }
-    artist.biography = artistBio;
     return artistBio;
 }
 
