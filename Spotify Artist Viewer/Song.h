@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Song : NSManagedObject
 
+- (void)setDetailsWithDictionary:(NSDictionary *)details;
+
 @end
 
 NS_ASSUME_NONNULL_END
