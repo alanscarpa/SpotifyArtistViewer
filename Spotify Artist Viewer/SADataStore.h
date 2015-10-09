@@ -25,7 +25,7 @@
 - (NSArray *)fetchFavoritedArtists;
 - (NSArray *)fetchAllArtists;
 - (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
-- (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID;
+- (Artist *)insertNewArtist;
 - (void)flagArtistAsFavorite:(Artist *)artist;
 - (void)unflagArtistAsFavorite:(Artist *)artist;
 

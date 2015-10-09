@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString *const kSongEntityName;
+extern NSString *const _Nonnull kSongEntityName;
 
 @class Album;
 

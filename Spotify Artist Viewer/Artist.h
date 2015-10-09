@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString *const kArtistEntityName;
+extern NSString *const _Nonnull kArtistEntityName;
 
 @class Album;
 
@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSManagedObject
 
++ (Artist *)artistWithSpotifyID:(NSString *)spotifyID;
 - (Album *)albumWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)albumsSortedByName;
 

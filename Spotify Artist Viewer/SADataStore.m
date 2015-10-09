@@ -114,14 +114,14 @@ NSString *const kPhotosDirectory = @"Photos";
 
 - (NSArray *)fetchAllArtists {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+    return [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kArtistEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
-    return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
+    return [[self.managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
 - (NSArray *)fetchFavoritedArtists {
@@ -130,14 +130,14 @@ NSString *const kPhotosDirectory = @"Photos";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
     request.predicate = predicate;
     request.sortDescriptors = @[sortArtistsByName];
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+    return [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 - (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:kAlbumEntityName];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"spotifyID == %@", spotifyID];
     request.predicate = predicate;
-    return [[[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil] firstObject];
+    return [[self.managedObjectContext executeFetchRequest:request error:nil] firstObject];
 }
 
 - (NSArray *)fetchAllSongsFromAlbum:(Album *)album {
@@ -146,27 +146,25 @@ NSString *const kPhotosDirectory = @"Photos";
     request.sortDescriptors = @[sortSongsByTrackNumber];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"album == %@", album];
     request.predicate = predicate;
-    return [[SADataStore sharedDataStore].managedObjectContext executeFetchRequest:request error:nil];
+    return [self.managedObjectContext executeFetchRequest:request error:nil];
 }
 
 #pragma mark - Insert Methods
 
-- (Artist *)insertNewArtistWithSpotifyID:(NSString *)spotifyID {
-    Artist *artist = [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
-    artist.spotifyID = spotifyID;
-    return artist;
+- (Artist *)insertNewArtist {
+    return [NSEntityDescription insertNewObjectForEntityForName:kArtistEntityName inManagedObjectContext:self.managedObjectContext];
 }
 
 - (Album *)insertNewAlbum {
-    return [NSEntityDescription insertNewObjectForEntityForName:kAlbumEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:kAlbumEntityName inManagedObjectContext:self.managedObjectContext];
 }
 
 - (Song *)insertNewSong {
-    return [NSEntityDescription insertNewObjectForEntityForName:kSongEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:kSongEntityName inManagedObjectContext:self.managedObjectContext];
 }
 
 - (Genre *)insertNewGenre {
-    return [NSEntityDescription insertNewObjectForEntityForName:kGenreEntityName inManagedObjectContext:[SADataStore sharedDataStore].managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:kGenreEntityName inManagedObjectContext:self.managedObjectContext];
 }
 
 @end
