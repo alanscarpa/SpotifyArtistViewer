@@ -46,7 +46,6 @@
     }
     artist.popularity = [NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]];
     [self setGenres:artistDictionary[@"genres"] ForArtist:artist];
-    [[SADataStore sharedDataStore] save];
 }
 
 + (void)setGenres:(NSArray *)genres ForArtist:(Artist *)artist {
@@ -78,7 +77,6 @@
         }
     }
     artist.biography = artistBio;
-    [[SADataStore sharedDataStore] save];
     return artistBio;
 }
 
@@ -111,7 +109,6 @@
     if ([dictionary[@"images"] count]>0) {
         album.imageLocalURL = dictionary[@"images"][0][@"url"];
     }
-    [[SADataStore sharedDataStore] save];
 }
 
 #pragma mark - Song Methods
@@ -128,7 +125,6 @@
         song.trackNumber = dictionary[@"track_number"];
         song.spotifyID = dictionary[@"id"];
     }
-    [[SADataStore sharedDataStore] save];
     return [album songsSortedByTrackNumber];
 }
 

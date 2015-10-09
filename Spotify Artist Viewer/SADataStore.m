@@ -66,18 +66,22 @@ NSString *const kPhotosDirectory = @"Photos";
 
 - (void)registerForApplicationNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleApplicationWillTerminateNotification:)
+                                             selector:@selector(handleApplicationExit:)
                                                  name:UIApplicationWillTerminateNotification
                                                object:[UIApplication sharedApplication]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleApplicationWillTerminateNotification:)
-                                                 name:UIApplicationWillTerminateNotification
+                                             selector:@selector(handleApplicationExit:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
                                                object:[UIApplication sharedApplication]];
-#warning also save on will resign active
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleApplicationExit:)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:[UIApplication sharedApplication]];
 }
 
-- (void)handleApplicationWillTerminateNotification:(NSNotification *)notification {
+- (void)handleApplicationExit:(NSNotification *)notification {
     if (self.managedObjectContext.hasChanges) {
         [self save];
     }
@@ -100,12 +104,10 @@ NSString *const kPhotosDirectory = @"Photos";
 
 - (void)flagArtistAsFavorite:(Artist *)artist {
     artist.isFavorite = @(YES);
-    [[SADataStore sharedDataStore] save];
 }
 
 - (void)unflagArtistAsFavorite:(Artist *)artist {
     artist.isFavorite = @(NO);
-    [[SADataStore sharedDataStore] save];
 }
 
 #pragma mark - Retrieval Methods
