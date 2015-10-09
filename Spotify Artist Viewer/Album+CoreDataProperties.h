@@ -10,6 +10,7 @@
 //
 
 #import "Album.h"
+#import "Artist.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -10,7 +10,6 @@
 //
 
 #import "Artist.h"
-
 @class Album;
 @class Genre;
 

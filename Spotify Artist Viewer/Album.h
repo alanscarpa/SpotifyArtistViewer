@@ -11,7 +11,6 @@
 
 extern NSString *const kAlbumEntityName;
 
-@class Artist;
 @class Song;
 
 NS_ASSUME_NONNULL_BEGIN

@@ -9,7 +9,6 @@
 #import "Album.h"
 #import "Artist.h"
 #import "Song.h"
-#import "Genre.h"
 
 NSString *const kAlbumEntityName = @"Album";
 
