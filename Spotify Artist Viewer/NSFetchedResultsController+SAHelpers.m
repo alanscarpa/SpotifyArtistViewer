@@ -6,11 +6,11 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "NSFetchedResultsController+Setup.h"
+#import "NSFetchedResultsController+SAHelpers.h"
 
-@implementation NSFetchedResultsController (Setup)
+@implementation NSFetchedResultsController (SAHelpers)
 
-+ (NSFetchedResultsController *)observeFavoriteArtistsInManageObjectContext:(NSManagedObjectContext *)managedObjectContext {
++ (NSFetchedResultsController *)sa_createFavoriteArtistsFetchedResultsControllerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext; {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Artist"];
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];

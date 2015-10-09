@@ -13,7 +13,7 @@
 #import "Artist.h"
 #import "SAArtistDetailsViewController.h"
 #import "SAFavoritesTableViewCell+Customization.h"
-#import "NSFetchedResultsController+Setup.h"
+#import "NSFetchedResultsController+SAHelpers.h"
 
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -46,7 +46,7 @@
 }
 
 - (void)setUpFetchedResultsController {
-    self.fetchedResultsController = [NSFetchedResultsController observeFavoriteArtistsInManageObjectContext:self.dataStore.managedObjectContext];
+    self.fetchedResultsController = [NSFetchedResultsController sa_createFavoriteArtistsFetchedResultsControllerWithManagedObjectContext:self.dataStore.managedObjectContext];
     self.fetchedResultsController.delegate = self;
 }
 

@@ -29,7 +29,7 @@
 		453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770361BC57A9F001478DA /* SASongsTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770381BC58E7C001478DA /* SACoreDataTransformer.m */; settings = {ASSET_TAGS = (); }; };
-		453770441BC6EFF9001478DA /* NSFetchedResultsController+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */; settings = {ASSET_TAGS = (); }; };
+		453770441BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770431BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
@@ -109,8 +109,8 @@
 		453770371BC58E7C001478DA /* SACoreDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACoreDataTransformer.h; sourceTree = "<group>"; };
 		453770381BC58E7C001478DA /* SACoreDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACoreDataTransformer.m; sourceTree = "<group>"; };
 		4537703B1BC5A752001478DA /* SAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
-		453770421BC6EFF9001478DA /* NSFetchedResultsController+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFetchedResultsController+Setup.h"; sourceTree = "<group>"; };
-		453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+Setup.m"; sourceTree = "<group>"; };
+		453770421BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFetchedResultsController+SAHelpers.h"; sourceTree = "<group>"; };
+		453770431BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+SAHelpers.m"; sourceTree = "<group>"; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
@@ -307,8 +307,8 @@
 		453770411BC6EFB1001478DA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				453770421BC6EFF9001478DA /* NSFetchedResultsController+Setup.h */,
-				453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */,
+				453770421BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.h */,
+				453770431BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -601,7 +601,7 @@
 				451F7B011BC2EEC80013226C /* SASongsTableViewCell.m in Sources */,
 				45B1D6231BBDC669004CBBB9 /* Song.m in Sources */,
 				4530791B1BB9799800BDC8FB /* AppDelegate.m in Sources */,
-				453770441BC6EFF9001478DA /* NSFetchedResultsController+Setup.m in Sources */,
+				453770441BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m in Sources */,
 				451F7B061BC30B870013226C /* Genre+CoreDataProperties.m in Sources */,
 				453079181BB9799800BDC8FB /* main.m in Sources */,
 				453770301BC5791F001478DA /* SAFavoritesTableViewCell+Customization.m in Sources */,

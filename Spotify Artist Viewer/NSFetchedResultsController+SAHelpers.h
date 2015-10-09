@@ -8,8 +8,8 @@
 
 #import <CoreData/CoreData.h>
 
-@interface NSFetchedResultsController (Setup)
+@interface NSFetchedResultsController (SAHelpers)
 
-+ (NSFetchedResultsController *)observeFavoriteArtistsInManageObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (NSFetchedResultsController *)sa_createFavoriteArtistsFetchedResultsControllerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end
