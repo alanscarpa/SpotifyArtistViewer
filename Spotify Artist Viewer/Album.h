@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (Song *)songWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)songsSortedByTrackNumber;
+- (void)setDetailsWithDictionary:(NSDictionary *)details;
 
 @end
 

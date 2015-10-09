@@ -27,4 +27,12 @@ NSString *const kAlbumEntityName = @"Album";
     return [[self.songs allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"trackNumber" ascending:YES]]];
 }
 
+- (void)setDetailsWithDictionary:(NSDictionary *)details {
+    self.name = details[@"name"];
+    self.spotifyID = details[@"id"];
+    if ([details[@"images"] count] > 0) {
+        self.imageLocalURL = details[@"images"][0][@"url"];
+    }
+}
+
 @end
