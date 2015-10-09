@@ -29,14 +29,13 @@
 		453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770321BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770361BC57A9F001478DA /* SASongsTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770351BC57A9F001478DA /* SASongsTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770381BC58E7C001478DA /* SACoreDataTransformer.m */; settings = {ASSET_TAGS = (); }; };
-		4537703D1BC5A752001478DA /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537703C1BC5A752001478DA /* SAConstants.m */; settings = {ASSET_TAGS = (); }; };
-		453770401BC6E653001478DA /* NSSet+Organizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537703F1BC6E653001478DA /* NSSet+Organizer.m */; settings = {ASSET_TAGS = (); }; };
 		453770441BC6EFF9001478DA /* NSFetchedResultsController+Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */; settings = {ASSET_TAGS = (); }; };
 		458522031BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
+		45A66A441BC7F7A500E0D5FA /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A66A431BC7F7A500E0D5FA /* SAConstants.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D60F1BBDC2ED004CBBB9 /* Model.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6131BBDC669004CBBB9 /* Artist+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		45B1D61F1BBDC669004CBBB9 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B1D6151BBDC669004CBBB9 /* Artist.m */; settings = {ASSET_TAGS = (); }; };
@@ -110,9 +109,6 @@
 		453770371BC58E7C001478DA /* SACoreDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACoreDataTransformer.h; sourceTree = "<group>"; };
 		453770381BC58E7C001478DA /* SACoreDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACoreDataTransformer.m; sourceTree = "<group>"; };
 		4537703B1BC5A752001478DA /* SAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
-		4537703C1BC5A752001478DA /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
-		4537703E1BC6E653001478DA /* NSSet+Organizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+Organizer.h"; sourceTree = "<group>"; };
-		4537703F1BC6E653001478DA /* NSSet+Organizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+Organizer.m"; sourceTree = "<group>"; };
 		453770421BC6EFF9001478DA /* NSFetchedResultsController+Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFetchedResultsController+Setup.h"; sourceTree = "<group>"; };
 		453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+Setup.m"; sourceTree = "<group>"; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
@@ -125,6 +121,7 @@
 		456ED7F01BBC2FCF00791E01 /* SAInfiniteScrollHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAInfiniteScrollHandler.m; sourceTree = "<group>"; };
 		458522011BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SASearchCollectionViewCell+Customization.h"; path = "../SASearchCollectionViewCell+Customization.h"; sourceTree = "<group>"; };
 		458522021BBD6F2E009AAFBE /* SASearchCollectionViewCell+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SASearchCollectionViewCell+Customization.m"; path = "../SASearchCollectionViewCell+Customization.m"; sourceTree = "<group>"; };
+		45A66A431BC7F7A500E0D5FA /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
 		45B1D6101BBDC2ED004CBBB9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		45B1D6121BBDC669004CBBB9 /* Artist+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Artist+CoreDataProperties.h"; sourceTree = "<group>"; };
 		45B1D6131BBDC669004CBBB9 /* Artist+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Artist+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -302,7 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				4537703B1BC5A752001478DA /* SAConstants.h */,
-				4537703C1BC5A752001478DA /* SAConstants.m */,
+				45A66A431BC7F7A500E0D5FA /* SAConstants.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -310,8 +307,6 @@
 		453770411BC6EFB1001478DA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				4537703E1BC6E653001478DA /* NSSet+Organizer.h */,
-				4537703F1BC6E653001478DA /* NSSet+Organizer.m */,
 				453770421BC6EFF9001478DA /* NSFetchedResultsController+Setup.h */,
 				453770431BC6EFF9001478DA /* NSFetchedResultsController+Setup.m */,
 			);
@@ -600,7 +595,6 @@
 				453770331BC57A06001478DA /* SAAlbumsCollectionViewCell+Customization.m in Sources */,
 				45B1D6221BBDC669004CBBB9 /* Song+CoreDataProperties.m in Sources */,
 				45B1D62F1BBEBCC1004CBBB9 /* SAFavoritesTableViewCell.m in Sources */,
-				4537703D1BC5A752001478DA /* SAConstants.m in Sources */,
 				45B1D61E1BBDC669004CBBB9 /* Artist+CoreDataProperties.m in Sources */,
 				456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */,
 				451F7AF41BC2C0710013226C /* SAAlbumsCollectionViewCell.m in Sources */,
@@ -615,11 +609,11 @@
 				453079541BB98A8400BDC8FB /* SAArtistDetailsViewController.m in Sources */,
 				45DAFE1A1BBC7CA9003F4EAA /* SASearchCollectionViewCell.m in Sources */,
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
-				453770401BC6E653001478DA /* NSSet+Organizer.m in Sources */,
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
 				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
 				451F7B071BC30B870013226C /* Genre.m in Sources */,
+				45A66A441BC7F7A500E0D5FA /* SAConstants.m in Sources */,
 				453770391BC58E7C001478DA /* SACoreDataTransformer.m in Sources */,
 				4530794B1BB97E3200BDC8FB /* SASearchViewController.m in Sources */,
 				45B1D6111BBDC2ED004CBBB9 /* Model.xcdatamodeld in Sources */,
