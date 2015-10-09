@@ -12,7 +12,7 @@
 #import "Song.h"
 #import "Genre.h"
 
-NSString *const kArtistEntityName = @"Artist";
+NSString *const _Nonnull kArtistEntityName = @"Artist";
 
 @implementation Artist
 
@@ -28,5 +28,26 @@ NSString *const kArtistEntityName = @"Artist";
 - (NSArray *)albumsSortedByName {
     return [[self.albums allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 }
+
+- (void)setDetailsWithDictionary:(NSDictionary *)details {
+    self.spotifyID = details[@"id"];
+    self.name = details[@"name"];
+    self.popularity = [NSString stringWithFormat:@"%@%%", details[@"popularity"]];
+    
+    if ([details[@"images"] count] > 0) {
+        self.imageLocalURL = [[NSURL URLWithString:details[@"images"][0][@"url"]] absoluteString];
+    }
+    
+    if ([details[@"genres"] count] > 0) {
+        NSMutableSet *genreSet = [[NSMutableSet alloc] init];
+        for (NSString *genreName in details[@"genres"]){
+            Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
+            genre.name = genreName;
+            [genreSet addObject:genre];
+        }
+        self.genres = genreSet;
+    }
+}
+
 
 @end

@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Artist : NSManagedObject
 
-+ (Artist *)artistWithSpotifyID:(NSString *)spotifyID;
 - (Album *)albumWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)albumsSortedByName;
+- (void)setDetailsWithDictionary:(NSDictionary *)details;
 
 @end
 
