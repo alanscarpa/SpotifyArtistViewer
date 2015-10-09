@@ -25,10 +25,38 @@
         if (!artist){
             artist = [[SADataStore sharedDataStore] insertNewArtist];
         }
-        [artist setDetailsWithDictionary:artistDictionary];
+        [artist setDetailsWithName:artistDictionary[@"name"]
+                         spotifyID:artistDictionary[@"id"]
+                    imageURLString:[self imageURLFromDictionary:artistDictionary]
+                        popularity:[NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]]
+                            genres:[self genresFromDictionary:artistDictionary]];
         [artistsFromSearch addObject:artist];
     }
     return artistsFromSearch;
+}
+
+#pragma mark - Helper Methods
+         
++ (NSString *)imageURLFromDictionary:(NSDictionary *)dictionary {
+    if ([dictionary[@"images"] count] > 0) {
+        return [[NSURL URLWithString:dictionary[@"images"][0][@"url"]] absoluteString];
+    } else {
+        return nil;
+    }
+}
+
++ (NSSet *)genresFromDictionary:(NSDictionary *)dictionary {
+    if ([dictionary[@"genres"] count] > 0) {
+        NSMutableSet *genreSet = [[NSMutableSet alloc] init];
+        for (NSString *genreName in dictionary[@"genres"]){
+            Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
+            genre.name = genreName;
+            [genreSet addObject:genre];
+        }
+        return genreSet;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - Album Methods
@@ -40,7 +68,7 @@
             album = [[SADataStore sharedDataStore] insertNewAlbum];
             [artist addAlbumsObject:album];
         }
-        [album setDetailsWithDictionary:dictionary];
+        [album setDetailsWithName:dictionary[@"name"] spotifyID:dictionary[@"id"] andImageURLString:[self imageURLFromDictionary:dictionary]];
     }
     return [artist albumsSortedByName];
 }
@@ -54,7 +82,7 @@
             song = [[SADataStore sharedDataStore] insertNewSong];
             [album addSongsObject:song];
         }
-        [song setDetailsWithDictionary:dictionary];
+        [song setDetailsWithName:dictionary[@"name"] spotifyID:dictionary[@"id"] andTrackNumber:dictionary[@"track_number"]];
     }
     return [album songsSortedByTrackNumber];
 }

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Song : NSManagedObject
 
-- (void)setDetailsWithDictionary:(NSDictionary *)details;
+- (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID andTrackNumber:(NSString *)trackNumber;
 
 @end
 

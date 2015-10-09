@@ -13,10 +13,11 @@ NSString *const kSongEntityName = @"Song";
 
 @implementation Song
 
-- (void)setDetailsWithDictionary:(NSDictionary *)details {
-    self.name = details[@"name"];
-    self.trackNumber = details[@"track_number"];
-    self.spotifyID = details[@"id"];
+
+- (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID andTrackNumber:(NSNumber *)trackNumber {
+    self.name = name;
+    self.spotifyID = spotifyID;
+    self.trackNumber = trackNumber;
 }
 
 @end
