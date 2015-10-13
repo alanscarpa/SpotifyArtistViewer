@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString *const kAlbumEntityName;
+extern NSString *const _Nonnull kAlbumEntityName;
 
 @class Song;
 
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (Song *)songWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)songsSortedByTrackNumber;
+- (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID andImageURLString:(NSString *)imageURLString;
 
 @end
 

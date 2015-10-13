@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString *const kGenreEntityName;
+extern NSString *const _Nonnull kGenreEntityName;
 
 @class Artist;
 
