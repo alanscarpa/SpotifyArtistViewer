@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Artist.h"
 
-@interface SAArtistViewController : UIViewController
+@interface SAArtistDetailsViewController : UIViewController
 
 @property (nonatomic, strong) Artist *artist;
 

@@ -2,7 +2,7 @@
 //  Genre+CoreDataProperties.m
 //  Spotify Artist Viewer
 //
-//  Created by Alan Scarpa on 10/5/15.
+//  Created by Alan Scarpa on 10/8/15.
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,6 +14,6 @@
 @implementation Genre (CoreDataProperties)
 
 @dynamic name;
-@dynamic album;
+@dynamic artist;
 
 @end

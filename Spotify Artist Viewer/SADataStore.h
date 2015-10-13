@@ -7,14 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@class UIImage;
+@class NSManagedObjectContext;
+@class Artist;
+@class Album;
+@class Song;
+@class Genre;
 
 @interface SADataStore : NSObject
 
 @property (readonly, nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 + (instancetype)sharedDataStore;
+
 - (void)save;
-- (NSURL *)applicationDocumentsDirectory;
-- (NSArray *)favoritedArtists;
+
+- (NSArray *)fetchFavoritedArtists;
+- (NSArray *)fetchAllArtists;
+- (Artist *)fetchArtistWithSpotifyID:(NSString *)spotifyID;
+- (Artist *)insertNewArtist;
+- (void)flagArtistAsFavorite:(Artist *)artist;
+- (void)unflagArtistAsFavorite:(Artist *)artist;
+
+- (Album *)fetchAlbumWithSpotifyID:(NSString *)spotifyID;
+- (Album *)insertNewAlbum;
+
+- (NSArray *)fetchAllSongsFromAlbum:(Album *)album;
+- (Song *)insertNewSong;
+
+- (Genre *)insertNewGenre;
 
 @end

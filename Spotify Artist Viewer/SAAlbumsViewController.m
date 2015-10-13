@@ -9,12 +9,14 @@
 #import "SAAlbumsViewController.h"
 #import "Album.h"
 #import "SAAlbumsCollectionViewCell.h"
+#import "SAAlbumsCollectionViewCell+Customization.h"
 #import "SASongsViewController.h"
+#import "SAAFNetworkingManager.h"
 
 @interface SAAlbumsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (strong, nonatomic) NSArray *sortedAlbums;
+@property (strong, nonatomic) NSArray *albums;
 
 @end
 
@@ -22,26 +24,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self sortAlbums];
+    [self loadAlbums];
 }
 
-- (void)sortAlbums {
-    self.sortedAlbums = [[self.artist.album allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+- (void)loadAlbums {
+    [SAAFNetworkingManager getArtistAlbums:self.artist.spotifyID withCompletionHandler:^(NSArray *albums, NSError *error) {
+        if (!error) {
+            self.albums = albums;
+            [self.collectionView reloadData];
+        } else {
+            NSLog(@"Error getting albums: %@", error);
+        }
+    }];
 }
 
 #pragma mark UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sortedAlbums.count;
+    return self.albums.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SAAlbumsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SAAlbumsCollectionViewCell class]) forIndexPath:indexPath];
-    [cell customizeCellWithAlbum:self.sortedAlbums[indexPath.row]];
+    SAAlbumsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SAAlbumsCollectionViewCell class])
+                                                                                 forIndexPath:indexPath];
+    [cell customizeCellWithAlbum:self.albums[indexPath.row]];
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4);
 }
 
@@ -50,7 +62,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     SASongsViewController *destinationVC = [segue destinationViewController];
-    destinationVC.album = self.sortedAlbums[indexPath.row];
+    destinationVC.album = self.albums[indexPath.row];
 }
 
 @end

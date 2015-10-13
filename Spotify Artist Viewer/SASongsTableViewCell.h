@@ -13,6 +13,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *trackNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *songNameLabel;
-- (void)customizeCellWithCoreDataSong:(Song *)song;
 
 @end

@@ -2,7 +2,7 @@
 //  Album+CoreDataProperties.m
 //  Spotify Artist Viewer
 //
-//  Created by Alan Scarpa on 10/5/15.
+//  Created by Alan Scarpa on 10/13/15.
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,10 @@
 
 @implementation Album (CoreDataProperties)
 
-@dynamic imageLocalURL;
+@dynamic imageURLString;
 @dynamic name;
 @dynamic spotifyID;
 @dynamic artist;
-@dynamic song;
+@dynamic songs;
 
 @end
