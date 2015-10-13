@@ -14,7 +14,6 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Artist"];
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"isFavorite == YES"];
-    
     return [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                managedObjectContext:managedObjectContext
                                                  sectionNameKeyPath:nil
