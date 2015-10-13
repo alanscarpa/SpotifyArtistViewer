@@ -47,7 +47,10 @@
             album = [[SADataStore sharedDataStore] insertNewAlbum];
             [artist addAlbumsObject:album];
         }
-        [album setDetailsWithName:dictionary[@"name"] spotifyID:dictionary[@"id"] andImageURLString:[self imageURLFromDictionary:dictionary]];
+        [album setDetailsWithName:dictionary[@"name"]
+                        spotifyID:dictionary[@"id"]
+                andImageURLString:[self imageURLFromDictionary:dictionary]];
+        [SALocalFileManager saveImage:album.imageURLString withName:album.spotifyID];
     }
     return [artist albumsSortedByName];
 }
