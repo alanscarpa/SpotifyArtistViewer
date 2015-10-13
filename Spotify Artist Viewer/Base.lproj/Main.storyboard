@@ -9,7 +9,7 @@
         <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SASearchViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="SASearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,10 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5ov-BH-D1P">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search 👀" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4jY-e9-CIq" customClass="MLPAutoCompleteTextField">
+                                <rect key="frame" x="20" y="70" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkI-Oj-Dxr" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <subviews>
@@ -196,14 +197,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5ov-BH-D1P" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Bud-OQ-tqO"/>
                             <constraint firstAttribute="trailing" secondItem="hkI-Oj-Dxr" secondAttribute="trailing" id="G2d-JE-Mpd"/>
-                            <constraint firstItem="5ov-BH-D1P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K7f-c0-2dt"/>
-                            <constraint firstItem="hkI-Oj-Dxr" firstAttribute="top" secondItem="5ov-BH-D1P" secondAttribute="bottom" id="Ky6-cs-GGB"/>
+                            <constraint firstItem="4jY-e9-CIq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="KhB-dW-0Yo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hkI-Oj-Dxr" secondAttribute="bottom" id="Q1o-di-dhT"/>
-                            <constraint firstAttribute="trailing" secondItem="5ov-BH-D1P" secondAttribute="trailing" id="R4H-sj-z3h"/>
                             <constraint firstItem="hkI-Oj-Dxr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YBQ-RA-3LG"/>
-                            <constraint firstItem="5ov-BH-D1P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jkL-UE-6V5"/>
+                            <constraint firstItem="hkI-Oj-Dxr" firstAttribute="top" secondItem="4jY-e9-CIq" secondAttribute="bottom" constant="8" id="gVX-fP-daF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4jY-e9-CIq" secondAttribute="trailing" id="sDa-hA-PwL"/>
+                            <constraint firstItem="4jY-e9-CIq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="6" id="uNa-f8-nKb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="bTw-IC-tgc">
@@ -234,7 +234,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="UQf-Bn-JZP" id="WiM-SV-Vpi"/>
-                        <outlet property="searchBar" destination="5ov-BH-D1P" id="3s4-8N-BJF"/>
+                        <outlet property="containerView" destination="hkI-Oj-Dxr" id="1zj-4C-TTJ"/>
+                        <outlet property="searchBar" destination="4jY-e9-CIq" id="rNS-CN-Bqn"/>
                         <outlet property="searchDisplayController" destination="lfY-dO-ehq" id="aj3-pC-ojb"/>
                         <outlet property="segmentedControl" destination="dpS-kJ-fSP" id="gri-nx-MDF"/>
                         <outlet property="tableView" destination="PO2-5k-54x" id="Sd0-zu-0pW"/>

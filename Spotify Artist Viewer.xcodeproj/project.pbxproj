@@ -31,6 +31,7 @@
 		453770391BC58E7C001478DA /* SADataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770381BC58E7C001478DA /* SADataTransformer.m */; settings = {ASSET_TAGS = (); }; };
 		453770441BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770431BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m */; settings = {ASSET_TAGS = (); }; };
 		453770471BCD4ED6001478DA /* SALocalFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770461BCD4ED6001478DA /* SALocalFileManager.m */; settings = {ASSET_TAGS = (); }; };
+		4537704A1BCD85BA001478DA /* SAAutoCompleteDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 453770491BCD85BA001478DA /* SAAutoCompleteDataSource.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7E61BBB2BB000791E01 /* SAAFNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EB1BBB3B3700791E01 /* SASearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7EA1BBB3B3700791E01 /* SASearchTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		456ED7EE1BBC241F00791E01 /* SASearchTableViewCell+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 456ED7ED1BBC241F00791E01 /* SASearchTableViewCell+Customization.m */; settings = {ASSET_TAGS = (); }; };
@@ -114,6 +115,8 @@
 		453770431BC6EFF9001478DA /* NSFetchedResultsController+SAHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+SAHelpers.m"; sourceTree = "<group>"; };
 		453770451BCD4ED6001478DA /* SALocalFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALocalFileManager.h; sourceTree = "<group>"; };
 		453770461BCD4ED6001478DA /* SALocalFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SALocalFileManager.m; sourceTree = "<group>"; };
+		453770481BCD85BA001478DA /* SAAutoCompleteDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAutoCompleteDataSource.h; sourceTree = "<group>"; };
+		453770491BCD85BA001478DA /* SAAutoCompleteDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAutoCompleteDataSource.m; sourceTree = "<group>"; };
 		456ED7E41BBB2BB000791E01 /* SAAFNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAFNetworkingManager.h; sourceTree = "<group>"; };
 		456ED7E51BBB2BB000791E01 /* SAAFNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAFNetworkingManager.m; sourceTree = "<group>"; };
 		456ED7E91BBB3B3700791E01 /* SASearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchTableViewCell.h; sourceTree = "<group>"; };
@@ -296,6 +299,8 @@
 				453770461BCD4ED6001478DA /* SALocalFileManager.m */,
 				453770371BC58E7C001478DA /* SADataTransformer.h */,
 				453770381BC58E7C001478DA /* SADataTransformer.m */,
+				453770481BCD85BA001478DA /* SAAutoCompleteDataSource.h */,
+				453770491BCD85BA001478DA /* SAAutoCompleteDataSource.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 				456ED7F11BBC2FCF00791E01 /* SAInfiniteScrollHandler.m in Sources */,
 				45B1D62A1BBDDD8C004CBBB9 /* SAFavoritesViewController.m in Sources */,
 				45B1D6211BBDC669004CBBB9 /* Album.m in Sources */,
+				4537704A1BCD85BA001478DA /* SAAutoCompleteDataSource.m in Sources */,
 				451F7AF11BC2B7DA0013226C /* SAAlbumsViewController.m in Sources */,
 				451F7B071BC30B870013226C /* Genre.m in Sources */,
 				45A66A441BC7F7A500E0D5FA /* SAConstants.m in Sources */,

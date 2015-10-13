@@ -18,22 +18,31 @@
 #import "Artist.h"
 #import "Album.h"
 #import "Song.h"
+#import "MLPAutoCompleteTextField.h"
+#import "MLPAutoCompleteTextFieldDelegate.h"
+#import "SAAutoCompleteDataSource.h"
 
 static NSInteger const kReturnLimit = 10;
 NSString *const kFavoritesSegueIdentifier = @"favoritesSegue";
 NSString *const kArtistDetailsFromCollectionViewSegueIdentifier = @"artistDetailsSegueFromCollectionView";
 NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegueFromTableView";
 
-@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
+@interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UITextFieldDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate, MLPAutoCompleteTextFieldDelegate, UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
-@property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
+@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *searchBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) NSMutableArray *tableViewConstraints;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) SADataStore *dataStore;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+@property (strong, nonatomic) SADataStore *dataStore;
+@property (strong, nonatomic) SAInfiniteScrollHandler *infiniteScrollHandler;
+@property (strong, nonatomic) SAAutoCompleteDataSource *autocompleteDataSource;
+
+@property (strong, nonatomic) NSMutableArray *tableViewConstraints;
+@property (strong, nonatomic) NSMutableArray *artistsFromSearch;
+
+@property (strong, nonatomic) UITapGestureRecognizer *scrollViewTapGestureRecognizer;
 
 @end
 
@@ -41,10 +50,20 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpAutoComplete];
     [self prepareCoreData];
     [self prepareArtistsArray];
-    [self setSearchBarDelegate];
     [self setUpInfiniteScroll];
+    [self setUpTapGestureRecognizer];
+}
+
+- (void)setUpAutoComplete {
+    self.autocompleteDataSource = [[SAAutoCompleteDataSource alloc] init];
+    self.searchBar.autoCompleteDataSource = self.autocompleteDataSource;
+    self.searchBar.delegate = self;
+    self.searchBar.autoCompleteDelegate = self;
+    self.searchBar.sortAutoCompleteSuggestionsByClosestMatch = YES;
+    self.searchBar.reverseAutoCompleteSuggestionsBoldEffect = YES;
 }
 
 - (void)prepareCoreData {
@@ -55,15 +74,18 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
     self.artistsFromSearch = [[NSMutableArray alloc] init];
 }
 
-- (void)setSearchBarDelegate {
-    self.searchBar.delegate = self;
-}
-
 - (void)setUpInfiniteScroll {
     self.infiniteScrollHandler = [[SAInfiniteScrollHandler alloc] init];
     self.infiniteScrollHandler.delegate = self;
     [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.tableView];
     [self.infiniteScrollHandler addInfiniteScrollOnScrollView:self.collectionView];
+}
+
+- (void)setUpTapGestureRecognizer {
+    self.scrollViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapReceived:)];
+    self.scrollViewTapGestureRecognizer.delegate = self;
+    self.scrollViewTapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.containerView addGestureRecognizer:self.scrollViewTapGestureRecognizer];
 }
 
 #pragma mark - Segmented Control
@@ -95,25 +117,6 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
                        options:UIViewAnimationOptionTransitionFlipFromLeft | UIViewAnimationOptionShowHideTransitionViews
                     completion:nil];
 }
-
-#pragma mark - Search function
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self clearPreviousArtistSearchResults];
-    [self resetInfiniteScrollOffset];
-    [self requestAdditionalIemsWithScrollHandler:self.infiniteScrollHandler];
-    [self.searchBar resignFirstResponder];
-}
-
-- (void)clearPreviousArtistSearchResults {
-    [self.artistsFromSearch removeAllObjects];
-}
-
-- (void)resetInfiniteScrollOffset {
-    self.infiniteScrollHandler.offset = 0;
-}
-
-#pragma mark - SAInfiniteScrollHandlerDelegate
 
 - (void)requestAdditionalIemsWithScrollHandler:(SAInfiniteScrollHandler *)scrollHandler {
     [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text
@@ -197,5 +200,63 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
         [self.dataStore flagArtistAsFavorite:self.artistsFromSearch[indexPath.row]];
     }
 }
+
+#pragma mark - UITextfield Delegate Methods
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    textField.text = nil;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self searchForArtists];
+    [textField resignFirstResponder];
+    return NO;
+}
+
+#pragma mark - UITapGestureRecognizer Delegate Methods
+
+- (void)scrollViewTapReceived:(UITapGestureRecognizer *)tapGestureRecognizer {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Search function
+
+- (void)searchForArtists {
+    [self clearPreviousArtistSearchResults];
+    [self resetInfiniteScrollOffset];
+    [self requestAdditionalIemsWithScrollHandler:self.infiniteScrollHandler];
+}
+
+- (void)clearPreviousArtistSearchResults {
+    [self.artistsFromSearch removeAllObjects];
+}
+
+- (void)resetInfiniteScrollOffset {
+    self.infiniteScrollHandler.offset = 0;
+}
+
+#pragma mark - MLPAutoCompleteTextField Delegate
+
+- (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+          shouldConfigureCell:(UITableViewCell *)cell
+       withAutoCompleteString:(NSString *)autocompleteString
+         withAttributedString:(NSAttributedString *)boldedString
+        forAutoCompleteObject:(id<MLPAutoCompletionObject>)autocompleteObject
+            forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //This is your chance to customize an autocomplete tableview cell before it appears in the autocomplete tableview
+    return YES;
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+  didSelectAutoCompleteString:(NSString *)selectedString
+       withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
+            forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (selectedObject) {
+        NSLog(@"selected object from autocomplete menu %@ with string %@", selectedObject, [selectedObject autocompleteString]);
+        [self searchForArtists];
+    } else {
+        NSLog(@"selected string '%@' from autocomplete menu", selectedString);
+    }
+};
 
 @end

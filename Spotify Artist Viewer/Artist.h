@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "MLPAutoCompletionObject.h"
 
 extern NSString *const _Nonnull kArtistEntityName;
 
@@ -15,7 +16,7 @@ extern NSString *const _Nonnull kArtistEntityName;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Artist : NSManagedObject
+@interface Artist : NSManagedObject <MLPAutoCompletionObject>
 
 - (Album *)albumWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)albumsSortedByName;

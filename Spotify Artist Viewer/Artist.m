@@ -41,4 +41,10 @@ NSString *const _Nonnull kArtistEntityName = @"Artist";
     self.genres = genres;
 }
 
+#pragma mark - MLPAutoCompletionObject Protocl
+
+- (NSString *)autocompleteString {
+    return self.name;
+}
+
 @end
