@@ -15,6 +15,8 @@
 #import "SAFavoritesTableViewCell+Customization.h"
 #import "NSFetchedResultsController+SAHelpers.h"
 
+NSString *const kArtistDetailsSegueIdentifier = @"artistDetailsSegue";
+
 @interface SAFavoritesViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -128,7 +130,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"artistDetailsSegue" sender:nil];
+    [self performSegueWithIdentifier:kArtistDetailsSegueIdentifier sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

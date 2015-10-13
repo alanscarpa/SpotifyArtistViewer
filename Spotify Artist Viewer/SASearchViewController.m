@@ -21,6 +21,9 @@
 #import "SDImageCache.h"
 
 static NSInteger const kReturnLimit = 10;
+NSString *const kFavoritesSegueIdentifier = @"favoritesSegue";
+NSString *const kArtistDetailsFromCollectionViewSegueIdentifier = @"artistDetailsSegueFromCollectionView";
+NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegueFromTableView";
 
 @interface SASearchViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SAInfiniteScrollHandlerDelegate, SASearchTableViewCellDelegate>
 
@@ -165,7 +168,7 @@ static NSInteger const kReturnLimit = 10;
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if (![segue.identifier isEqualToString:@"favoritesSegue"]) {
+    if (![segue.identifier isEqualToString:kFavoritesSegueIdentifier]) {
         SAArtistDetailsViewController *destinationVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self indexPathFromSegue:segue andSender:sender];
         destinationVC.artist = self.artistsFromSearch[indexPath.row];
@@ -173,7 +176,7 @@ static NSInteger const kReturnLimit = 10;
 }
 
 - (NSIndexPath *)indexPathFromSegue:(UIStoryboardSegue *)segue andSender:(id)sender {
-    if ([segue.identifier isEqualToString:@"artistProfileSegueFromCollectionView"]) {
+    if ([segue.identifier isEqualToString:kArtistDetailsFromCollectionViewSegueIdentifier]) {
         return [self.collectionView indexPathForCell:sender];
     } else {
         return [self.tableView indexPathForSelectedRow];

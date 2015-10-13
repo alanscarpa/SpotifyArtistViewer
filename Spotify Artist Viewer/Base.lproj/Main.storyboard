@@ -75,7 +75,7 @@
                                                     <outlet property="activityIndicatorView" destination="Ok7-Nf-9Yx" id="PYO-TU-Xic"/>
                                                     <outlet property="artistNameLabel" destination="pC1-lm-N8H" id="bKC-fU-Mgp"/>
                                                     <outlet property="profileImageView" destination="52z-pe-Fps" id="qIO-yK-RAG"/>
-                                                    <segue destination="5f7-SC-lz8" kind="show" identifier="artistProfileSegueFromCollectionView" id="nQ3-Fr-V6a"/>
+                                                    <segue destination="5f7-SC-lz8" kind="show" identifier="artistDetailsSegueFromCollectionView" id="nQ3-Fr-V6a"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -171,7 +171,7 @@
                                                     <outlet property="artistNameOffsetConstraint" destination="KcW-Gb-EdN" id="7Tm-e5-81q"/>
                                                     <outlet property="artistPopularityPercentageLabel" destination="620-Q8-msv" id="jKk-Vk-0bp"/>
                                                     <outlet property="favoriteButton" destination="1si-hk-Gsl" id="hrX-6J-bS7"/>
-                                                    <segue destination="5f7-SC-lz8" kind="show" identifier="artistProfileSegueFromTableView" id="lTY-r1-5eJ"/>
+                                                    <segue destination="5f7-SC-lz8" kind="show" identifier="artistDetailsSegueFromTableView" id="lTY-r1-5eJ"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -535,6 +535,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wgd-Je-URg"/>
+        <segue reference="nQ3-Fr-V6a"/>
     </inferredMetricsTieBreakers>
 </document>
