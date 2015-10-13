@@ -434,7 +434,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcx-Ql-aWe" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="461"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="ifs-jR-bFf">
                                                 <rect key="frame" x="16" y="36" width="568" height="21"/>
@@ -449,19 +449,26 @@
                                                 <rect key="frame" x="282" y="163" width="37" height="37"/>
                                                 <color key="color" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
-                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
-                                                <rect key="frame" x="30" y="309" width="540" height="117"/>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
+                                                <rect key="frame" x="30" y="308" width="540" height="212"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLV-ab-UAo">
-                                                <rect key="frame" x="259" y="281" width="82" height="30"/>
+                                                <rect key="frame" x="259" y="280" width="82" height="30"/>
                                                 <state key="normal" title="See Albums"/>
                                                 <connections>
                                                     <segue destination="lhq-zg-Gfl" kind="show" id="xVT-8Z-UYI"/>
                                                 </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Yb-wb-zGB">
+                                                <rect key="frame" x="285" y="54" width="30" height="30"/>
+                                                <state key="normal" title="♥"/>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -470,6 +477,7 @@
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="centerX" secondItem="Bcx-Ql-aWe" secondAttribute="centerX" id="Bic-Dc-lbu"/>
                                             <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="ifs-jR-bFf" secondAttribute="bottom" constant="36" id="G9i-ke-K5M"/>
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="top" secondItem="FLV-ab-UAo" secondAttribute="bottom" constant="-2" id="HQs-Hm-Ix5"/>
+                                            <constraint firstItem="1Yb-wb-zGB" firstAttribute="top" secondItem="ifs-jR-bFf" secondAttribute="bottom" constant="-3" id="KlV-Zc-nPa"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="leading" secondItem="Bcx-Ql-aWe" secondAttribute="leading" constant="16" id="NK4-yH-BPw"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerX" secondItem="EXz-le-fv5" secondAttribute="centerX" id="NU5-mm-Ram"/>
                                             <constraint firstItem="M7S-x2-nuz" firstAttribute="centerY" secondItem="EXz-le-fv5" secondAttribute="centerY" id="VaP-Rb-dEk"/>
@@ -480,11 +488,20 @@
                                             <constraint firstAttribute="trailing" secondItem="ifs-jR-bFf" secondAttribute="trailing" constant="16" id="pbE-L8-zRg"/>
                                             <constraint firstAttribute="trailing" secondItem="8YC-SY-IAz" secondAttribute="trailing" constant="30" id="qd0-4t-7c6"/>
                                             <constraint firstAttribute="bottom" secondItem="8YC-SY-IAz" secondAttribute="bottom" constant="36" id="uYC-V8-gok"/>
+                                            <constraint firstItem="1Yb-wb-zGB" firstAttribute="centerX" secondItem="ifs-jR-bFf" secondAttribute="centerX" id="wfI-Ka-W50"/>
+                                            <constraint firstItem="EXz-le-fv5" firstAttribute="top" secondItem="1Yb-wb-zGB" secondAttribute="bottom" constant="8" id="yj0-zh-4OK"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="G9i-ke-K5M"/>
+                                                <exclude reference="uYC-V8-gok"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Bcx-Ql-aWe" firstAttribute="width" secondItem="PFK-c9-eDS" secondAttribute="width" id="55C-BS-LGC"/>
+                                    <constraint firstItem="Bcx-Ql-aWe" firstAttribute="height" secondItem="PFK-c9-eDS" secondAttribute="height" id="T8l-Ue-bJb"/>
                                     <constraint firstItem="Bcx-Ql-aWe" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="top" id="hFE-Bu-lev"/>
                                     <constraint firstAttribute="bottom" secondItem="Bcx-Ql-aWe" secondAttribute="bottom" id="pu3-zk-UJE"/>
                                     <constraint firstAttribute="trailing" secondItem="Bcx-Ql-aWe" secondAttribute="trailing" id="qtt-6l-M0u"/>
@@ -498,6 +515,7 @@
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="leading" secondItem="IWf-2I-7PJ" secondAttribute="leading" id="Je3-xf-qkF"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="centerX" secondItem="IWf-2I-7PJ" secondAttribute="centerX" id="LKK-vY-wed"/>
                             <constraint firstItem="DY7-dj-i7g" firstAttribute="top" secondItem="PFK-c9-eDS" secondAttribute="bottom" id="X5u-Uq-Avj"/>
+                            <constraint firstItem="8YC-SY-IAz" firstAttribute="bottom" secondItem="DY7-dj-i7g" secondAttribute="top" constant="-16" id="hPd-Rt-w43"/>
                             <constraint firstAttribute="trailing" secondItem="PFK-c9-eDS" secondAttribute="trailing" id="iGF-7A-h5r"/>
                             <constraint firstItem="PFK-c9-eDS" firstAttribute="top" secondItem="RyH-sx-x11" secondAttribute="bottom" id="im4-hi-k2R"/>
                             <constraint firstItem="EXz-le-fv5" firstAttribute="height" secondItem="IWf-2I-7PJ" secondAttribute="height" multiplier="0.3" id="q9K-ty-RJT"/>

@@ -22,7 +22,7 @@
     NSMutableArray *artistsFromSearch = [[NSMutableArray alloc] init];
     for (NSDictionary *artistDictionary in JSONDictionary[@"artists"][@"items"]) {
         Artist *artist = [[SADataStore sharedDataStore] fetchArtistWithSpotifyID:artistDictionary[@"id"]];
-        if (!artist){
+        if (!artist) {
             artist = [[SADataStore sharedDataStore] insertNewArtist];
         }
         [artist setDetailsWithName:artistDictionary[@"name"]
@@ -30,6 +30,8 @@
                     imageURLString:[self imageURLFromDictionary:artistDictionary]
                         popularity:[NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]]
                             genres:[self genresFromDictionary:artistDictionary]];
+        
+        
         [artistsFromSearch addObject:artist];
     }
     return artistsFromSearch;
@@ -84,7 +86,7 @@
 + (NSSet *)genresFromDictionary:(NSDictionary *)dictionary {
     if ([dictionary[@"genres"] count] > 0) {
         NSMutableSet *genreSet = [[NSMutableSet alloc] init];
-        for (NSString *genreName in dictionary[@"genres"]){
+        for (NSString *genreName in dictionary[@"genres"]) {
             Genre *genre = [[SADataStore sharedDataStore] insertNewGenre];
             genre.name = genreName;
             [genreSet addObject:genre];

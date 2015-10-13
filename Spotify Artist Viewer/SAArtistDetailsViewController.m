@@ -58,6 +58,7 @@
 #warning show cached version when enting VC, but update after download
             self.biographyTextView.text = artistBio;
             self.biographyTextView.hidden = NO;
+            [self.biographyTextView flashScrollIndicators];
         } else {
             NSLog(@"Error calling echonest: %@", error);
         }
