@@ -13,6 +13,7 @@
 #import "Genre.h"
 #import "Album.h"
 #import "Song.h"
+#import "SAConstants.h"
 
 @implementation SACoreDataTransformer
 
@@ -98,7 +99,7 @@
 }
 
 + (NSString *)biographyFromDictionary:(NSDictionary *)dictionary {
-    NSString *artistBio = @"No bio available";
+    NSString *artistBio = kNoBioAvailableText;
     for (NSDictionary *bio in dictionary[@"response"][@"artist"][@"biographies"]) {
         // Find the first full biography if there is one
         if ((NSUInteger)bio[@"truncated"] == 0) {

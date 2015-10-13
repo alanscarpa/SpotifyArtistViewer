@@ -11,5 +11,6 @@
 @implementation SAConstants
 
 NSString *const kNoImagePhotoName = @"noImage.jpg";
+NSString *const kNoBioAvailableText = @"No bio available";
 
 @end

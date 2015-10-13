@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpUI];
+    [self loadCachedBio];
     [self getArtistBioFromEchoNest];
 }
 
@@ -35,6 +36,18 @@
     [self.activityIndicator startAnimating];
     [self setArtistName];
     [self setArtistImage];
+}
+
+- (void)loadCachedBio {
+    if (self.artist.biography) {
+        [self updateBiographyTextViewWithBio:self.artist.biography];
+    }
+}
+
+- (void)updateBiographyTextViewWithBio:(NSString *)bio {
+    self.biographyTextView.text = bio;
+    [self.biographyTextView flashScrollIndicators];
+    [self.biographyTextView setContentOffset:CGPointZero animated:NO];
 }
 
 - (void)setArtistName {
@@ -55,10 +68,7 @@
 - (void)getArtistBioFromEchoNest {
     [SAAFNetworkingManager getArtistBiography:self.artist.spotifyID withCompletionHandler:^(NSString *artistBio, NSError *error) {
         if (!error) {
-#warning show cached version when enting VC, but update after download
-            self.biographyTextView.text = artistBio;
-            self.biographyTextView.hidden = NO;
-            [self.biographyTextView flashScrollIndicators];
+            [self updateBiographyTextViewWithBio:artistBio];
         } else {
             NSLog(@"Error calling echonest: %@", error);
         }

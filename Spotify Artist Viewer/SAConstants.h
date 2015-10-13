@@ -11,5 +11,6 @@
 @interface SAConstants : NSObject
 
 extern NSString *const kNoImagePhotoName;
+extern NSString *const kNoBioAvailableText;
 
 @end
