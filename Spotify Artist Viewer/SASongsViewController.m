@@ -24,14 +24,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self registerTableViewCell];
-    [self loadSongs];
+    [self loadCachedSongs];
+    [self downloadLatestSongs];
 }
 
 - (void)registerTableViewCell {
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SASongsTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SASongsTableViewCell class])];
 }
 
-- (void)loadSongs {
+- (void)loadCachedSongs {
+    if (self.album.songs.count > 0) {
+        self.songs = [self.album songsSortedByTrackNumber];
+    }
+}
+
+- (void)downloadLatestSongs {
     [SAAFNetworkingManager getAlbumSongs:self.album.spotifyID withCompletionHandler:^(NSArray *songs, NSError *error) {
         if (!error) {
             self.songs = songs;
