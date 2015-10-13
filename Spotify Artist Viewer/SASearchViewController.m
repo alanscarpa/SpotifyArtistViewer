@@ -237,16 +237,6 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
 
 #pragma mark - MLPAutoCompleteTextField Delegate
 
-- (BOOL)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
-          shouldConfigureCell:(UITableViewCell *)cell
-       withAutoCompleteString:(NSString *)autocompleteString
-         withAttributedString:(NSAttributedString *)boldedString
-        forAutoCompleteObject:(id<MLPAutoCompletionObject>)autocompleteObject
-            forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //This is your chance to customize an autocomplete tableview cell before it appears in the autocomplete tableview
-    return YES;
-}
-
 - (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
   didSelectAutoCompleteString:(NSString *)selectedString
        withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
