@@ -85,7 +85,7 @@
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
     for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
         Album *album = [artist albumWithSpotifyID:dictionary[@"id"]];
-        if (!album){
+        if (!album) {
             album = [[SADataStore sharedDataStore] insertNewAlbum];
             [artist addAlbumsObject:album];
         }

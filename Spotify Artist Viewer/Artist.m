@@ -22,7 +22,6 @@ NSString *const kArtistEntityName = @"Artist";
     }
     return nil;
 }
-
 ///////
 //+ (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist {
 //    for (NSDictionary *dictionary in JSONDictionary[@"items"]) {
