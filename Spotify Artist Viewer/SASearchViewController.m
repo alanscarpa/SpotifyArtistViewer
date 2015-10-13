@@ -18,7 +18,6 @@
 #import "Artist.h"
 #import "Album.h"
 #import "Song.h"
-#import "SDImageCache.h"
 
 static NSInteger const kReturnLimit = 10;
 NSString *const kFavoritesSegueIdentifier = @"favoritesSegue";
@@ -117,7 +116,10 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
 #pragma mark - SAInfiniteScrollHandlerDelegate
 
 - (void)requestAdditionalIemsWithScrollHandler:(SAInfiniteScrollHandler *)scrollHandler {
-    [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text withReturnLimit:kReturnLimit withOffset:self.artistsFromSearch.count withCompletionHandler:^(NSArray *artists, NSError *error) {
+    [SAAFNetworkingManager searchForArtistsWithQuery:self.searchBar.text
+                                     withReturnLimit:kReturnLimit
+                                          withOffset:self.artistsFromSearch.count
+                               withCompletionHandler:^(NSArray *artists, NSError *error) {
         if (artists) {
             [self updateArtistsWithSearchResults:artists];
         } else {
@@ -161,7 +163,9 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(self.view.frame.size.width / 2, self.view.frame.size.height / 4);
 }
 

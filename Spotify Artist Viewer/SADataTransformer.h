@@ -10,7 +10,7 @@
 @class Artist;
 @class Album;
 
-@interface SACoreDataTransformer : NSObject
+@interface SADataTransformer : NSObject
 
 + (NSArray *)artistsFromDictionary:(NSDictionary *)JSONDictionary;
 + (NSArray *)albumsFromDictionary:(NSDictionary *)JSONDictionary forArtist:(Artist *)artist;

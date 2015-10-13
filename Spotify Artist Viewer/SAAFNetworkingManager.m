@@ -9,7 +9,7 @@
 #import "SAAFNetworkingManager.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SADataStore.h"
-#import "SACoreDataTransformer.h"
+#import "SADataTransformer.h"
 
 @implementation SAAFNetworkingManager
 
@@ -59,19 +59,19 @@
 #pragma mark - Helper Methods
 
 + (NSArray *)artistsFromJSONDictionary:(NSDictionary *)JSONDictionary {
-    return [SACoreDataTransformer artistsFromDictionary:JSONDictionary];
+    return [SADataTransformer artistsFromDictionary:JSONDictionary];
 }
 
 + (NSArray *)albumsFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer albumsFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
+    return [SADataTransformer albumsFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
 }
 
 + (NSArray *)songsFromJSONDictionary:(NSDictionary *)JSONDictionary withAlbumSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer songsFromDictionary:JSONDictionary forAlbum:[[SADataStore sharedDataStore] fetchAlbumWithSpotifyID:spotifyID]];
+    return [SADataTransformer songsFromDictionary:JSONDictionary forAlbum:[[SADataStore sharedDataStore] fetchAlbumWithSpotifyID:spotifyID]];
 }
 
 + (NSString *)bioFromJSONDictionary:(NSDictionary *)JSONDictionary withArtistSpotifyID:(NSString *)spotifyID {
-    return [SACoreDataTransformer bioFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
+    return [SADataTransformer bioFromDictionary:JSONDictionary forArtist:[[SADataStore sharedDataStore] fetchArtistWithSpotifyID:spotifyID]];
 }
 
 @end

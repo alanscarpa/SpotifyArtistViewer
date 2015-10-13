@@ -32,7 +32,7 @@ NSString *const _Nonnull kArtistEntityName = @"Artist";
 - (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID imageURLString:(NSString *)imageUrlString popularity:(NSString *)popularity genres:(NSSet *)genres {
     self.name = name;
     self.spotifyID = spotifyID;
-    self.imageLocalURL = imageUrlString;
+    self.imageURLString = imageUrlString;
     self.popularity = popularity;
     self.genres = genres;
 }

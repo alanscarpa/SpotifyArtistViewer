@@ -7,15 +7,16 @@
 //  Copyright © 2015 Intrepid. All rights reserved.
 //
 
-#import "SACoreDataTransformer.h"
+#import "SADataTransformer.h"
 #import "SADataStore.h"
 #import "Artist.h"
 #import "Genre.h"
 #import "Album.h"
 #import "Song.h"
 #import "SAConstants.h"
+#import "SALocalFileManager.h"
 
-@implementation SACoreDataTransformer
+@implementation SADataTransformer
 
 #pragma mark - Artist Methods
 
@@ -31,8 +32,7 @@
                     imageURLString:[self imageURLFromDictionary:artistDictionary]
                         popularity:[NSString stringWithFormat:@"%@%%", artistDictionary[@"popularity"]]
                             genres:[self genresFromDictionary:artistDictionary]];
-        
-        
+        [SALocalFileManager saveImage:artist.imageURLString withName:artist.spotifyID];
         [artistsFromSearch addObject:artist];
     }
     return artistsFromSearch;
@@ -96,6 +96,10 @@
     } else {
         return nil;
     }
+}
+
++ (void)saveImageToLocalFileDirectory:(NSString *)imageURLString forArtist:(Artist *)artist {
+    
 }
 
 + (NSString *)biographyFromDictionary:(NSDictionary *)dictionary {

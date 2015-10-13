@@ -11,6 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SAAlbumsViewController.h"
 #import "SAConstants.h"
+#import "SALocalFileManager.h"
 
 @interface SAArtistDetailsViewController ()
 
@@ -55,14 +56,26 @@
 }
 
 - (void)setArtistImage {
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.artist.imageLocalURL]
-                         placeholderImage:nil
-                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                    [self.activityIndicator stopAnimating];
-                                    if (error) {
-                                        self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
-                                    }
-                                }];
+    [self loadCachedProfileImage];
+    [self loadLatestProfileImage];
+}
+
+- (void)loadCachedProfileImage {
+    UIImage *cachedImage = [SALocalFileManager fetchImageNamed:self.artist.spotifyID];
+    if (cachedImage) {
+        self.profileImageView.image = cachedImage;
+    }
+}
+
+- (void)loadLatestProfileImage {
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:self.artist.imageURLString]
+                             placeholderImage:nil
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        [self.activityIndicator stopAnimating];
+                                        if (error) {
+                                            self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
+                                        }
+                                    }];
 }
 
 - (void)getArtistBioFromEchoNest {

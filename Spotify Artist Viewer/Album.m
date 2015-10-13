@@ -30,7 +30,7 @@ NSString *const kAlbumEntityName = @"Album";
 - (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID andImageURLString:(NSString *)imageURLString {
     self.name = name;
     self.spotifyID = spotifyID;
-    self.imageLocalURL = imageURLString;
+    self.imageURLString = imageURLString;
 }
 
 @end

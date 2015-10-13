@@ -10,12 +10,25 @@
 #import "SADataStore.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SAConstants.h"
+#import "SALocalFileManager.h"
 
 @implementation SAFavoritesTableViewCell (Customization)
 
 - (void)customizeCellWithArtist:(Artist *)artist {
     self.artistNameLabel.text = artist.name;
-    [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
+    [self loadCachedImageForArtist:artist];
+    [self loadLatestImageForArtist:artist];
+}
+
+- (void)loadCachedImageForArtist:(Artist *)artist {
+    UIImage *cachedImage = [SALocalFileManager fetchImageNamed:artist.spotifyID];
+    if (cachedImage) {
+        self.artistImageView.image = cachedImage;
+    }
+}
+
+- (void)loadLatestImageForArtist:(Artist *)artist {
+    [self.artistImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageURLString]
                             placeholderImage:nil
                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                        if (error) {

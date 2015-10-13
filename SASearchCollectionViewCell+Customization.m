@@ -9,6 +9,7 @@
 #import "SASearchCollectionViewCell+Customization.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SAConstants.h"
+#import "SALocalFileManager.h"
 
 @implementation SASearchCollectionViewCell (Customization)
 
@@ -16,14 +17,8 @@
     [self.activityIndicatorView startAnimating];
     self.artistNameLabel.text = artist.name;
     [self setStyleBasedOnPopularity:[artist.popularity floatValue]];
-    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageLocalURL]
-                        placeholderImage:nil
-                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                   [self.activityIndicatorView stopAnimating];
-                                   if (error) {
-                                       self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
-                                   }
-                               }];
+    [self loadCachedImageForArtist:artist];
+    [self loadLatestImageForArtist:artist];
 }
 
 - (void)setStyleBasedOnPopularity:(CGFloat)popularity {
@@ -37,6 +32,24 @@
     self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];
     self.profileImageView.alpha = alphaBasedOnPopularity;
     self.artistNameLabel.alpha = alphaBasedOnPopularity;
+}
+
+- (void)loadCachedImageForArtist:(Artist *)artist {
+    UIImage *cachedImage = [SALocalFileManager fetchImageNamed:artist.spotifyID];
+    if (cachedImage) {
+        self.profileImageView.image = cachedImage;
+    }
+}
+
+- (void)loadLatestImageForArtist:(Artist *)artist {
+    [self.profileImageView sd_setImageWithURL:[NSURL URLWithString:artist.imageURLString]
+                             placeholderImage:nil
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        [self.activityIndicatorView stopAnimating];
+                                        if (error) {
+                                            self.profileImageView.image = [UIImage imageNamed:kNoImagePhotoName];
+                                        }
+                                    }];
 }
 
 @end

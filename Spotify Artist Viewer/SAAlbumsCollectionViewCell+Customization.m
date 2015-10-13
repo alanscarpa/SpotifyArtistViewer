@@ -15,7 +15,7 @@
 - (void)customizeCellWithAlbum:(Album *)album {
     [self.activityIndicatorView startAnimating];
     self.albumTitleLabel.text = album.name;
-    [self.albumCoverImageView sd_setImageWithURL:[NSURL URLWithString:album.imageLocalURL]
+    [self.albumCoverImageView sd_setImageWithURL:[NSURL URLWithString:album.imageURLString]
                                 placeholderImage:nil
                                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                            [self.activityIndicatorView stopAnimating];
