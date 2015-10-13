@@ -443,31 +443,40 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EXz-le-fv5">
-                                                <rect key="frame" x="210" y="92" width="180" height="180"/>
+                                                <rect key="frame" x="210" y="110" width="180" height="180"/>
                                             </imageView>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="M7S-x2-nuz">
-                                                <rect key="frame" x="282" y="163" width="37" height="37"/>
+                                                <rect key="frame" x="282" y="181" width="37" height="37"/>
                                                 <color key="color" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8YC-SY-IAz">
-                                                <rect key="frame" x="30" y="308" width="540" height="212"/>
+                                                <rect key="frame" x="30" y="326" width="540" height="195"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLV-ab-UAo">
-                                                <rect key="frame" x="259" y="280" width="82" height="30"/>
+                                                <rect key="frame" x="259" y="298" width="82" height="30"/>
                                                 <state key="normal" title="See Albums"/>
                                                 <connections>
                                                     <segue destination="lhq-zg-Gfl" kind="show" id="xVT-8Z-UYI"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Yb-wb-zGB">
-                                                <rect key="frame" x="285" y="54" width="30" height="30"/>
-                                                <state key="normal" title="♥"/>
+                                                <rect key="frame" x="0.0" y="54" width="600" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="Xst-mM-f5j"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <state key="highlighted">
                                                     <color key="titleColor" red="0.32197124570000002" green="0.68631518820000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="favoriteButtonTapped:" destination="5f7-SC-lz8" eventType="touchUpInside" id="hM8-6f-x1S"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -485,6 +494,7 @@
                                             <constraint firstItem="8YC-SY-IAz" firstAttribute="leading" secondItem="Bcx-Ql-aWe" secondAttribute="leading" constant="30" id="ezV-ik-Ghc"/>
                                             <constraint firstItem="ifs-jR-bFf" firstAttribute="top" secondItem="Bcx-Ql-aWe" secondAttribute="top" constant="36" id="l0A-8p-pjW"/>
                                             <constraint firstAttribute="trailing" secondItem="ifs-jR-bFf" secondAttribute="trailing" constant="16" id="pbE-L8-zRg"/>
+                                            <constraint firstItem="1Yb-wb-zGB" firstAttribute="width" secondItem="Bcx-Ql-aWe" secondAttribute="width" id="qE5-h0-jX9"/>
                                             <constraint firstAttribute="trailing" secondItem="8YC-SY-IAz" secondAttribute="trailing" constant="30" id="qd0-4t-7c6"/>
                                             <constraint firstAttribute="bottom" secondItem="8YC-SY-IAz" secondAttribute="bottom" constant="36" id="uYC-V8-gok"/>
                                             <constraint firstItem="1Yb-wb-zGB" firstAttribute="centerX" secondItem="ifs-jR-bFf" secondAttribute="centerX" id="wfI-Ka-W50"/>
@@ -525,6 +535,7 @@
                         <outlet property="activityIndicator" destination="M7S-x2-nuz" id="ubI-oy-NCF"/>
                         <outlet property="artistNameLabel" destination="ifs-jR-bFf" id="8k8-s5-QZ6"/>
                         <outlet property="biographyTextView" destination="8YC-SY-IAz" id="nlI-3K-xZO"/>
+                        <outlet property="favoriteButton" destination="1Yb-wb-zGB" id="qug-5T-Iur"/>
                         <outlet property="profileImageView" destination="EXz-le-fv5" id="PKU-pa-hQq"/>
                     </connections>
                 </viewController>

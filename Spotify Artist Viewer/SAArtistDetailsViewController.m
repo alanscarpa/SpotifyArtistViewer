@@ -12,6 +12,7 @@
 #import "SAAlbumsViewController.h"
 #import "SAConstants.h"
 #import "SALocalFileManager.h"
+#import "SADataStore.h"
 
 @interface SAArtistDetailsViewController ()
 
@@ -19,12 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
 @end
 
 @implementation SAArtistDetailsViewController
-
-#warning add ability to favorite/unfavorite from here
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,20 +35,17 @@
 
 - (void)setUpUI {
     [self.activityIndicator startAnimating];
+    [self checkIfArtistIsFavorite];
     [self setArtistName];
     [self setArtistImage];
 }
 
-- (void)loadCachedBio {
-    if (self.artist.biography) {
-        [self updateBiographyTextViewWithBio:self.artist.biography];
+- (void)checkIfArtistIsFavorite {
+    if ([self.artist.isFavorite isEqual:@(YES)]) {
+        [self.favoriteButton setTitle:@"❌ - Remove From Favorites" forState:UIControlStateNormal];
+    } else {
+        [self.favoriteButton setTitle:@"♥ - Add to Favorites" forState:UIControlStateNormal];
     }
-}
-
-- (void)updateBiographyTextViewWithBio:(NSString *)bio {
-    self.biographyTextView.text = bio;
-    [self.biographyTextView flashScrollIndicators];
-    [self.biographyTextView setContentOffset:CGPointZero animated:NO];
 }
 
 - (void)setArtistName {
@@ -78,6 +75,12 @@
                                     }];
 }
 
+- (void)loadCachedBio {
+    if (self.artist.biography) {
+        [self updateBiographyTextViewWithBio:self.artist.biography];
+    }
+}
+
 - (void)getArtistBioFromEchoNest {
     [SAAFNetworkingManager getArtistBiography:self.artist.spotifyID withCompletionHandler:^(NSString *artistBio, NSError *error) {
         if (!error) {
@@ -86,6 +89,21 @@
             NSLog(@"Error calling echonest: %@", error);
         }
     }];
+}
+
+- (void)updateBiographyTextViewWithBio:(NSString *)bio {
+    self.biographyTextView.text = bio;
+    [self.biographyTextView flashScrollIndicators];
+    [self.biographyTextView setContentOffset:CGPointZero animated:NO];
+}
+
+- (IBAction)favoriteButtonTapped:(id)sender {
+    if ([self.artist.isFavorite isEqual:@(YES)]) {
+        [[SADataStore sharedDataStore] unflagArtistAsFavorite:self.artist];
+    } else {
+        [[SADataStore sharedDataStore] flagArtistAsFavorite:self.artist];
+    }
+    [self checkIfArtistIsFavorite];
 }
 
 #pragma mark - Navigation
