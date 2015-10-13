@@ -19,7 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (Album *)albumWithSpotifyID:(NSString *)spotifyID;
 - (NSArray *)albumsSortedByName;
-- (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID imageURLString:(NSString *)imageUrlString popularity:(NSString *)popularity genres:(NSSet *)genres;
+- (void)setDetailsWithName:(NSString *)name
+                 spotifyID:(NSString *)spotifyID
+            imageURLString:(NSString *)imageUrlString
+                popularity:(NSString *)popularity
+                    genres:(NSSet *)genres;
 
 @end
 

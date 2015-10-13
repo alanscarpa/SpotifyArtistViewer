@@ -45,7 +45,10 @@
     NSError *error = nil;
     NSString *photosDirectory = [self photosDirectory];
     if (![[NSFileManager defaultManager] fileExistsAtPath:photosDirectory]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:photosDirectory withIntermediateDirectories:NO attributes:nil error:&error];
+        [[NSFileManager defaultManager] createDirectoryAtPath:photosDirectory
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error:&error];
     }
 }
 

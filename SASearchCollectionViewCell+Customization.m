@@ -29,7 +29,9 @@
     if (alphaBasedOnPopularity < 0.25) {
         alphaBasedOnPopularity = 0.25;
     }
-    self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity green:colorBasedOnPopularity blue:colorBasedOnPopularity alpha:1.0];
+    self.backgroundColor = [UIColor colorWithRed:colorBasedOnPopularity
+                                           green:colorBasedOnPopularity
+                                            blue:colorBasedOnPopularity alpha:1.0];
     self.profileImageView.alpha = alphaBasedOnPopularity;
     self.artistNameLabel.alpha = alphaBasedOnPopularity;
 }

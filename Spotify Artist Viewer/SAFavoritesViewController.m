@@ -63,11 +63,15 @@ NSString *const kArtistDetailsSegueIdentifier = @"artistDetailsSegue";
 }
 
 - (void)registerTableViewCellNib {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SAFavoritesTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SAFavoritesTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])];
 }
 
 - (void)createDeleteButton {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditMode)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                              target:self
+                                              action:@selector(toggleEditMode)];
 }
 
 - (void)toggleEditMode {
@@ -93,7 +97,11 @@ NSString *const kArtistDetailsSegueIdentifier = @"artistDetailsSegue";
     [self.tableView endUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
     switch (type) {
         case NSFetchedResultsChangeInsert: {
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -122,7 +130,8 @@ NSString *const kArtistDetailsSegueIdentifier = @"artistDetailsSegue";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SAFavoritesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SAFavoritesTableViewCell class]) forIndexPath:indexPath];
+    SAFavoritesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SAFavoritesTableViewCell class])
+                                                                     forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.favoriteArtists[indexPath.row]];
     return cell;
 }

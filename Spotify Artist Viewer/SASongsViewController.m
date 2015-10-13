@@ -29,7 +29,8 @@
 }
 
 - (void)registerTableViewCell {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SASongsTableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([SASongsTableViewCell class])];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SASongsTableViewCell class]) bundle:nil]
+         forCellReuseIdentifier:NSStringFromClass([SASongsTableViewCell class])];
 }
 
 - (void)loadCachedSongs {
@@ -57,7 +58,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SASongsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASongsTableViewCell class]) forIndexPath:indexPath];
+    SASongsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASongsTableViewCell class])
+                                                                 forIndexPath:indexPath];
     [cell customizeCellWithSong:self.songs[indexPath.row]];
     return cell;
 }

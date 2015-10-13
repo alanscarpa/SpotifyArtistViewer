@@ -29,7 +29,11 @@ NSString *const _Nonnull kArtistEntityName = @"Artist";
     return [[self.albums allObjects] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 }
 
-- (void)setDetailsWithName:(NSString *)name spotifyID:(NSString *)spotifyID imageURLString:(NSString *)imageUrlString popularity:(NSString *)popularity genres:(NSSet *)genres {
+- (void)setDetailsWithName:(NSString *)name
+                 spotifyID:(NSString *)spotifyID
+            imageURLString:(NSString *)imageUrlString
+                popularity:(NSString *)popularity
+                    genres:(NSSet *)genres {
     self.name = name;
     self.spotifyID = spotifyID;
     self.imageURLString = imageUrlString;

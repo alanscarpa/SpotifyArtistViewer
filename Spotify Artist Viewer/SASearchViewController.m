@@ -145,7 +145,8 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class]) forIndexPath:indexPath];
+    SASearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([SASearchTableViewCell class])
+                                                                  forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     cell.delegate = self;
     return cell;
@@ -158,7 +159,8 @@ NSString *const kArtistDetailsFromTableViewSegueIdentifier = @"artistDetailsSegu
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SASearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class]) forIndexPath:indexPath];
+    SASearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([SASearchCollectionViewCell class])
+                                                                                 forIndexPath:indexPath];
     [cell customizeCellWithArtist:self.artistsFromSearch[indexPath.row]];
     return cell;
 }
